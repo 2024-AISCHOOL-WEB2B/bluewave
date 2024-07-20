@@ -2,6 +2,7 @@
 
 ## 청년 정책 플랫폼
 주요내용 : 청년 정책 추천 모델 최적화
+OPENAPI활용한 정책데이터가져오기(2230개)
 
 ### Tech Stack
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"/>
