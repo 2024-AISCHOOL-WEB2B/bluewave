@@ -1,5 +1,5 @@
 # 2024-07-19 - 2024-08-02 
-# ![image](https://github.com/user-attachments/assets/718d9f2c-bd50-4de2-9912-b73b2eee472b) Team.BlueWave
+# ![image](https://github.com/user-attachments/assets/718d9f2c-bd50-4de2-9912-b73b2eee472b)
 - 팀장 : 유승완 
 - 팀원 : 임수현, 박지호
 
