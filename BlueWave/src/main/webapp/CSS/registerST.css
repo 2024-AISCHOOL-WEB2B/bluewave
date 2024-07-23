@@ -218,7 +218,50 @@ select:focus {
 select option {
     padding: 8px;
 }
+/* form-group 스타일 수정 */
+.form-group {
+    flex: 0 0 48%; /* 각 그룹이 행의 약 절반을 차지하도록 설정 */
+    margin-bottom: 15px; /* 그룹 간 간격 추가 */
+}
 
+/* 모든 input 태그에 대한 공통 스타일 */
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: white;
+    box-sizing: border-box; /* padding을 width에 포함 */
+}
+
+/* 호버 상태 */
+.form-group input[type="text"]:hover,
+.form-group input[type="password"]:hover,
+.form-group input[type="number"]:hover,
+.form-group select:hover {
+    border-color: #aaa;
+}
+
+/* 포커스 상태 */
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #4169e1;
+    box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+}
+
+/* 소득수준과 가구원수 입력 필드에 대한 특정 스타일 */
+.form-group input[name="income"],
+.form-group input[name="familySize"] {
+    width: 100%; /* 전체 너비 사용 */
+}
 /* 푸터 스타일 */
 footer {
     background-color: #333;

@@ -35,10 +35,6 @@
                                 <option value="">선택하세요</option>
                                 <option value="male">남성</option>
                                 <option value="female">여성</option>
-                                <option value="other">기타</option>
-                                <option value="prefer_not_to_say">
-                                    선택 안 함
-                                </option>
                             </select>
                         </div>
                     </div>
@@ -123,13 +119,18 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="gender">성별</label>
-                            <select id="gender" name="gender" required>
+                            <label for="policyInterest">관심정책분야</label>
+                            <select
+                                id="policyInterest"
+                                name="policyInterest"
+                                required
+                            >
                                 <option value="">선택하세요</option>
-                                <option value="남성">남성</option>
-                                <option value="여성">여성</option>
-                                <option value="기타">기타</option>
-                                <option value="선택안함">선택 안 함</option>
+                                <option value="일자리">일자리</option>
+                                <option value="주거">주거</option>
+                                <option value="교육">교육</option>
+                                <option value="복지.문화">복지&문화</option>
+                                <option value="참여.권리">참여&권리</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -163,13 +164,23 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group full-width">
+                        <div class="form-group">
                             <label for="pay">소득수준</label>
                             <input
-                                type="text"
+                                type="number"
                                 id="pay"
                                 name="pay"
                                 placeholder="만원"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="familly">가구원수</label>
+                            <input
+                                type="number"
+                                id="pay"
+                                name="familly"
+                                placeholder="명"
                             />
                         </div>
                     </div>
@@ -230,8 +241,70 @@
         </footer>
 
         <script>
-            // 가상의 중복 아이디 목록
-            const existingUsernames = ["user1", "user2", "user3"];
+            document.addEventListener("DOMContentLoaded", function () {
+                const birthdateInputs =
+                    document.querySelector(".birthdate-inputs");
+                const inputs = birthdateInputs.querySelectorAll("input");
+
+                const yearInput = inputs[0];
+                const monthInput = inputs[1];
+                const dayInput = inputs[2];
+
+                // 년도 입력 제한
+                yearInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, "").slice(0, 4);
+                    if (this.value.length === 4) {
+                        const year = parseInt(this.value);
+                        if (year < 1900 || year > new Date().getFullYear()) {
+                            alert("유효한 년도를 입력해주세요.");
+                            this.value = "";
+                        }
+                    }
+                });
+
+                // 월 입력 제한
+                monthInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
+                    if (this.value.length > 0) {
+                        const month = parseInt(this.value);
+                        if (month < 1 || month > 12) {
+                            alert("유효한 월을 입력해주세요.");
+                            this.value = "";
+                        }
+                    }
+                });
+
+                // 일 입력 제한
+                dayInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
+                    if (this.value.length > 0) {
+                        const day = parseInt(this.value);
+                        if (day < 1 || day > 31) {
+                            alert("유효한 일을 입력해주세요.");
+                            this.value = "";
+                        }
+                    }
+                });
+
+                // 포커스를 잃었을 때 앞에 0 제거
+                [monthInput, dayInput].forEach((input) => {
+                    input.addEventListener("blur", function () {
+                        if (this.value.length > 0) {
+                            this.value = parseInt(this.value).toString();
+                        }
+                    });
+                });
+
+                // 각 입력 필드의 최대 길이 설정
+                yearInput.setAttribute("maxlength", "4");
+                monthInput.setAttribute("maxlength", "2");
+                dayInput.setAttribute("maxlength", "2");
+
+                // 플레이스홀더 설정
+                yearInput.setAttribute("placeholder", "년(4자리)");
+                monthInput.setAttribute("placeholder", "월");
+                dayInput.setAttribute("placeholder", "일");
+            });
 
             function checkUsername() {
                 const usernameInput = document.getElementById("username");
