@@ -74,11 +74,12 @@ nav {
 .register-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh; /* 높이를 최소 뷰포트 높이로 설정 */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
+    padding: 20px 0; /* 위아래 여백 추가 */
     overflow: hidden;
 }
 
@@ -160,6 +161,62 @@ nav {
     margin: 4px 2px; /* 외부 여백 */
     cursor: pointer; /* 커서 모양 */
     border-radius: 10px; /* 둥근 모서리 */
+}
+
+/* 기존 CSS에 추가 */
+
+/* 생년월일 입력 스타일 */
+.birthdate-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.birthdate-inputs input {
+    width: 32%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.birthdate-inputs input:focus {
+    outline: none;
+    border-color: #4169e1;
+    box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+}
+
+/* Select 태그 스타일 (이전에 제안한 스타일) */
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+select:hover {
+    border-color: #aaa;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4169e1;
+    box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+}
+
+/* Select 옵션 스타일 */
+select option {
+    padding: 8px;
 }
 
 /* 푸터 스타일 */

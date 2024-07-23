@@ -25,33 +25,57 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">이름</label>
-                            <input type="text" id="name" placeholder="곽두팔" />
+                            <input type="text" id="name" name="name" required />
                         </div>
                         <div class="form-group">
-                            <label for="birthdate">생년월일</label>
-                            <input
-                                type="date"
-                                id="birthdate"
-                                placeholder="1990/02/31"
-                            />
+                            <label for="gender">성별</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">선택하세요</option>
+                                <option value="male">남성</option>
+                                <option value="female">여성</option>
+                                <option value="other">기타</option>
+                                <option value="prefer_not_to_say">
+                                    선택 안 함
+                                </option>
+                            </select>
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="birthdate">생년월일</label>
+                            <div class="birthdate-inputs">
+                                <input
+                                    type="text"
+                                    id="birth-year"
+                                    name="birth-year"
+                                    placeholder="년(4자)"
+                                    maxlength="4"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    id="birth-month"
+                                    name="birth-month"
+                                    placeholder="월"
+                                    maxlength="2"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    id="birth-day"
+                                    name="birth-day"
+                                    placeholder="일"
+                                    maxlength="2"
+                                    required
+                                />
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group full-width">
                             <label for="email">이메일</label>
                             <input type="text" id="email" placeholder="email" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group full-width">
-                            <label for="address">거주지역</label>
-                            <input
-                                type="text"
-                                id="address"
-                                placeholder="거주지역"
-                            />
                         </div>
                     </div>
 
@@ -92,6 +116,16 @@
 
                     <div class="form-row">
                         <div class="form-group">
+                            <label for="gender">성별</label>
+                            <select id="gender">
+                                <option value="">선택하세요</option>
+                                <option value="남성">남성</option>
+                                <option value="여성">여성</option>
+                                <option value="기타">기타</option>
+                                <option value="선택안함">선택 안 함</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="addressSelect">거주지역</label>
                             <select id="addressSelect">
                                 <option value="">선택하세요</option>
@@ -107,17 +141,6 @@
                                 <option value="전북">전북</option>
                                 <option value="광주">광주</option>
                                 <option value="전남">전남</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="policyType">관심분야</label>
-                            <select id="policyType">
-                                <option value="">선택하세요</option>
-                                <option value="일자리">일자리</option>
-                                <option value="주거">주거</option>
-                                <option value="교육">교육</option>
-                                <option value="복지.문화">복지&문화</option>
-                                <option value="참여.권리">참여&권리</option>
                             </select>
                         </div>
                     </div>
@@ -189,7 +212,7 @@
                     'button[onclick="checkUsername()"]'
                 );
 
-                // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는부분!!!!!!!!!!!!
+                // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는 부분
                 if (existingUsernames.includes(username)) {
                     alert("이 아이디는 이미 사용 중입니다.");
                 } else {
@@ -201,9 +224,11 @@
                 var name = document.getElementById("name").value;
                 var birthdate = document.getElementById("birthdate").value;
                 var email = document.getElementById("email").value;
-                var address = document.getElementById("address").value;
                 var education = document.getElementById("education").value;
                 var employment = document.getElementById("employment").value;
+                var gender = document.getElementById("gender").value;
+                var addressSelect =
+                    document.getElementById("addressSelect").value;
                 var pay = document.getElementById("pay").value;
                 var username = document.getElementById("username").value;
                 var password = document.getElementById("password").value;
@@ -214,9 +239,10 @@
                     !name ||
                     !birthdate ||
                     !email ||
-                    !address ||
                     !education ||
                     !employment ||
+                    !gender ||
+                    !addressSelect ||
                     !pay ||
                     !username ||
                     !password ||
