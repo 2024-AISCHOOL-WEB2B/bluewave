@@ -8,7 +8,7 @@
     <title>Blue Wave</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-<body>
+<body> 
     
     <header>
         <nav>
