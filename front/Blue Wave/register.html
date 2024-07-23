@@ -1,133 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원가입</title>
-    <link rel="stylesheet" href="registerST.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>회원가입</title>
+        <link rel="stylesheet" href="registerST.css" />
+    </head>
+    <body>
+        <!-- 회원가입 섹션 전체를 감싸는 컨테이너 -->
+        <div class="register-container">
+            <!-- 배경 텍스트 -->
+            <div class="background-text">
+                <span>BLUE</span>
+                <span>WAVE</span>
+            </div>
 
+            <form id="signupForm" onsubmit="return validateForm()">
+                <div class="signup-form">
+                    <img src="image/Blue Wave.png" alt="logo" />
+                    <h2>
+                        안녕하세요!<br />회원가입을 위해 정보를 입력해주세요.
+                    </h2>
+                    <br /><br />
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">이름</label>
+                            <input type="text" id="name" placeholder="곽두팔" />
+                        </div>
+                        <div class="form-group">
+                            <label for="birthdate">생년월일</label>
+                            <input
+                                type="date"
+                                id="birthdate"
+                                placeholder="1990/02/31"
+                            />
+                        </div>
+                    </div>
 
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="email">이메일</label>
+                            <input type="text" id="email" placeholder="email" />
+                        </div>
+                    </div>
 
-    <!-- 회원가입 섹션 전체를 감싸는 컨테이너 -->
-    <div class="register-container">
-        <!-- 배경 텍스트 -->
-        <div class="background-text">
-            <span>BLUE</span>
-            <span>WAVE</span>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="address">거주지역</label>
+                            <input
+                                type="text"
+                                id="address"
+                                placeholder="거주지역"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="education">최종학력</label>
+                            <select id="education">
+                                <option value="">선택하세요</option>
+                                <option value="고졸미만">고졸 미만</option>
+                                <option value="고교재학">고교 재학</option>
+                                <option value="고졸예정">고졸 예정</option>
+                                <option value="고교졸업">고교 졸업</option>
+                                <option value="대학재학">대학 재학</option>
+                                <option value="대졸예정">대졸 예정</option>
+                                <option value="대학졸업">대학 졸업</option>
+                                <option value="석박사">석·박사</option>
+                                <option value="제한없음">제한없음</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employment">재직상태</label>
+                            <select id="employment">
+                                <option value="">선택하세요</option>
+                                <option value="재직자">재직자</option>
+                                <option value="자영업자">자영업자</option>
+                                <option value="미취업자">미취업자</option>
+                                <option value="프리랜서">프리랜서</option>
+                                <option value="일용근로자">일용근로자</option>
+                                <option value="(예비)창업자">
+                                    (예비)창업자
+                                </option>
+                                <option value="단기근로자">단기근로자</option>
+                                <option value="영농종사자">영농종사자</option>
+                                <option value="제한없음">제한없음</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addressSelect">거주지역</label>
+                            <select id="addressSelect">
+                                <option value="">선택하세요</option>
+                                <option value="서울">서울</option>
+                                <option value="인천">인천</option>
+                                <option value="경기">경기</option>
+                                <option value="강원">강원</option>
+                                <option value="경북">경북</option>
+                                <option value="대구">대구</option>
+                                <option value="경남">경남</option>
+                                <option value="울산">울산</option>
+                                <option value="부산">부산</option>
+                                <option value="전북">전북</option>
+                                <option value="광주">광주</option>
+                                <option value="전남">전남</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="policyType">관심분야</label>
+                            <select id="policyType">
+                                <option value="">선택하세요</option>
+                                <option value="일자리">일자리</option>
+                                <option value="주거">주거</option>
+                                <option value="교육">교육</option>
+                                <option value="복지.문화">복지&문화</option>
+                                <option value="참여.권리">참여&권리</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="pay">소득수준</label>
+                            <input type="text" id="pay" placeholder="만원" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="username">아이디</label>
+                            <input type="text" id="username" />
+                        </div>
+                        <div class="form-group">
+                            <button
+                                type="button"
+                                onclick="checkUsername()"
+                                id="idcheck"
+                            >
+                                아이디 중복확인
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">비밀번호</label>
+                            <input type="password" id="password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordConfirm">비밀번호 확인</label>
+                            <input type="password" id="passwordConfirm" />
+                        </div>
+                    </div>
+
+                    <!-- 나머지 입력 필드들도 비슷한 구조로 추가 -->
+
+                    <button type="submit" class="submit-button">
+                        <span>BlueWave</span><br />회원가입
+                    </button>
+                </div>
+            </form>
         </div>
-        
-        <div class="signup-form">
-            <img src="image/Blue Wave.png" alt="logo">
-            <h2>안녕하세요!<br>회원가입을 위해 정보를 입력해주세요.</h2>
-            <br><br>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" placeholder="곽두팔">
-                </div>
-                <div class="form-group">
-                    <label for="birthdate">생년월일</label>
-                    <input type="text" id="birthdate" placeholder="1990/02/31">
-                </div>
+
+        <!-- 웹페이지 최하단 -->
+        <footer>
+            <div class="footer-container">
+                <img src="image/Blue Wave.png" alt="Logo" class="footer-logo" />
+                <nav class="footer-nav">
+                    <a href="#">팀 소개</a>
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">시스템 문의</a>
+                </nav>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="email">이메일</label>
-                    <input type="text" id="email" placeholder="email">
-                </div>
-            </div>
+        </footer>
 
+        <script>
+            // 가상의 중복 아이디 목록
+            const existingUsernames = ["user1", "user2", "user3"];
 
+            function checkUsername() {
+                const usernameInput = document.getElementById("username");
+                const username = usernameInput.value.trim();
+                const button = document.querySelector(
+                    'button[onclick="checkUsername()"]'
+                );
 
+                // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는부분!!!!!!!!!!!!
+                if (existingUsernames.includes(username)) {
+                    alert("이 아이디는 이미 사용 중입니다.");
+                } else {
+                    alert("이 아이디는 사용 가능합니다.");
+                }
+            }
 
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="address">거주지역</label>
-                    <input type="text" id="address" placeholder="거주지역">
-                </div>
-            </div>
+            function validateForm() {
+                var name = document.getElementById("name").value;
+                var birthdate = document.getElementById("birthdate").value;
+                var email = document.getElementById("email").value;
+                var address = document.getElementById("address").value;
+                var education = document.getElementById("education").value;
+                var employment = document.getElementById("employment").value;
+                var pay = document.getElementById("pay").value;
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var passwordConfirm =
+                    document.getElementById("passwordConfirm").value;
 
+                if (
+                    !name ||
+                    !birthdate ||
+                    !email ||
+                    !address ||
+                    !education ||
+                    !employment ||
+                    !pay ||
+                    !username ||
+                    !password ||
+                    !passwordConfirm
+                ) {
+                    alert("모든 필드를 입력해주세요.");
+                    return false; // 폼 제출을 막음
+                }
 
+                if (password !== passwordConfirm) {
+                    alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+                    return false; // 폼 제출을 막음
+                }
 
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">최종학력</label>
-                    <select name="" id="name">
-                        <option value="korea">중학교 졸업</option>
-                        <option value="usa">고등학교 졸업</option>
-                        <option value="china">대학교 재학</option>
-                        <option value="japan">대학교 졸업</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="name">재직상태</label>
-                    <select name="" id="name">
-                        <option value="korea">재직중</option>
-                        <option value="usa">취업준비</option>
-                        <option value="china">대학교 재학</option>
-                        <option value="japan">기타</option>
-                    </select>
-                </div>
-            </div>
-
-
-            <div class="form-row">
-                <div class="form-group full-width">
-                    <label for="pay">소득수준</label>
-                    <input type="text" id="pay" placeholder="만원">
-                </div>
-            </div>
-
-
-
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">아이디</label>
-                    <input type="text" id="name">
-                </div>
-                <div class="form-group">
-                    <label for="idcheck">아이디 중복확인</label>
-                    <input type="text" id="idcheck">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">비밀번호</label>
-                    <input type="password" id="name">
-                </div>
-                <div class="form-group">
-                    <label for="name">비밀번호 확인</label>
-                    <input type="password" id="name">
-                </div>
-            </div>
-            
-            
-            <!-- 나머지 입력 필드들도 비슷한 구조로 추가 -->
-            
-            <button type="submit" class="submit-button">BlueWave 회원가입</button>
-        </div>
-    </div>
-
-
-
-    <!-- 웹페이지 최하단 -->
-    <footer>
-        <div class="footer-container">
-            <img src="image/Blue Wave.png" alt="Logo" class="footer-logo">
-            <nav class="footer-nav">
-                <a href="#">팀 소개</a>
-                <a href="#">이용약관</a>
-                <a href="#">개인정보처리방침</a>
-                <a href="#">시스템 문의</a>
-            </nav>
-        </div>
-    </footer>
-    
-</body>
+                return true; // 폼 제출을 허용
+            }
+        </script>
+    </body>
 </html>
