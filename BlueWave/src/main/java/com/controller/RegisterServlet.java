@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.model.User;
+import com.model.UserDTO;
 import com.model.UserDAO;
 
 import javax.servlet.ServletException;
@@ -27,18 +27,18 @@ public class RegisterServlet extends HttpServlet {
         String region = request.getParameter("address");
         String policyInterest = request.getParameter("policyType");
 
-        User user = new User();
+        UserDTO user = new UserDTO();
         user.setUserId(userId);
-        user.setPassword(password);
-        user.setName(name);
-        user.setEmail(email);
-        user.setBirthdate(birthdate);
-        user.setGender(gender);
-        user.setJob(job);
-        user.setIncome(income);
-        user.setFamily(family);
-        user.setRegion(region);
-        user.setPolicyInterest(policyInterest);
+        user.setUserPw(password);
+        user.setUserName(name);
+        user.setUserEmail(email);
+        user.setUserBirthdate(birthdate);
+        user.setUserGender(gender);
+        user.setUserJob(job);
+        user.setUserIncome(income);
+        user.setUserFamily(family);
+        user.setUserRegion(region);
+        user.setUserPolicyInterest(policyInterest);
 
         UserDAO userDAO = new UserDAO();
         int result = userDAO.register(user);
