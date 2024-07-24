@@ -18,7 +18,7 @@
             </div>
 
             <!-- 로그인 폼 -->
-            <form class="login-form" action="#" method="post">
+            <form class="login-form" action="login" method="POST" onsubmit="return validateForm()">
                 <!-- 로고 -->
                 <img src="image/Blue Wave.png" alt="Logo" />
 
@@ -40,9 +40,7 @@
 
                 <!-- 로그인 버튼 -->
                 <button type="submit" class="login-button">Login</button><br />
-                <span
-                    >비회원이신가요? <a href="register.jsp">회원가입</a></span
-                >
+                <span>비회원이신가요? <a href="register.jsp">회원가입</a></span>
             </form>
         </div>
 
@@ -58,5 +56,21 @@
                 </nav>
             </div>
         </footer>
+
+        <script>
+            function validateForm() {
+                var username = document.querySelector('input[name="username"]').value;
+                var password = document.querySelector('input[name="password"]').value;
+
+                if (!username || !password) {
+                    alert("아이디와 비밀번호를 입력해주세요.");
+                    return false; // 폼 제출을 막음
+                }
+
+                // 추가적인 유효성 검사 로직을 여기에 작성할 수 있습니다.
+
+                return true; // 유효성 검사를 통과하면 폼을 제출
+            }
+        </script>
     </body>
 </html>
