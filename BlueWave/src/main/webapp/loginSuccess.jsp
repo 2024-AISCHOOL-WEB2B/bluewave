@@ -3,27 +3,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인 성공</title>
-    <link rel="stylesheet" href="CSS/loginSuccessST.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="CSS/LoginSucST.css" />
 </head>
 <body>
-    <div class="login-success-container">
+    <!-- 로그인 섹션 전체를 감싸는 컨테이너 -->
+    <div class="login-container">
+        <!-- 배경 텍스트 -->
         <div class="background-text">
             <span>BLUE</span>
             <span>WAVE</span>
         </div>
-        <div class="login-success-content">
-            <img src="image/Blue Wave.png" alt="logo" />
-            <h2>로그인 성공</h2>
-            <p>블루웨이브에 오신 것을 환영합니다!</p>
-            <a href="index.jsp" class="home-button">홈으로 이동</a>
+
+        <!-- 로그인 성공 폼 -->
+        <div class="login-form">
+            <!-- 로고 -->
+            <img src="image/Blue Wave.png" alt="Logo" />
+
+            <!-- 텍스트 필드 -->
+            <h2>
+                <span>닉네임</span>님 안녕하세요.<br />
+                <span>블루웨이브</span>에 오신것을 환영합니다.
+            </h2>
+
+            <!-- 메인페이지 이동 버튼 -->
+            <button class="login-button" onclick="redirectToMain()">
+                메인페이지로 이동
+            </button>
+
+            <!-- 리다이렉트 알림 문구 -->
+            <p class="redirect-message">5초 후 리다이렉트됩니다.</p>
         </div>
     </div>
+
+    <!-- 웹페이지 최하단 -->
     <footer>
         <div class="footer-container">
-            <img src="image/Blue Wave.png" alt="Logo" class="footer-logo">
+            <img src="image/Blue Wave.png" alt="Logo" class="footer-logo" />
             <nav class="footer-nav">
                 <a href="#">팀 소개</a>
                 <a href="#">이용약관</a>
@@ -31,4 +49,16 @@
                 <a href="#">시스템 문의</a>
             </nav>
         </div>
-   
+    </footer>
+
+    <script>
+        function redirectToMain() {
+            // 메인 페이지로 이동
+            window.location.href = "main.jsp";
+        }
+
+        // 5초 후 자동 리다이렉트
+        setTimeout(redirectToMain, 5000);
+    </script>
+</body>
+</html>

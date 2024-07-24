@@ -9,9 +9,7 @@ body {
     min-height: 100vh;
 }
 
-header,
-main,
-footer {
+header, main, footer {
     width: 100%;
 }
 
@@ -21,7 +19,6 @@ footer {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 100px;
 }
 
 /* 헤더 스타일 */
@@ -40,14 +37,14 @@ header.right-menu a {
 
 /* 헤더 하단 선 */
 header::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 1200px;
     height: 1px;
-    background-color: #c6c6c6;
+    background-color: #C6C6C6;
 }
 
 /* 네비게이션 스타일 */
@@ -67,135 +64,117 @@ nav {
     left: 70px;
 }
 
-.right-menu {
-    display: flex;
-    gap: 20px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+.login-container {
+    margin: auto;
 }
 
-.right-menu a {
-    text-decoration: none;
-    color: #666;
-    font-size: 12px;
-}
 
-.menu li a:hover,
-.right-menu a:hover {
-    color: #0066cc;
-}
-
-/* 맞춤 정책 추천 섹션 스타일 */
-
-.policy-recommendation {
-    width: 70%;
-    margin-top: 25px;
-}
-
-.title {
-    position: relative;
-}
-
-.promptText {
-    background-color: #ececec;
-    border-radius: 10px;
-    width: 97%;
-    margin: 0;
-    padding: 40px; /* 모든 방향으로 패딩 추가 */
-    margin-bottom: 20px;
-    position: relative;
-    right: 20px;
-}
-
-.recommendation-text {
-    font-size: 0.9em;
-    line-height: 1.4;
-}
-
-.highlight {
-    font-weight: bold;
-    color: #4a90e2;
-    font-size: 20px;
-}
-
-/* 정책 리스트 스타일 */
-
-.policy-list {
-    width: 70%;
-    margin-top: 25px;
-}
-.bestPolicy {
-    background-color: #e8f5e9;
-    margin-bottom: 25px;
-    padding: 20px;
+/* 전체 로그인 컨테이너 스타일 */
+.login-container {
     width: 100%;
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-.Policy-row {
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.recPolicyList {
-    background-color: #e3f2fd;
-    margin-top: 25px;
-    padding: 20px;
-    width: calc(50% - 10px); /* 두 요소가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box;
-    border-radius: 10px;
-}
-
-.policy-info h3 {
-    margin: 0 0 5px 0;
-    font-size: 1em;
-}
-
-.date {
-    font-size: 0.8em;
-    color: #666;
-}
-
-/* 버튼 스타일 */
-.btn {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.9em;
-}
-
-.btn.view {
-    background-color: #4caf50;
-    color: white;
-}
-
-.btn.view.blue {
-    background-color: #2196f3;
-}
-
-.btn.compare {
-    background-color: white;
-    border: 1px solid #ddd;
-    margin-left: 5px;
-}
-
-/* 페이지네이션 스타일 */
-.pagination {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.pagination button {
+    justify-content: center;
+    align-items: center;
     background-color: #f0f0f0;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
+
+/* 배경 텍스트 스타일 */
+.background-text {
+    position: absolute;
+    font-size: 15vw;
+    font-weight: bold;
+    color: #e0e0e0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+/* 로그인 폼 스타일 */
+.login-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    text-align: left
+}
+
+.login-form h2 {
+    margin-bottom: 50px;
+}
+
+.login-form span {
+    color: #3254c7;
+}
+
+/* 로고 스타일 */
+.login-form img {
+    width: 100px;
+    padding-bottom: 50px;
+}
+
+/* 입력 필드 스타일 */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ececec; /* 배경색을 회색으로 설정 */
+    border: none; /* 보더를 없앰 */
+    border-radius: 10px;
+    font-size: 16px;
+    text-align: left
+}
+
+/* 로그인 버튼 스타일 */
+.login-button {
+    width: 50%; /* 좌우 크기를 줄임 */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #4169E1;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* 로그인 버튼 호버 효과 */
+.login-button:hover {
+    background-color: #3254c7;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* 푸터 스타일 */
 footer {
@@ -239,6 +218,7 @@ footer {
     text-decoration: underline;
 }
 
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .footer-nav {
@@ -251,6 +231,9 @@ footer {
         padding-top: 100px; /* 더 작은 화면에서 네비게이션을 더 아래로 이동 */
     }
 }
+
+
+
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
@@ -275,22 +258,22 @@ footer {
         align-items: stretch;
     }
 
-    .news,
-    .notices {
+    .news, .notices {
         width: 100%;
         margin-bottom: 10px;
     }
 }
 
+
 .lists {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     width: 1280px;
     max-width: 100%;
     padding: 20px;
-    margin-top: 20px;
-    margin-bottom: 150px;
+    margin-top: 20px ;
+    margin-bottom: 150px ;
 }
 .lists h2 {
     margin-top: 0;

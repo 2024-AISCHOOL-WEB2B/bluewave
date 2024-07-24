@@ -25,8 +25,9 @@
 
         <div class="container">
             <!-- 맞춤 정책 추천 섹션 -->
-            <h2 class="title">맞춤 정책 추천</h2>
+
             <section class="policy-recommendation">
+                <h2 class="title">맞춤 정책 추천</h2>
                 <p class="promptText">
                     XXX님은 XX에 거주하시는 XX세 청년이세요. <br />
                     회원님의 학력과 재직상태등을 고려했을때, <br />
@@ -37,7 +38,7 @@
                 </p>
             </section>
 
-            <hr width="60%" />
+            <hr width="71%" />
 
             <!-- 정책 리스트 섹션 -->
             <section class="policy-list">
@@ -49,11 +50,11 @@
                         <p class="date">′24.04.29~′24.05.28</p>
                     </div>
                     <div class="policy-actions">
-                        <button class="btn view">상세보기</button>
+                        <button class="btn view" onclick="redirectToPolicyView()">상세보기</button>
                     </div>
                 </div>
 
-                <hr width="86%" />
+                <hr width="100%" />
 
                 <!-- 차기 적합 정책리스트 -->
                 <div class="Policy-row">
@@ -64,7 +65,7 @@
                             <p class="date">′24.04.29~′24.05.28</p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
                         </div>
                     </div>
 
@@ -75,7 +76,7 @@
                             <p class="date">′24.04.29~′24.05.28</p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -101,5 +102,11 @@
                 </nav>
             </div>
         </footer>
+    <script>
+    function redirectToPolicyView() {
+        // 메인 페이지로 이동
+        window.location.href = "policyView.jsp";
+    }
+    </script>
     </body>
 </html>

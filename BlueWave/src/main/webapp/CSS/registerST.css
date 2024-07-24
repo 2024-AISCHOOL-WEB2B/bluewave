@@ -228,6 +228,7 @@ select option {
 .form-group input[type="text"],
 .form-group input[type="password"],
 .form-group input[type="number"],
+.form-group input[type="email"], /* 이메일 input 추가 */
 .form-group select {
     width: 100%;
     padding: 8px;
@@ -243,6 +244,7 @@ select option {
 .form-group input[type="text"]:hover,
 .form-group input[type="password"]:hover,
 .form-group input[type="number"]:hover,
+.form-group input[type="email"]:hover, /* 이메일 input 추가 */
 .form-group select:hover {
     border-color: #aaa;
 }
@@ -251,10 +253,12 @@ select option {
 .form-group input[type="text"]:focus,
 .form-group input[type="password"]:focus,
 .form-group input[type="number"]:focus,
+.form-group input[type="email"]:focus, /* 이메일 input 추가 */
 .form-group select:focus {
     outline: none;
     border-color: #4169e1;
     box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
+}box-shadow: 0 0 0 2px rgba(65, 105, 225, 0.2);
 }
 
 /* 소득수준과 가구원수 입력 필드에 대한 특정 스타일 */
