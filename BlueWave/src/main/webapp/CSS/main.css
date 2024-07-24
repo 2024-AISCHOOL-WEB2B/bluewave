@@ -9,7 +9,9 @@ body {
     min-height: 100vh;
 }
 
-header, main, footer {
+header,
+main,
+footer {
     width: 100%;
 }
 
@@ -19,6 +21,7 @@ header, main, footer {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 100px;
 }
 
 /* 헤더 스타일 */
@@ -27,24 +30,24 @@ header {
     padding: 10px 20px; /* 좌우 여백 추가 */
     position: relative;
     box-sizing: border-box;
-    margin-bottom: 0;
+    margin-bottom: 100px;
 }
 
-header .right-menu a {
+header.right-menu a {
     position: absolute;
     right: 1000px;
 }
 
 /* 헤더 하단 선 */
 header::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 1200px;
     height: 1px;
-    background-color: #C6C6C6;
+    background-color: #c6c6c6;
 }
 
 /* 네비게이션 스타일 */
@@ -69,15 +72,14 @@ nav {
     gap: 20px;
 }
 
-header .right-menu a, 
-header .right-menu a:link,
-header .right-menu a:visited {
+.right-menu a {
     text-decoration: none;
     color: #666;
     font-size: 12px;
 }
 
-.menu li a:hover, .right-menu a:hover {
+.menu li a:hover,
+.right-menu a:hover {
     color: #0066cc;
 }
 

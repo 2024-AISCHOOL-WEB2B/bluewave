@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blue Wave</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/main.css">
 </head>
 <body>
 
@@ -39,9 +39,16 @@
         <div class="container">
             <div class="policy-container">
                 <p class="policy-text">누구나 참여가능한 청년정책<br><span id="Blue">블루웨이브</span>가 도와드립니다</p>
+        	<% if(info != null){ %>
                 <a href="policySuggest.jsp" class="rainbow-button">
                     지금 바로 혜택 받을수있는<br>정책 추천받기
                 </a>
+			<% }else{ %>
+                <a href="register.jsp" class="rainbow-button">
+                    지금 바로 혜택 받을수있는<br>정책 추천받기
+                </a>
+			<% } %>
+
             </div>
             
             <br><br><br><br><br><br>
@@ -144,6 +151,5 @@
             </nav>
         </div>
     </footer>
-    
 </body>
 </html>

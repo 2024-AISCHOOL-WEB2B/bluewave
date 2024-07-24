@@ -17,7 +17,7 @@
 
             <form id="signupForm" action="register" method="POST" onsubmit="return validateForm()">
                 <div class="signup-form">
-                    <img src="image/Blue Wave.png" alt="logo" />
+                    <img src="image/Blue Wave.png" alt="logo" onclick="redirectToMain()"/>
                     <h2>
                         안녕하세요!<br />회원가입을 위해 정보를 입력해주세요.
                     </h2>
@@ -367,6 +367,10 @@
             // 유효성 검사를 통과하면 폼을 제출
             return true;
         }
+       
+    	function redirectToMain() {
+    	    window.location.href = "main.jsp";
+    	}  
     </script>
 </body>
 </html>

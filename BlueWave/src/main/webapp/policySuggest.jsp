@@ -1,3 +1,5 @@
+<%@page import="com.model.UserDTO"%>
+<%@page import="com.model.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -9,16 +11,19 @@
         <link rel="stylesheet" href="CSS/policySuggestST.css" />
     </head>
     <body>
+    	<%
+		UserDTO info = (UserDTO)session.getAttribute("user");
+		%>
         <header>
             <nav>
                 <div class="logo">
                     <a href="#">
-                        <img src="image/Blue Wave.png" alt="Blue Wave Logo" />
+                        <img src="image/Blue Wave.png" alt="Blue Wave Logo" onclick="redirectToMain()" />
                     </a>
                 </div>
 
                 <div class="right-menu">
-                    <a href="mypage.jsp">내정보</a>
+                    <a href="LogoutServlet">로그아웃</a>
                 </div>
             </nav>
         </header>
@@ -107,6 +112,9 @@
         // 메인 페이지로 이동
         window.location.href = "policyView.jsp";
     }
+	function redirectToMain() {
+	    window.location.href = "main.jsp";
+	} 
     </script>
     </body>
 </html>

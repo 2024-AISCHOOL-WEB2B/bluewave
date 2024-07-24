@@ -20,7 +20,7 @@
             <!-- 로그인 폼 -->
             <form class="login-form" action="login" method="POST" onsubmit="return validateForm()">
                 <!-- 로고 -->
-                <img src="image/Blue Wave.png" alt="Logo" />
+                <img src="image/Blue Wave.png" alt="Logo" onclick="redirectToMain()" />
 
                 <!-- 입력 필드 -->
                 <input
@@ -71,6 +71,9 @@
 
                 return true; // 유효성 검사를 통과하면 폼을 제출
             }
+        	function redirectToMain() {
+        	    window.location.href = "main.jsp";
+        	} 
         </script>
     </body>
 </html>

@@ -1,3 +1,5 @@
+<%@page import="com.model.UserDTO"%>
+<%@page import="com.model.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -9,16 +11,23 @@
         <link rel="stylesheet" href="CSS/policyViewST.css" />
     </head>
     <body>
+    	<%
+		UserDTO info = (UserDTO)session.getAttribute("user");
+		%>
         <header>
             <nav>
                 <div class="logo">
                     <a href="#">
-                        <img src="image/Blue Wave.png" alt="Blue Wave Logo" />
+                        <img src="image/Blue Wave.png" alt="Blue Wave Logo" onclick="redirectToMain()" />
                     </a>
                 </div>
 
                 <div class="right-menu">
-                    <a href="login.jsp">로그인</a>
+		        <% if(info != null){ %>
+					<a href="LogoutServlet">로그아웃<a>
+				<% }else{ %>
+					<a href="login.jsp">로그인</a>
+				<% } %>
                 </div>
             </nav>
         </header>
@@ -189,5 +198,10 @@
                 </nav>
             </div>
         </footer>
+        <script>
+    		function redirectToMain() {
+    		    window.location.href = "main.jsp";
+    		}  
+    	</script>
     </body>
 </html>
