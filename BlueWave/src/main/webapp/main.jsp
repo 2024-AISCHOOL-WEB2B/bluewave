@@ -1,3 +1,5 @@
+<%@page import="com.model.UserDTO"%>
+<%@page import="com.model.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -8,7 +10,12 @@
     <title>Blue Wave</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
-<body> 
+<body>
+
+	<%
+		UserDTO info = (UserDTO)session.getAttribute("user");
+		
+	%>
     
     <header>
         <nav>
@@ -19,7 +26,11 @@
         </div>
 
         <div class="right-menu">
-            <a href="login.jsp">로그인</a>
+        <% if(info != null){ %>
+			<a href="LogoutServlet">로그아웃<a>
+		<% }else{ %>
+			<a href="login.jsp">로그인</a>
+		<% } %>
         </div>
         </nav>
     </header>

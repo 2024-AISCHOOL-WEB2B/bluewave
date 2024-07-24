@@ -30,7 +30,7 @@ header {
     margin-bottom: 0;
 }
 
-header.right-menu a {
+header .right-menu a {
     position: absolute;
     right: 1000px;
 }
@@ -64,16 +64,14 @@ nav {
     left: 70px;
 }
 
-
-
-
-
 .right-menu {
     display: flex;
     gap: 20px;
 }
 
-.right-menu a {
+header .right-menu a, 
+header .right-menu a:link,
+header .right-menu a:visited {
     text-decoration: none;
     color: #666;
     font-size: 12px;
