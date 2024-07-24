@@ -1,5 +1,7 @@
 package com.model;
 
+import java.sql.Timestamp;
+
 public class UserDTO {
     private String userId;
     private String userPw;
@@ -12,26 +14,28 @@ public class UserDTO {
     private int userFamily;
     private String userRegion;
     private String userPolicyInterest;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
-    // 기본 생성자
-    public UserDTO() {}
-
-    // 매개변수가 있는 생성자
-    public UserDTO(String userId, String userPw, String userName, String userEmail, String userBirthdate, String userGender, String userJob, int userIncome, int userFamily, String userRegion, String userPolicyInterest) {
+    public UserDTO(String userId, String userPw, String userName, String userEmail, String userBirthdate,
+                   String userGender, String userJob, int userIncome, int userFamily, String userRegion,
+                   String userPolicyInterest, Timestamp createdAt, Timestamp updatedAt) {
         this.userId = userId;
         this.userPw = userPw;
         this.userName = userName;
         this.userEmail = userEmail;
-        this.userBirthdate = userBirthdate;
+        this.userBirthdate = userBirthdate.replace("-", ""); // YYYYMMDD 형식으로 변경
         this.userGender = userGender;
         this.userJob = userJob;
         this.userIncome = userIncome;
         this.userFamily = userFamily;
         this.userRegion = userRegion;
         this.userPolicyInterest = userPolicyInterest;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    // getter 및 setter 메서드
+    // Getters and Setters
     public String getUserId() {
         return userId;
     }
@@ -118,5 +122,21 @@ public class UserDTO {
 
     public void setUserPolicyInterest(String userPolicyInterest) {
         this.userPolicyInterest = userPolicyInterest;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
