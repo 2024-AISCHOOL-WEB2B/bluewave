@@ -68,6 +68,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" id="birthdate" name="birthdate" />
                     <div class="form-row">
                         <div class="form-group full-width">
                             <label for="email">이메일</label>
@@ -240,137 +241,139 @@
         </footer>
 
 
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const birthdateInputs =
-                document.querySelector(".birthdate-inputs");
-            const inputs = birthdateInputs.querySelectorAll("input");
+		<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		    const birthdateInputs = document.querySelector(".birthdate-inputs");
+		    const inputs = birthdateInputs.querySelectorAll("input");
+		
+		    const yearInput = inputs[0];
+		    const monthInput = inputs[1];
+		    const dayInput = inputs[2];
+		
+		    // 년도 입력 제한
+		    yearInput.addEventListener("input", function () {
+		        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 4);
+		        if (this.value.length === 4) {
+		            const year = parseInt(this.value);
+		            if (year < 1900 || year > new Date().getFullYear()) {
+		                alert("유효한 년도를 입력해주세요.");
+		                this.value = "";
+		            }
+		        }
+		    });
+		
+		    // 월 입력 제한 및 포맷팅
+		    monthInput.addEventListener("input", function () {
+		        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
+		        const month = parseInt(this.value);
+		        if (this.value.length === 2 && (month < 1 || month > 12)) {
+		            alert("유효한 월을 입력해주세요.");
+		            this.value = "";
+		        }
+		    });
+		
+		    // 일 입력 제한 및 포맷팅
+		    dayInput.addEventListener("input", function () {
+		        this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
+		        const day = parseInt(this.value);
+		        if (this.value.length === 2 && (day < 1 || day > 31)) {
+		            alert("유효한 일을 입력해주세요.");
+		            this.value = "";
+		        }
+		    });
+		
+		    // 포커스를 잃었을 때 한 자리 숫자 앞에 0 추가
+		    [monthInput, dayInput].forEach((input) => {
+		        input.addEventListener("blur", function () {
+		            if (this.value.length === 1) {
+		                this.value = this.value.padStart(2, '0');
+		            }
+		        });
+		    });
+		
+		    // 각 입력 필드의 최대 길이 설정
+		    yearInput.setAttribute("maxlength", "4");
+		    monthInput.setAttribute("maxlength", "2");
+		    dayInput.setAttribute("maxlength", "2");
+		
+		    // 플레이스홀더 설정
+		    yearInput.setAttribute("placeholder", "년(4자리)");
+		    monthInput.setAttribute("placeholder", "월");
+		    dayInput.setAttribute("placeholder", "일");
+		});
+		
+		function checkUsername() {
+		    const usernameInput = document.getElementById("username");
+		    const username = usernameInput.value.trim();
+		    const button = document.querySelector('button[onclick="checkUsername()"]');
+		
+		    // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는 부분
+		    if (existingUsernames.includes(username)) {
+		        alert("이 아이디는 이미 사용 중입니다.");
+		    } else {
+		        alert("이 아이디는 사용 가능합니다.");
+		    }
+		}
+		
+		function validateForm() {
+		    var name = document.getElementById("name").value;
+		    var birthYear = document.getElementById("birth-year").value;
+		    var birthMonth = document.getElementById("birth-month").value;
+		    var birthDay = document.getElementById("birth-day").value;
+		    var email = document.getElementById("email").value;
+		    var education = document.getElementById("education").value;
+		    var employment = document.getElementById("employment").value;
+		    var gender = document.getElementById("gender").value;
+		    var addressSelect = document.getElementById("addressSelect").value;
+		    var pay = document.getElementById("pay").value;
+		    var familly = document.getElementById("familly").value;
+		    var username = document.getElementById("username").value;
+		    var password = document.getElementById("password").value;
+		    var passwordConfirm = document.getElementById("passwordConfirm").value;
+		    var birthdateInput = document.getElementById("birthdate");
+		
+		    if (
+		        !name ||
+		        !birthYear ||
+		        !birthMonth ||
+		        !birthDay ||
+		        !email ||
+		        !education ||
+		        !employment ||
+		        !gender ||
+		        !addressSelect ||
+		        !pay ||
+		        !familly ||
+		        !username ||
+		        !password ||
+		        !passwordConfirm
+		    ) {
+		        alert("모든 필드를 입력해주세요.");
+		        return false; // 폼 제출을 막음
+		    }
+		
+		    if (password !== passwordConfirm) {
+		        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+		        return false; // 폼 제출을 막음
+		    }
+		
+		    // 생년월일을 YYYYMMDD 형식으로 결합하여 숨겨진 필드에 설정
+		    var birthdate = 
+		        birthYear.padStart(4, '0') + 
+		        birthMonth.padStart(2, '0') + 
+		        birthDay.padStart(2, '0');
+		    birthdateInput.value = birthdate;
+		
+		    // 유효성 검사를 통과하면 폼을 제출
+		    return true;
+		}
+		
+		function redirectToMain() {
+		    window.location.href = "main.jsp";
+		}  
+		</script>
 
-            const yearInput = inputs[0];
-            const monthInput = inputs[1];
-            const dayInput = inputs[2];
 
-            // 년도 입력 제한
-            yearInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "").slice(0, 4);
-                if (this.value.length === 4) {
-                    const year = parseInt(this.value);
-                    if (year < 1900 || year > new Date().getFullYear()) {
-                        alert("유효한 년도를 입력해주세요.");
-                        this.value = "";
-                    }
-                }
-            });
 
-            // 월 입력 제한
-            monthInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
-                if (this.value.length > 0) {
-                    const month = parseInt(this.value);
-                    if (month < 1 || month > 12) {
-                        alert("유효한 월을 입력해주세요.");
-                        this.value = "";
-                    }
-                }
-            });
-
-            // 일 입력 제한
-            dayInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "").slice(0, 2);
-                if (this.value.length > 0) {
-                    const day = parseInt(this.value);
-                    if (day < 1 || day > 31) {
-                        alert("유효한 일을 입력해주세요.");
-                        this.value = "";
-                    }
-                }
-            });
-
-            // 포커스를 잃었을 때 앞에 0 제거
-            [monthInput, dayInput].forEach((input) => {
-                input.addEventListener("blur", function () {
-                    if (this.value.length > 0) {
-                        this.value = parseInt(this.value).toString();
-                    }
-                });
-            });
-
-            // 각 입력 필드의 최대 길이 설정
-            yearInput.setAttribute("maxlength", "4");
-            monthInput.setAttribute("maxlength", "2");
-            dayInput.setAttribute("maxlength", "2");
-
-            // 플레이스홀더 설정
-            yearInput.setAttribute("placeholder", "년(4자리)");
-            monthInput.setAttribute("placeholder", "월");
-            dayInput.setAttribute("placeholder", "일");
-        });
-
-        function checkUsername() {
-            const usernameInput = document.getElementById("username");
-            const username = usernameInput.value.trim();
-            const button = document.querySelector(
-                'button[onclick="checkUsername()"]'
-            );
-
-            // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는 부분
-            if (existingUsernames.includes(username)) {
-                alert("이 아이디는 이미 사용 중입니다.");
-            } else {
-                alert("이 아이디는 사용 가능합니다.");
-            }
-        }
-
-        function validateForm() {
-            var name = document.getElementById("name").value;
-            var birthYear = document.getElementById("birth-year").value;
-            var birthMonth = document.getElementById("birth-month").value;
-            var birthDay = document.getElementById("birth-day").value;
-            var email = document.getElementById("email").value;
-            var education = document.getElementById("education").value;
-            var employment = document.getElementById("employment").value;
-            var gender = document.getElementById("gender").value;
-            var addressSelect =
-                document.getElementById("addressSelect").value;
-            var pay = document.getElementById("pay").value;
-            var familly = document.getElementById("familly").value;
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            var passwordConfirm =
-                document.getElementById("passwordConfirm").value;
-
-            if (
-                !name ||
-                !birthYear ||
-                !birthMonth ||
-                !birthDay ||
-                !email ||
-                !education ||
-                !employment ||
-                !gender ||
-                !addressSelect ||
-                !pay ||
-                !familly ||
-                !username ||
-                !password ||
-                !passwordConfirm
-            ) {
-                alert("모든 필드를 입력해주세요.");
-                return false; // 폼 제출을 막음
-            }
-
-            if (password !== passwordConfirm) {
-                alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-                return false; // 폼 제출을 막음
-            }
-
-            // 유효성 검사를 통과하면 폼을 제출
-            return true;
-        }
-       
-    	function redirectToMain() {
-    	    window.location.href = "main.jsp";
-    	}  
-    </script>
 </body>
 </html>

@@ -1,6 +1,10 @@
 package com.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class UserDTO {
     private String userId;
@@ -17,6 +21,7 @@ public class UserDTO {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    
     public UserDTO(String userId, String userPw, String userName, String userEmail, String userBirthdate,
                    String userGender, String userJob, int userIncome, int userFamily, String userRegion,
                    String userPolicyInterest, Timestamp createdAt, Timestamp updatedAt) {
@@ -24,7 +29,7 @@ public class UserDTO {
         this.userPw = userPw;
         this.userName = userName;
         this.userEmail = userEmail;
-        this.userBirthdate = userBirthdate.replace("-", ""); // YYYYMMDD 형식으로 변경
+        this.userBirthdate = userBirthdate;
         this.userGender = userGender;
         this.userJob = userJob;
         this.userIncome = userIncome;
@@ -33,8 +38,12 @@ public class UserDTO {
         this.userPolicyInterest = userPolicyInterest;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
 
+    }
+    
+
+
+    
     // Getters and Setters
     public String getUserId() {
         return userId;
@@ -139,4 +148,5 @@ public class UserDTO {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }

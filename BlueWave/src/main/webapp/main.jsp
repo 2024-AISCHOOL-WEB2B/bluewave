@@ -14,7 +14,6 @@
 
 	<%
 		UserDTO info = (UserDTO)session.getAttribute("user");
-		
 	%>
     
     <header>
