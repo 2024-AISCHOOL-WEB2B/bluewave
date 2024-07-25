@@ -1,3 +1,4 @@
+<%@page import="com.model.RecPolicyDAO"%>
 <%@page import="com.model.UserDTO"%>
 <%@page import="com.model.UserDAO"%>
 <%@ page import="com.model.PolicyDAO" %>
@@ -14,38 +15,31 @@
     </head>
     <body>
         <%
-            UserDTO info = (UserDTO)session.getAttribute("user");
-        
-	        PolicyDAO policyDAO = new PolicyDAO();
-	        List<PolicyDTO> policies = policyDAO.getAllPolicies();
-	        // policies 어레이리스트는 모든 정책 정보를 담고있는 객체임
-	        
-	        // user정보에 맞게 모델이 내놓은 정책 id를 유저테이블에 저장이 되어있어야 하고
-	        
-	        // 맞춤 정책 추천 세션의 beatPolicy에는 해당 id를 info에서 가져와서 정책을 선택해서 보여줘야함
-	        // 차기 적합 정책 리스트 세션에는 다음순위로 점수가 높은 정책의 id를 유저테이블에 저장이 되어있다면
-	        // 같은 방식으로 정책들을 불러오면 될것이고
-	        // 아니라면 그냥 단순히 최신 정책들을 보여주는 페이지로 만들수도있음
-	        
-	        
-	        
-	        
+        UserDTO info = (UserDTO)session.getAttribute("user");
+                    // 세션
 
-            int age = -1; // 기본값
-            if (info != null) {
-                String birthdate = info.getUserBirthdate();
-                if (birthdate != null && birthdate.length() == 8) {
-                    try {
-                        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd");
-                        java.time.LocalDate birthDate = java.time.LocalDate.parse(birthdate, formatter);
-                        java.time.LocalDate currentDate = java.time.LocalDate.now();
-                        age = java.time.Period.between(birthDate, currentDate).getYears();
-                    } catch (java.time.format.DateTimeParseException e) {
-                        // 생년월일 형식 예외 처리
-                        age = -1;
+                    // 올바른 클래스 이름 사용
+                    RecPolicyDAO rdao = new RecPolicyDAO();
+                    List<String> idList = rdao.getRecPolicyIds(info.getUserId());
+
+                    PolicyDAO policyDAO = new PolicyDAO();
+                    List<PolicyDTO> policies = policyDAO.getPoliciesByIds(idList);
+
+                    int age = -1; // 기본값
+                    if (info != null) {
+                        String birthdate = info.getUserBirthdate();
+                        if (birthdate != null && birthdate.length() == 8) {
+                            try {
+                                java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd");
+                                java.time.LocalDate birthDate = java.time.LocalDate.parse(birthdate, formatter);
+                                java.time.LocalDate currentDate = java.time.LocalDate.now();
+                                age = java.time.Period.between(birthDate, currentDate).getYears();
+                            } catch (java.time.format.DateTimeParseException e) {
+                                // 생년월일 형식 예외 처리
+                                age = -1;
+                            }
+                        }
                     }
-                }
-            }
         %>
         <header>
             <nav>
@@ -73,7 +67,7 @@
                         회원님의 학력과 재직상태등을 고려했을때, <br />
                         아래 정책들이 요건에 맞을것으로 예상됩니다. <br /><br />
                         저희가 생각하기엔
-                        <span class="highlight">청년 주택드림 청년특별자금</span>
+                        <span class="highlight">추천 정책</span>
                         정책이 가장 도움이 될 것 같습니다.
                     </p>
                 <%

@@ -104,4 +104,50 @@ public class PolicyDAO {
 
         return policy;
     }
+
+    // 여러 정책 ID로 정책 리스트 가져오기
+    public List<PolicyDTO> getPoliciesByIds(List<String> policyIds) {
+        List<PolicyDTO> policies = new ArrayList<>();
+        if (policyIds == null || policyIds.isEmpty()) {
+            return policies;
+        }
+        
+        String query = "SELECT * FROM Policy WHERE id IN (" + String.join(",", policyIds) + ")";
+        
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    PolicyDTO policy = new PolicyDTO();
+                    policy.setAGE_INFO(rs.getString("age_info"));
+                    policy.setRESIDENCE_INCOME_CONDITION(rs.getString("residence_income_condition"));
+                    policy.setAPPLICATION_PROCESS(rs.getString("application_process"));
+                    policy.setPARTICIPATION_LIMIT_TARGET(rs.getString("participation_limit_target"));
+                    policy.setAPPLICATION_PROCEDURE(rs.getString("application_procedure"));
+                    policy.setMAIN_DEPARTMENT_NAME(rs.getString("main_department_name"));
+                    policy.setMAIN_DEPARTMENT_CONTACT(rs.getString("main_department_contact"));
+                    policy.setMAIN_DEPARTMENT_PHONE(rs.getString("main_department_phone"));
+                    policy.setOPERATING_INSTITUTION_NAME(rs.getString("operating_institution_name"));
+                    policy.setOPERATING_INSTITUTION_CONTACT(rs.getString("operating_institution_contact"));
+                    policy.setOPERATING_INSTITUTION_PHONE(rs.getString("operating_institution_phone"));
+                    policy.setSUBMISSION_DOCUMENTS(rs.getString("submission_documents"));
+                    policy.setEVALUATION_AND_ANNOUNCEMENT(rs.getString("evaluation_and_announcement"));
+                    policy.setAPPLICATION_SITE_URL(rs.getString("application_site_url"));
+                    policy.setREFERENCE_SITE_URL1(rs.getString("reference_site_url1"));
+                    policy.setREFERENCE_SITE_URL2(rs.getString("reference_site_url2"));
+                    policy.setETC(rs.getString("etc"));
+                    policy.setPOLICY_FIELD_CODE(rs.getString("policy_field_code"));
+                    policy.setCREATED_AT(rs.getTimestamp("created_at").toString()); // Timestamp to String
+                    policy.setUPDATED_AT(rs.getTimestamp("updated_at").toString()); // Timestamp to String
+
+                    policies.add(policy);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return policies;
+    }
 }
