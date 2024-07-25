@@ -39,12 +39,8 @@ public class UserDTO {
         this.userPolicyInterest = userPolicyInterest;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-
     }
 
-
-
-    
     // Getters and Setters
     public String getUserId() {
         return userId;

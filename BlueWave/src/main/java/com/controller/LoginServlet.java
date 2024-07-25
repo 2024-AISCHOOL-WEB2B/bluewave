@@ -13,20 +13,32 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String userId = request.getParameter("username");
-        String password = request.getParameter("password");
+		request.setCharacterEncoding("UTF-8");
 
-        UserDAO userDAO = new UserDAO();
-        UserDTO user = userDAO.login(userId, password);
+		String userId = request.getParameter("username");
+		String password = request.getParameter("password");
 
-        if (user != null && PasswordUtil.checkPassword(password, user.getUserPw())) {
-            request.getSession().setAttribute("user", user);
-            response.sendRedirect("loginSuccess.jsp");
-        } else {
-            response.sendRedirect("login.jsp?error=1");
-        }
-    }
+		UserDAO userDAO = new UserDAO();
+		UserDTO user = userDAO.login(userId, password);
+
+		if (user != null) {
+			if (PasswordUtil.checkPassword(password, user.getUserPw())) {
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect("loginSuccess.jsp");
+			} else {
+				System.out.println("password checkpw가 false입니다.");
+			}
+		} else {
+			System.out.println("user가 null입니다.");
+			response.sendRedirect("login.jsp?error=1");
+			System.out.println("아이디 : "+userId);
+			System.out.println("내가 입력한 값 : " + password);
+			System.out.println("함수에 넣은 해시 값 : " + PasswordUtil.hashPassword(password));
+			String dto = user.getUserPw();
+			System.out.println("DTO에 저장된 해시값" + dto);
+		}
+	}
 }
