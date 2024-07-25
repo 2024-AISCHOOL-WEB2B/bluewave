@@ -15,7 +15,7 @@
                 <span>WAVE</span>
             </div>
 
-            <form id="signupForm" action="RegisterServlet" method="POST" onsubmit="return validateForm()">
+            <form id="signupForm" action="register" method="POST" onsubmit="return validateForm()">
                 <div class="signup-form">
                     <img src="image/Blue Wave.png" alt="logo" onclick="redirectToMain()"/>
                     <h2>
@@ -242,6 +242,7 @@
 
 
 		<script>
+		let isUsernameDuplicate = false; //중복확인 결과 여부
 		document.addEventListener("DOMContentLoaded", function () {
 		    const birthdateInputs = document.querySelector(".birthdate-inputs");
 		    const inputs = birthdateInputs.querySelectorAll("input");
@@ -300,19 +301,48 @@
 		    yearInput.setAttribute("placeholder", "년(4자리)");
 		    monthInput.setAttribute("placeholder", "월");
 		    dayInput.setAttribute("placeholder", "일");
+		    
+		    
+		    const usernameInput = document.getElementById("username");
+		    usernameInput.addEventListener("input", function() {
+		        isUsernameDuplicate = true; // 아이디가 변경되면 중복 상태로 설정
+		    });
+		    
+		    
 		});
 		
 		function checkUsername() {
 		    const usernameInput = document.getElementById("username");
 		    const username = usernameInput.value.trim();
-		    const button = document.querySelector('button[onclick="checkUsername()"]');
-		
-		    // 여기서 실제 서버와 통신하거나, 고정된 목록을 통해 중복을 확인하는 부분
-		    if (existingUsernames.includes(username)) {
-		        alert("이 아이디는 이미 사용 중입니다.");
-		    } else {
-		        alert("이 아이디는 사용 가능합니다.");
+
+		    if (username === "") {
+		        alert("아이디를 입력해주세요.");
+		        return;
 		    }
+
+		    const xhr = new XMLHttpRequest();
+		    xhr.onreadystatechange = function() {
+		        if (xhr.readyState === XMLHttpRequest.DONE) {
+		            if (xhr.status === 200) {
+		                const response = xhr.responseText;
+		                if (response === "exists") {
+		                    alert("이 아이디는 이미 사용 중입니다.");
+		                    isUsernameDuplicate = true;
+		                } else if (response === "available") {
+		                    alert("이 아이디는 사용 가능합니다.");
+		                    isUsernameDuplicate = false;
+		                } else {
+		                    alert("중복 확인 중 오류가 발생했습니다.");
+		                    isUsernameDuplicate = true;
+		                }
+		            } else {
+		                alert("중복 확인 중 오류가 발생했습니다.");
+		                isUsernameDuplicate = true;
+		            }
+		        }
+		    };
+		    xhr.open("GET", "CheckUsernameServlet?username=" + encodeURIComponent(username), true);
+		    xhr.send();
 		}
 		
 		function validateForm() {
@@ -363,6 +393,11 @@
 		        birthMonth.padStart(2, '0') + 
 		        birthDay.padStart(2, '0');
 		    birthdateInput.value = birthdate;
+		    
+		    if (isUsernameDuplicate) {
+		        alert("중복된 아이디입니다. 다른 아이디를 선택해주세요.");
+		        return false;
+		    }
 		
 		    // 유효성 검사를 통과하면 폼을 제출
 		    return true;

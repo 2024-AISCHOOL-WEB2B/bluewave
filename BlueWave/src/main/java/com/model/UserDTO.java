@@ -21,7 +21,8 @@ public class UserDTO {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    
+    public UserDTO() {
+    }
     public UserDTO(String userId, String userPw, String userName, String userEmail, String userBirthdate,
                    String userGender, String userJob, int userIncome, int userFamily, String userRegion,
                    String userPolicyInterest, Timestamp createdAt, Timestamp updatedAt) {
@@ -40,7 +41,7 @@ public class UserDTO {
         this.updatedAt = updatedAt;
 
     }
-    
+
 
 
     

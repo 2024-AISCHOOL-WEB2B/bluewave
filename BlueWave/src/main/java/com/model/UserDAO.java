@@ -30,6 +30,8 @@ public class UserDAO {
         }
         return connection;
     }
+    
+    
 
     public int register(UserDTO user) {
         int result = 0;
@@ -95,5 +97,7 @@ public class UserDAO {
             e.printStackTrace();
         }
         return user;
+        
+        
     }
 }
