@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.UserDTO;
+import com.util.PasswordUtil;
 import com.model.UserDAO;
 
 import javax.servlet.ServletException;
@@ -48,7 +49,10 @@ public class RegisterServlet extends HttpServlet {
             // 현재 시간을 Timestamp 형식으로 생성
             Timestamp currentTimestamp = new Timestamp(new Date().getTime());
 
-            UserDTO user = new UserDTO(userId, password, name, email, birthdate, gender, job, income, family, region, policyInterest, currentTimestamp, currentTimestamp);
+            // 비밀번호 해싱
+            String hashedPassword = PasswordUtil.hashPassword(password);
+            
+            UserDTO user = new UserDTO(userId, hashedPassword, name, email, birthdate, gender, job, income, family, region, policyInterest, currentTimestamp, currentTimestamp);
             UserDAO userDAO = new UserDAO();
             
             int result = userDAO.register(user);

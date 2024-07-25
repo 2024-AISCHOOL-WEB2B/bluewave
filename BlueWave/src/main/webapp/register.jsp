@@ -15,7 +15,7 @@
                 <span>WAVE</span>
             </div>
 
-            <form id="signupForm" action="register" method="POST" onsubmit="return validateForm()">
+            <form id="signupForm" action="RegisterServlet" method="POST" onsubmit="return validateForm()">
                 <div class="signup-form">
                     <img src="image/Blue Wave.png" alt="logo" onclick="redirectToMain()"/>
                     <h2>

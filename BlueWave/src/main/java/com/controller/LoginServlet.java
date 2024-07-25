@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.UserDTO;
+import com.util.PasswordUtil;
 import com.model.UserDAO;
 
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         UserDTO user = userDAO.login(userId, password);
 
-        if (user != null) {
+        if (user != null && PasswordUtil.checkPassword(password, user.getUserPw())) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("loginSuccess.jsp");
         } else {

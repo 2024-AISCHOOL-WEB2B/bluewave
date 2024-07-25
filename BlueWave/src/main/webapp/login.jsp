@@ -18,7 +18,7 @@
             </div>
 
             <!-- 로그인 폼 -->
-            <form class="login-form" action="login" method="POST" onsubmit="return validateForm()">
+            <form class="login-form" action="LoginServlet" method="POST" onsubmit="return validateForm()">
                 <!-- 로고 -->
                 <img src="image/Blue Wave.png" alt="Logo" onclick="redirectToMain()" />
 
