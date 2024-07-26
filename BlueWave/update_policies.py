@@ -13,7 +13,7 @@ os.makedirs(save_dir, exist_ok=True)
 
 # API 기본 설정
 # API 기본 설정
-api_key = '5c66b3083243d10e3543979d'
+api_key = '본인 API키 입력'
 base_url = 'https://www.youthcenter.go.kr/opi/youthPlcyList.do'
 
 # 정책분야코드 리스트
