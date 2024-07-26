@@ -5,10 +5,12 @@
 
 ## 청년 정책 추천 플랫폼
 주요내용 : 청년 정책 추천 모델 최적화<br>
-OPENAPI활용한 정책데이터가져오기(2230개)
+OPENAPI활용한 정책데이터가져오기(2230개)<br>
 2024-07-23 로그인페이지, 회원가입페이지 구성(Front) - 완료
-           로그인, 회원가입 구성(Back) - 완료
-2024-07-24 정책데이터 테이블저장 - 진행중
+           로그인, 회원가입 구성(Back) - 완료<br>
+2024-07-24 정책데이터 테이블저장 - 진행중<br>
+2024-07-25 비밀번호 해시 처리 - 완료<br>
+2024
 
 ### Tech Stack
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"/>
