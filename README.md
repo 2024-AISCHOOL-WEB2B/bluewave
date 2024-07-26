@@ -4,11 +4,11 @@
 ![팀로고](https://github.com/user-attachments/assets/f3dc16c2-d8c6-4e38-92ae-1783461de10c)
 
 ## 팀원 정보
-| 이름    | 메일주소              | 역할       |
-| ------- | --------------------- | ---------- |
-| 유승완  | example1@example.com  | 팀장       |
-| 임수현  | example2@example.com  | 팀원       |
-| 박지호  | example3@example.com  | 팀원       |
+| 이름   | 메일주소              | 역할  |
+| ------ | --------------------- | ----- |
+| 유승완 | example1@example.com  | 팀장  |
+| 임수현 | example2@example.com  | 팀원  |
+| 박지호 | example3@example.com  | 팀원  |
 
 # 개발내용
 청년 정책 추천 플랫폼
