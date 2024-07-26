@@ -103,7 +103,7 @@
                         <p class="date"><%= policies.get(0).getAPPLICATION_PERIOD() %></p>
                     </div>
                     <div class="policy-actions">
-                        <button class="btn view" onclick="redirectToPolicyView()">상세보기</button>
+                        <button class="btn view" onclick="redirectToPolicyView('<%= policies.get(0).getPOLICY_ID() %>')">상세보기</button>
                     </div>
                 </div>
 
@@ -118,7 +118,7 @@
                             <p class="date"><%= policies.get(1).getAPPLICATION_PERIOD() %></p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView('<%= policies.get(1).getPOLICY_ID() %>')">상세보기</button>
                         </div>
                     </div>
 
@@ -129,7 +129,7 @@
                             <p class="date"><%= policies.get(2).getAPPLICATION_PERIOD() %></p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView('<%= policies.get(2).getPOLICY_ID() %>')">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                             <p class="date"><%= policies.get(3).getAPPLICATION_PERIOD() %></p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView('<%= policies.get(3).getPOLICY_ID() %>')">상세보기</button>
                         </div>
                     </div>
 
@@ -155,7 +155,7 @@
                             <p class="date"><%= policies.get(4).getAPPLICATION_PERIOD() %></p>
                         </div>
                         <div class="policy-actions">
-                            <button class="btn view blue" onclick="redirectToPolicyView()">상세보기</button>
+                            <button class="btn view blue" onclick="redirectToPolicyView('<%= policies.get(4).getPOLICY_ID() %>')">상세보기</button>
                         </div>
                     </div>
                 </div>
@@ -186,10 +186,11 @@
             </div>
         </footer>
     <script>
-    function redirectToPolicyView() {
-        // 메인 페이지로 이동
-        window.location.href = "policyView.jsp";
+    function redirectToPolicyView(policyId) {
+        console.log("Redirecting to policy view with ID: " + policyId);
+        window.location.href = "policyView.jsp?policyId=" + policyId;
     }
+
     function redirectToMain() {
         window.location.href = "main.jsp";
     } 
