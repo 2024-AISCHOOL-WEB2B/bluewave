@@ -3,32 +3,16 @@ package com.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.util.DBUtil;
 
 public class PolicyDAO {
-
-    private String jdbcURL = "jdbc:oracle:thin:@project-db-stu3.smhrd.com:1524:xe";
-    private String jdbcUsername = "Insa5_SpringB_hacksim_2";
-    private String jdbcPassword = "aishcool2";
-    
-    protected Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
 
     // 모든 정책 가져오기
     public List<PolicyDTO> getAllPolicies() {
         List<PolicyDTO> policies = new ArrayList<>();
         String query = "SELECT * FROM ALL_POLICY";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -69,7 +53,7 @@ public class PolicyDAO {
         PolicyDTO policy = null;
         String query = "SELECT * FROM ALL_POLICY WHERE POLICY_ID = ?";
 
-        try (Connection conn = getConnection();
+        try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, policyId);
@@ -123,7 +107,7 @@ public class PolicyDAO {
         String query = "SELECT * FROM ALL_POLICY WHERE POLICY_ID IN (" + placeholders.toString() + ")";
         System.out.println("Executing query: " + query);
         
-        try (Connection conn = getConnection();
+        try (Connection conn = DBUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             for (int i = 0; i < policyIds.size(); i++) {
