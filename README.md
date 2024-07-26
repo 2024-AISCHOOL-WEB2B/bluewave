@@ -10,7 +10,7 @@ OPENAPI활용한 정책데이터가져오기(2230개)<br>
            로그인, 회원가입 구성(Back) - 완료<br>
 2024-07-24 정책데이터 테이블저장 - 진행중<br>
 2024-07-25 비밀번호 해시 처리 - 완료<br>
-2024
+2024-07-26 정책데이터 자동화 - 완료
 
 ### Tech Stack
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"/>
