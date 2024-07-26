@@ -4,12 +4,12 @@ import java.sql.Timestamp;
 
 public class PostDTO {
 	
-	private String postIdx;
+	private int postIdx;
 	private String postTitle;
 	private String postContents;
 	private String postFile;
 	private String postViews;
-	private String postLikes;
+	private int postLikes;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private String userId;
@@ -18,8 +18,8 @@ public class PostDTO {
 	public PostDTO() {
 		//기본생성자
 	}
-	public PostDTO(String postIdx, String postTitle, String postContents, String postFile, String postViews,
-			String postLikes, Timestamp createdAt, Timestamp updatedAt, String userId) {
+	public PostDTO(int postIdx, String postTitle, String postContents, String postFile, String postViews,
+			int postLikes, Timestamp createdAt, Timestamp updatedAt, String userId) {
 		this.postIdx = postIdx;
 		this.postTitle = postTitle;
 		this.postContents = postContents;
@@ -30,10 +30,10 @@ public class PostDTO {
 		this.updatedAt = updatedAt;
 		this.userId = userId;
 	}
-	public String getPostIdx() {
+	public int getPostIdx() {
 		return postIdx;
 	}
-	public void setPostIdx(String postIdx) {
+	public void setPostIdx(int postIdx) {
 		this.postIdx = postIdx;
 	}
 	public String getPostTitle() {
@@ -60,10 +60,10 @@ public class PostDTO {
 	public void setPostViews(String postViews) {
 		this.postViews = postViews;
 	}
-	public String getPostLikes() {
+	public int getPostLikes() {
 		return postLikes;
 	}
-	public void setPostLikes(String postLikes) {
+	public void setPostLikes(int postLikes) {
 		this.postLikes = postLikes;
 	}
 	public Timestamp getCreatedAt() {
