@@ -2,8 +2,12 @@
 
 # Team.BlueWave
 ![팀로고](https://github.com/user-attachments/assets/f3dc16c2-d8c6-4e38-92ae-1783461de10c)
-- 팀장 : 유승완 
-- 팀원 : 임수현, 박지호
+## 팀원 정보
+| 이름    | 메일주소              | 역할       |
+| ------- | --------------------- | ---------- |
+| 유승완  | example1@example.com  | 팀장       |
+| 임수현  | example2@example.com  | 팀원       |
+| 박지호  | example3@example.com  | 팀원       |
 
 # 개발내용
 청년 정책 추천 플랫폼
@@ -23,4 +27,5 @@ OPENAPI활용한 정책데이터가져오기(2230개)<br>
 ### Tech Stack
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"/> <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"/>
 <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white"/>
-<img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
+<img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white"/> <img src="https://img.shields.io/badge/ORACLE-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"/>
