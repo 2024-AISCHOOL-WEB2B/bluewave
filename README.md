@@ -4,28 +4,8 @@
 ![팀로고](https://github.com/user-attachments/assets/f3dc16c2-d8c6-4e38-92ae-1783461de10c)
 
 ## 팀원 정보
-<table>
-  <tr>
-    <th>이름</th>
-    <th>메일주소</th>
-    <th>역할</th>
-  </tr>
-  <tr>
-    <td>유승완</td>
-    <td><a href="mailto:example1@example.com">example1@example.com</a></td>
-    <td>팀장</td>
-  </tr>
-  <tr>
-    <td>임수현</td>
-    <td><a href="mailto:example2@example.com">example2@example.com</a></td>
-    <td>팀원</td>
-  </tr>
-  <tr>
-    <td>박지호</td>
-    <td><a href="mailto:example3@example.com">example3@example.com</a></td>
-    <td>팀원</td>
-  </tr>
-</table>
+팀장 : 유승완
+팀원 : 임수현, 박지호
 
 # 개발내용
 청년 정책 추천 플랫폼
