@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		String userId = request.getParameter("username");
+		String userId = request.getParameter("userid");
 		String password = request.getParameter("password");
 
 		UserDAO userDAO = new UserDAO();

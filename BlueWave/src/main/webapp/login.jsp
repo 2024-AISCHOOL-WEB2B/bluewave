@@ -27,7 +27,7 @@
                     type="text"
                     placeholder="¾ÆÀÌµð"
                     class="input-field"
-                    name="username"
+                    name="userid"
                     required
                 />
                 <input
