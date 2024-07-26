@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.model.PostDTO;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.CallableStatement;
@@ -15,30 +18,21 @@ import java.util.Properties;
 @WebServlet("/PostLikeService")
 public class PostLikeService {
 
-	private static Connection getConnection() throws SQLException {
-		Properties props = new Properties();
-		try {
-			props.load(PostLikeService.class.getClassLoader().getResourceAsStream("db.properties"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		String url = props.getProperty("jdbc:oracle:thin:@project-db-stu3.smhrd.com:1524:xe");
-		String username = props.getProperty("Insa5_SpringB_hacksim_2");
-		String password = props.getProperty("aishcool2");
-
-		return DriverManager.getConnection(url, username, password);
-	}
-
-	public static void increasePostLike(int postId, String userId) throws SQLException {
-		String sql = "{call INCREASE_POST_LIKE(?, ?)}";
-		try (Connection conn = getConnection(); CallableStatement stmt = conn.prepareCall(sql)) {
-			stmt.setInt(1, postId);
-			stmt.setString(2, userId);
-			stmt.execute();
-			conn.commit(); // 커밋 수행
-		} catch (SQLException e) {
-			throw new SQLException("Error executing procedure", e);
-		}
-	}
+	String userId; //회원 번호
+	String postIdx; //글 번호
+	Boolean isLike; //변수추가 좋아요 한 글인가?
+	
+	//1. 게시물 번호를 가져오기
+	//2. 회원 번호 가져오기
+	//3. db postlike 테이블에 있는지 확인한다.
+	// * postlike 테이블의 like컬럼값을!!
+	//4. 만약 있으면 like수는 변동X
+	//5. 없으면 like +1
+	
+	
+	PostDTO post = new PostDTO();
+	
+	
+	
+	
 }
