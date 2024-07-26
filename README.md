@@ -1,8 +1,7 @@
 # 핵심프로젝트 : 2024-07-22 - 2024-08-02 
 
 # Team.BlueWave
-![Uploading image.png…]()
-
+![팀로고](https://github.com/user-attachments/assets/f3dc16c2-d8c6-4e38-92ae-1783461de10c)
 - 팀장 : 유승완 
 - 팀원 : 임수현, 박지호
 
