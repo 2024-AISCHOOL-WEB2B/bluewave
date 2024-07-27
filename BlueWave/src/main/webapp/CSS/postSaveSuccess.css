@@ -1,0 +1,45 @@
+@charset "EUC-KR";
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* 아주 연한 파란색 배경 */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    border: 2px solid #00aaff; /* 파란색 테두리 */
+    border-radius: 10px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #0077cc; /* 진한 파란색 제목 */
+}
+
+p {
+    color: #333333; /* 본문 색상 */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #0077cc; /* 진한 파란색 버튼 */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #005fa3; /* 어두운 파란색 호버 효과 */
+}

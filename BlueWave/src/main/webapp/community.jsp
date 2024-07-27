@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>커뮤니티 글 목록</title>
-    <link rel="stylesheet" type="text/css" href="communityStyles.css">
+    <link rel="stylesheet" type="text/css" href="CSS/communityStyles.css">
 </head>
 <body>
     <header>
@@ -25,7 +25,7 @@
                 <!-- 예시 데이터 -->
                 <tr>
                     <td>1</td>
-                    <td><a href="view.jsp?id=1">첫 번째 글 제목</a></td>
+                    <td><a href="viewPost">첫 번째 글 제목</a></td>
                     <td>홍길동</td>
                     <td>2024-07-26</td>
                 </tr>

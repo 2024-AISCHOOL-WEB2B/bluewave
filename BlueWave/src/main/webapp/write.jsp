@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기 - 커뮤니티</title>
-<link rel="stylesheet" type="text/css" href="WriteStyles.css">
+<link rel="stylesheet" type="text/css" href="CSS/WriteStyles.css">
 </head>
 <body>
 

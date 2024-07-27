@@ -50,7 +50,7 @@ public class PostServlet extends HttpServlet {
 		int result = dao.postDbSave(post);
 
 		if (result > 0) {
-			response.getWriter().print("글이 성공적으로 저장되었습니다.");
+			response.sendRedirect("postSaveSuccess.jsp");
 		} else {
 			response.getWriter().print("글 저장에 실패하였습니다.");
 		}
