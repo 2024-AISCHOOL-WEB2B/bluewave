@@ -112,7 +112,15 @@ nav {
     font-weight: bold;
     text-decoration: none;
     color: white;
-    background: linear-gradient(90deg, #ff4248, #ff941a, #feffbe, #80ff6f, #65b2ff, #8b00c2);
+    background: linear-gradient(
+        90deg,
+        #ff4248,
+        #ff941a,
+        #feffbe,
+        #80ff6f,
+        #65b2ff,
+        #8b00c2
+    );
     border-radius: 25px;
     transition: transform 0.3s ease;
     line-height: 1.3;
@@ -182,7 +190,7 @@ nav {
 
 /* 좋아요 버튼 스타일 */
 .like-btn {
-    background-color: #4CAF50; /* 초록색 */
+    background-color: #4caf50; /* 초록색 */
     color: white;
     padding: 15px 30px; /* 버튼의 크기와 여백 조정 */
     border: none;
@@ -194,8 +202,6 @@ nav {
 .like-btn img {
     width: 70px;
 }
-
-
 
 .like-btn:hover {
     background-color: #45a049; /* 더 어두운 초록색 */
@@ -226,7 +232,7 @@ nav {
 
 /* 커뮤니티 이동 버튼 스타일 */
 .community-btn {
-    background-color: #2196F3; /* 파란색 */
+    background-color: #2196f3; /* 파란색 */
     color: white;
     text-decoration: none; /* 링크일 경우 기본 밑줄 제거 */
     padding: 15px 30px; /* 버튼의 크기와 여백 조정 */
@@ -238,16 +244,9 @@ nav {
 }
 
 .community-btn:hover {
-    background-color: #1976D2; /* 더 어두운 파란색 */
+    background-color: #1976d2; /* 더 어두운 파란색 */
     transform: scale(1.05);
 }
-
-
-
-
-
-
-
 
 /* 푸터 스타일 */
 footer {
@@ -291,6 +290,87 @@ footer {
     text-decoration: underline;
 }
 
+/* 정책 리스트 스타일 */
+
+.policy-list {
+    width: 70%;
+    margin-top: 25px;
+}
+.bestPolicy {
+    background-color: #e8f5e9;
+    margin-bottom: 25px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.Policy-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 1300px;
+    box-sizing: border-box;
+}
+
+.recPolicyList {
+    background-color: #ececec;
+    margin-top: 25px;
+    padding: 20px;
+    width: calc(25% - 25px); /* 5개의 요소가 한 줄에 배치되도록 설정 */
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.policy-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+}
+
+.date {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn.view {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn.view.blue {
+    background-color: #85c5f9;
+}
+
+.btn.compare {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-left: 5px;
+}
+
+.allpolicyViewButton {
+    border: none;
+    border-radius: 10px;
+    margin: 50px;
+    padding: 20px 80px 20px 80px;
+    font-size: 20px;
+    background: linear-gradient(90deg, #1b1bff, #4b7bff, #6aa0ff, #97c4ff);
+}
+
+.APVbtn {
+    color: #ffffff;
+}
+
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
@@ -304,9 +384,6 @@ footer {
         padding-top: 100px; /* 더 작은 화면에서 네비게이션을 더 아래로 이동 */
     }
 }
-
-
-
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
@@ -331,22 +408,22 @@ footer {
         align-items: stretch;
     }
 
-    .news, .notices {
+    .news,
+    .notices {
         width: 100%;
         margin-bottom: 10px;
     }
 }
 
-
 .lists {
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 1280px;
     max-width: 100%;
     padding: 20px;
-    margin-top: 20px ;
-    margin-bottom: 150px ;
+    margin-top: 20px;
+    margin-bottom: 150px;
 }
 .lists h2 {
     margin-top: 0;

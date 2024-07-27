@@ -37,11 +37,27 @@
     String policyId = request.getParameter("policyId");
     PolicyDAO policyDAO = new PolicyDAO();
     PolicyDTO policy = null;
+
     if (policyId != null && !policyId.isEmpty()) {
         policy = policyDAO.getPolicyById(policyId);
     }
 
     if (policy != null) {
+%>
+<%
+	String category = "-";
+	if(policy.getPOLICY_FIELD_CODE().equals("23010")) {
+		category = "일자리 분야";
+	}else if(policy.getPOLICY_FIELD_CODE().equals("23020")) {
+		category = "주거 분야";
+	}else if(policy.getPOLICY_FIELD_CODE().equals("23030")) {
+		category = "교육 분야";
+	}else if(policy.getPOLICY_FIELD_CODE().equals("23040")) {
+		category = "복지.문화 분야";
+	}else if(policy.getPOLICY_FIELD_CODE().equals("23050")) {
+		category = "참여.권리 분야";
+	}
+
 %>
 <div class="container">
 	<h2 class="doc_tit01 type2"><%=policy.getPOLICY_NAME()%></h2>
@@ -56,7 +72,7 @@
             </li>
             <li>
                 <div class="list_tit">정책 분야</div>
-                <div class="list_cont"><%= policy.getPOLICY_FIELD_CODE() != null ? policy.getPOLICY_FIELD_CODE() : "-" %></div>
+                <div class="list_cont"><%= category%></div>
             </li>
             <li>
                 <div class="list_tit">지원 내용</div>

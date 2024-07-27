@@ -32,6 +32,8 @@ public class PolicyDTO {
 	private String CREATED_AT;
 	private String UPDATED_AT;
 	
+	private long numericPolicyId; //숫자로 변환된 policy_id 를 저장할 변수
+	
 	
 	public String getPOLICY_ID() {
 		return POLICY_ID;
@@ -207,6 +209,14 @@ public class PolicyDTO {
 	public void setUPDATED_AT(String uPDATED_AT) {
 		UPDATED_AT = uPDATED_AT;
 	}
+	
+    public long getNumericPolicyId() {
+        return numericPolicyId;
+    }
+
+    public void setNumericPolicyId(long numericPolicyId) {
+        this.numericPolicyId = numericPolicyId;
+    }
 	
 	
 	
