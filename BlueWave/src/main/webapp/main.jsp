@@ -58,7 +58,11 @@
 				<%
 				}
 				%>
-
+			<div class="btn-wrap">
+			
+            <a href="policyRecommend.jsp" class="btn btn-primary">정책 추천 받기</a> <!-- policyRecommend버튼(삭제할예정) -->
+            
+        </div>
 			</div>
 
 			<br> <br> <br> <br> <br> <br>

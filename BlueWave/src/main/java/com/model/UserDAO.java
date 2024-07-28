@@ -75,4 +75,42 @@ public class UserDAO {
 		}
 		return user;
 	}
+	
+	
+	// 사용자 정보 가져오는 클래스 20240728
+	public UserDTO getUserById(String userId) {
+        UserDTO user = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DBUtil.getConnection();
+            String sql = "SELECT * FROM TBL_USER WHERE USER_ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                user = new UserDTO();
+                user.setUserId(rs.getString("USER_ID"));
+                user.setUserPw(rs.getString("USER_PW"));
+                user.setUserName(rs.getString("USER_NAME"));
+                user.setUserEmail(rs.getString("USER_EMAIL"));
+                user.setUserBirthdate(rs.getString("USER_BIRTHDATE"));
+                user.setUserGender(rs.getString("USER_GENDER"));
+                user.setUserJob(rs.getString("USER_JOB"));
+                user.setUserIncome(rs.getInt("USER_INCOME"));
+                user.setUserFamily(rs.getInt("USER_FAMILY"));
+                user.setUserRegion(rs.getString("USER_REGION"));
+                user.setUserPolicyInterest(rs.getString("USER_POLICY_INTEREST"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs, pstmt, conn);
+        }
+
+        return user;
+    }
 }
