@@ -8,7 +8,7 @@ public class PostDTO {
 	private String postTitle;
 	private String postContents;
 	private String postFile;
-	private String postViews;
+	private	int postViews;
 	private int postLikes;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
@@ -18,7 +18,7 @@ public class PostDTO {
 	public PostDTO() {
 		//기본생성자
 	}
-	public PostDTO(int postIdx, String postTitle, String postContents, String postFile, String postViews,
+	public PostDTO(int postIdx, String postTitle, String postContents, String postFile, int postViews,
 			int postLikes, Timestamp createdAt, Timestamp updatedAt, String userId) {
 		this.postIdx = postIdx;
 		this.postTitle = postTitle;
@@ -54,10 +54,10 @@ public class PostDTO {
 	public void setPostFile(String postFile) {
 		this.postFile = postFile;
 	}
-	public String getPostViews() {
+	public int getPostViews() {
 		return postViews;
 	}
-	public void setPostViews(String postViews) {
+	public void setPostViews(int postViews) {
 		this.postViews = postViews;
 	}
 	public int getPostLikes() {

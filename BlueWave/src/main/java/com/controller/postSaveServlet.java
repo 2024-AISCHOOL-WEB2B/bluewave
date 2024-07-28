@@ -21,7 +21,7 @@ import com.oreilly.servlet.multipart.Part;
 		maxFileSize = 1024 * 1024 * 10, // 10 MB
 		maxRequestSize = 1024 * 1024 * 15 // 15 MB
 )
-public class PostServlet extends HttpServlet {
+public class postSaveServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
