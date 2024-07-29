@@ -89,12 +89,6 @@
 		int post_views = dto.getPostViews();
 		int post_likes = dto.getPostLikes();
 		response.setCharacterEncoding("EUC-KR");
-<<<<<<< HEAD
-		dto = dao.postSearch(index_num);
-		UserDTO info = (UserDTO) session.getAttribute("user");
-=======
-		dto = dao.postSearch(post_idx);
->>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/bluewave.git
 		%>
 		<table>
 			<thead>
