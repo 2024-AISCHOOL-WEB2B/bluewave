@@ -70,58 +70,54 @@
 
       <!-- 댓글 작성 폼 추가 -->
       <h2>댓글</h2>
-      <form action="CommentServlet" method="post">
-         <p>
-            <% 
-            if (user == null || user.getUserId() == null) {
-                response.sendRedirect("retry.jsp");
-            } else {
-                String userid = user.getUserId();
-            %>
-            작성자 :
-            <%= userid %>
-            <% } %>
-         </p>
+      <form action="CommentServlet" method="post" class="comment-form">
+         <%
+         if (user == null || user.getUserId() == null) {
+             response.sendRedirect("retry.jsp");
+         } else {
+             String userid = user.getUserId();
+         %>
          <input type="hidden" value="<%=post_idx%>" name="post_idx">
-         
          <textarea name="comment_content" placeholder="댓글 내용을 입력하세요" required></textarea>
          <button type="submit">댓글 작성</button>
+         <% } %>
       </form>
-<!-- 댓글 목록 출력 -->
-		<%
-		CommentDAO commentDao = new CommentDAO();
-		List<CommentDTO> commentList = commentDao.getCommentsByPostId(post_idx);
-		if (commentList != null && !commentList.isEmpty()) {
-		%>
-		<table>
-			<thead>
-				<tr>
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (CommentDTO comment : commentList) {
-				%>
-				<tr>
-					<td><%= comment.getUserId() %></td>
-					<td><%= comment.getCommentContent() %></td>
-					<td><%= comment.getCreatedAt() %></td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
-		</table>
-		<%
-		} else {
-		%>
-		<p>댓글이 없습니다.</p>
-		<%
-		}
-		%>
+
+      <!-- 댓글 목록 출력 -->
+      <%
+      CommentDAO commentDao = new CommentDAO();
+      List<CommentDTO> commentList = commentDao.getCommentsByPostId(post_idx);
+      if (commentList != null && !commentList.isEmpty()) {
+      %>
+      <table class="comment-table">
+         <thead>
+            <tr>
+               <th>작성자</th>
+               <th>내용</th>
+               <th>작성일</th>
+            </tr>
+         </thead>
+         <tbody>
+            <%
+            for (CommentDTO comment : commentList) {
+            %>
+            <tr>
+               <td><%= comment.getUserId() %></td>
+               <td><%= comment.getCommentContent() %></td>
+               <td><%= comment.getCreatedAt() %></td>
+            </tr>
+            <%
+            }
+            %>
+         </tbody>
+      </table>
+      <%
+      } else {
+      %>
+      <p>댓글이 없습니다.</p>
+      <%
+      }
+      %>
 
    </main>
 </body>
