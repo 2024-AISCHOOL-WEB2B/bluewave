@@ -143,7 +143,7 @@
 		    int endIndex = startIndex + pageSize - 1;
 		
 		    PolicyDAO pDAO = new PolicyDAO();
-		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(keywords, code, startIndex, endIndex);
+		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(keywords, code, startIndex, endIndex+1);
 		    int totalPolicyCount = pDAO.getTotalPolicyCount(keywords, code);
 		    int totalPages = (int) Math.ceil(totalPolicyCount / (double) pageSize);
 		%>

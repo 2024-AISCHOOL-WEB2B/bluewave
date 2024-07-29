@@ -53,7 +53,7 @@
 			<%=post_file%></p>
 
 		<!-- 좋아요 버튼 추가 -->
-		<form action="PostLikeService.java" method="post">
+		<form action="PostLikeService" method="post">
 			<input type="hidden" name="index_num" value="<%=index_num%>">
 			<!-- index_num 추가 -->
 			<button type="submit">좋아요! (클릭)</button>
