@@ -10,6 +10,7 @@
 <title>Blue Wave</title>
 <link rel="stylesheet" href="CSS/mainST.css">
 </head>
+
 <body>
 
 	<%
@@ -392,8 +393,8 @@
                         </div>
                     </div>
                 </div>
-                <button onclick="redirectToAllPolicy()">
-                    모든 정책 조회하기
+                <button class ="allpolicyViewButton"onclick="redirectToAllPolicy()">
+                    <span class="APVbtn">모든 정책 조회하기</span>
                 </button>
             </div>
         </main>

@@ -28,6 +28,32 @@ public class PolicyDAO {
         return totalCount;
     }
     
+    //검색 조건에 맞는 정책 갯수 반환하는 메서드
+    public int getTotalPolicyCount(String title, String code) {
+        String query = "SELECT COUNT(*) FROM ALL_POLICY WHERE POLICY_NAME LIKE ? " +
+                       (code != null && !code.isEmpty() ? "AND POLICY_FIELD_CODE = ? " : "");
+        int count = 0;
+        
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setString(1, "%" + title + "%");
+            if (code != null && !code.isEmpty()) {
+                stmt.setString(2, code);
+            }
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return count;
+    }
+    
 
     // 정책 범위에 따라 가져오기
 	// 모든 정책을 가져오는 메서드로 설계했지만 성능상의 문제로 범위지정으로 변경했음
@@ -41,6 +67,45 @@ public class PolicyDAO {
             int limit = end;
             stmt.setInt(1, limit);
             stmt.setInt(2, start);
+
+            System.out.println("Executing query: " + stmt.toString());
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    PolicyDTO policy = createPolicyFromResultSet(rs);
+                    allPolicies.add(policy);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQLException occurred while retrieving policies: " + e.getMessage());
+        }
+
+        return allPolicies;
+    }
+    
+    // 정책 범위에 따라 가져오기
+	// 키워드 검색기능을 포함한 오버라이딩
+    public List<PolicyDTO> getAllPolicies(String title, String code, int start, int end) {
+        List<PolicyDTO> allPolicies = new ArrayList<>();
+        String query = "SELECT * FROM (SELECT a.*, ROWNUM r__ FROM " +
+                       "(SELECT * FROM ALL_POLICY " +
+                       "WHERE POLICY_NAME LIKE ? " +
+                       (code != null && !code.isEmpty() ? "AND POLICY_FIELD_CODE = ? " : "") +
+                       "ORDER BY TO_NUMBER(SUBSTR(POLICY_ID, 2)) DESC) a " +
+                       "WHERE ROWNUM <= ?) WHERE r__ >= ?";
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            int parameterIndex = 1;
+            stmt.setString(parameterIndex++, "%" + title + "%");
+            
+            if (code != null && !code.isEmpty()) {
+                stmt.setString(parameterIndex++, code);
+            }
+
+            stmt.setInt(parameterIndex++, end);
+            stmt.setInt(parameterIndex, start);
 
             System.out.println("Executing query: " + stmt.toString());
             try (ResultSet rs = stmt.executeQuery()) {
