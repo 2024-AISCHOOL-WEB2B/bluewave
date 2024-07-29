@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ public class PostDAO {
 
 	// 객체 생성
 	UserDTO user = new UserDTO();
+	private ResultSet rs;
 
 	// 게시물을 DB에 저장하는 메서드
 	public int postDbSave(PostDTO post) {
@@ -42,7 +45,7 @@ public class PostDAO {
 	public PostDTO postSearch(int search) {
 		ResultSet result = null;
 		PostDTO dto = null;
-		
+
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement psmt = connection.prepareStatement(SELECT_POST_SQL)) {
 
@@ -59,8 +62,8 @@ public class PostDAO {
 				java.sql.Timestamp created_at = result.getTimestamp("created_at");
 				java.sql.Timestamp updated_at = result.getTimestamp("updated_at");
 
-				dto = new PostDTO(search, post_title, post_content, post_file, post_views, post_likes,
-						created_at, updated_at, user_id);
+				dto = new PostDTO(search, post_title, post_content, post_file, post_views, post_likes, created_at,
+						updated_at, user_id);
 			}
 
 		} catch (SQLException e) {
@@ -68,4 +71,33 @@ public class PostDAO {
 		}
 		return dto;
 	}
+
+	// 커뮤니티 홈으로 글 목록 전체 불러오는 메서드
+	public List<PostDTO> getAllPosts() {
+		List<PostDTO> postList = new ArrayList<>();
+		String select_SQL = "SELECT * FROM tbl_post order by post_idx asc";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement psmt = connection.prepareStatement(select_SQL);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				PostDTO post = new PostDTO();
+				post.setPostIdx(rs.getInt("post_idx"));
+				post.setUserId(rs.getString("user_id"));
+				post.setPostTitle(rs.getString("post_title"));
+				post.setPostContents(rs.getString("post_content"));
+				post.setPostFile(rs.getString("post_file"));
+				post.setCreatedAt(rs.getTimestamp("created_at"));
+				post.setUpdatedAt(rs.getTimestamp("updated_at"));
+				post.setPostViews(rs.getInt("post_views"));
+				post.setPostLikes(rs.getInt("post_likes"));
+				postList.add(post);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return postList;
+
+	}
+
 }

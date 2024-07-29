@@ -1,6 +1,8 @@
+<%@page import="java.util.List"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="com.model.PostDTO"%>
 <%@page import="com.model.PostDAO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,12 +21,8 @@
 		<%
 		PostDAO dao = new PostDAO();
 		PostDTO dto = new PostDTO();
-
-		int index_num = 64;
-
-		dto = dao.postSearch(index_num);
-
-		int post_idx = dto.getPostIdx(); //글 인덱스 번호
+	    List<PostDTO> postList = dao.getAllPosts();
+		int index_num = dto.getPostIdx(); //글 인덱스 번호
 		String user_id = dto.getUserId();//작성자ID
 		String post_title = dto.getPostTitle(); //타이틀
 		String post_content = dto.getPostContents(); //내용
@@ -34,6 +32,7 @@
 		int post_views = dto.getPostViews();
 		int post_likes = dto.getPostLikes();
 		response.setCharacterEncoding("EUC-KR");
+		dto = dao.postSearch(index_num);
 		%>
 		<table>
 			<thead>
@@ -45,13 +44,14 @@
 				</tr>
 			</thead>
 			<tbody>
+				<% for(PostDTO post : postList) { %>
 				<tr>
-					<td><%=index_num%></td>
-					<td><a href="viewPost.jsp?index_num=<%=index_num%>"><%=post_title%></a></td>
-					<td><%=user_id%></td>
-					<td><%=created_at%></td>
+					<td><%= post.getPostIdx() %></td>
+					<td><a href="viewPost.jsp?index_num=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
+					<td><%= post.getUserId() %></td>
+					<td><%= post.getCreatedAt() %></td>
 				</tr>
-
+				<% } %>
 			</tbody>
 		</table>
 	</main>
