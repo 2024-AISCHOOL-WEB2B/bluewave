@@ -12,6 +12,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blue Wave</title>
     <link rel="stylesheet" href="CSS/policyViewST.css" />
+    <style>
+		/* 정책 정보 테이블 스타일 */
+		.table_wrap {
+		    margin-bottom: 30px;
+		}
+		
+		.common_table01.type2 {
+		    width: 100%;
+		    border-collapse: collapse;
+		}
+		
+		.common_table01.type2 li {
+		    display: flex;
+		    border-bottom: 1px solid #e0e0e0;
+		}
+		
+		.common_table01.type2 li:last-child {
+		    border-bottom: none;
+		}
+		
+		.list_tit, .list_cont {
+		    padding: 15px;
+		    line-height: 1.5;
+		}
+		
+		.list_tit {
+		    width: 30%;
+		    background-color: #f5f5f5;
+		    font-weight: bold;
+		    border-right: 1px solid #e0e0e0;
+		}
+		
+		.list_cont {
+		    width: 70%;
+		}
+		
+		/* 섹션 제목 스타일 */
+		.tbl-header {
+		    margin-top: 30px;
+		    margin-bottom: 15px;
+		    border-bottom: 2px solid #333;
+		    padding-bottom: 10px;
+		}
+		
+		.h3-tit {
+		    font-size: 1.2em;
+		    color: #333;
+		    margin: 0;
+		}
+		
+		/* 정책 이름 스타일 */
+		.doc_tit01.type2 {
+		    font-size: 1.8em;
+		    color: #0066cc;
+		    margin-bottom: 30px;
+		    padding-bottom: 15px;
+		    border-bottom: 2px solid #0066cc;
+		}
+		
+		/* 컨테이너 스타일 수정 */
+		.container {
+		    max-width: 1000px;
+		    margin: 0 auto;
+		    padding: 20px;
+		}
+		
+		/* 반응형 디자인 */
+		@media (max-width: 768px) {
+		    .common_table01.type2 li {
+		        flex-direction: column;
+		    }
+		
+		    .list_tit, .list_cont {
+		        width: 100%;
+		        border-right: none;
+		    }
+		
+		    .list_tit {
+		        border-bottom: 1px solid #e0e0e0;
+		    }
+		}
+    </style>
 </head>
 <body>
 <%
@@ -62,7 +144,7 @@
 <div class="container">
 	<h2 class="doc_tit01 type2"><%=policy.getPOLICY_NAME()%></h2>
     <div class="tbl-header">
-        <h3 class="h3-tit">한 눈에 보는 정책 요약</h3>
+        <h3 class="h3-tit">정책 정보 요약</h3>
     </div>
     <div class="table_wrap">
         <ul class="common_table01 type2">

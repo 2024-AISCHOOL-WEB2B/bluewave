@@ -371,6 +371,10 @@ footer {
     color: #ffffff;
 }
 
+.allpolicyViewButton:hover {
+    transform: scale(1.05);
+}
+
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
