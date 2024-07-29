@@ -328,59 +328,53 @@ public class PolicyDAO {
     
     
     // 정책필터링 클래스
-    public List<PolicyDTO> getRecommendedPolicies(String residence, int age, String policyInterest, int limit) {
+    public List<PolicyDTO> getFilteredPolicies(String policyFieldCode, String orgCode) {
         List<PolicyDTO> policies = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DBUtil.getConnection();
-            String sql = "SELECT * FROM EX_POLICY WHERE RESIDENCE_INCOME_CONDITION LIKE ? AND AGE_INFO LIKE ? AND POLICY_FIELD_CODE = ? FETCH FIRST ? ROWS ONLY";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "%" + residence + "%");
-            pstmt.setString(2, "%" + age + "%");
-            pstmt.setString(3, policyInterest);
-            pstmt.setInt(4, limit);
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                PolicyDTO policy = new PolicyDTO();
-                policy.setPOLICY_ID(rs.getString("POLICY_ID"));
-                policy.setORG_CODE(rs.getString("ORG_CODE"));
-                policy.setPOLICY_NAME(rs.getString("POLICY_NAME"));
-                policy.setPOLICY_DESC(rs.getString("POLICY_DESC"));
-                policy.setSUPPORT_CONTENT(rs.getString("SUPPORT_CONTENT"));
-                policy.setSUPPORT_SCALE(rs.getString("SUPPORT_SCALE"));
-                policy.setOPERATION_PERIOD(rs.getString("OPERATION_PERIOD"));
-                policy.setAPPLICATION_REPEAT_CODE(rs.getString("APPLICATION_REPEAT_CODE"));
-                policy.setAPPLICATION_PERIOD(rs.getString("APPLICATION_PERIOD"));
-                policy.setAGE_INFO(rs.getString("AGE_INFO"));
-                policy.setRESIDENCE_INCOME_CONDITION(rs.getString("RESIDENCE_INCOME_CONDITION"));
-                policy.setAPPLICATION_PROCESS(rs.getString("APPLICATION_PROCESS"));
-                policy.setPARTICIPATION_LIMIT_TARGET(rs.getString("PARTICIPATION_LIMIT_TARGET"));
-                policy.setAPPLICATION_PROCEDURE(rs.getString("APPLICATION_PROCEDURE"));
-                policy.setMAIN_DEPARTMENT_NAME(rs.getString("MAIN_DEPARTMENT_NAME"));
-                policy.setMAIN_DEPARTMENT_CONTACT(rs.getString("MAIN_DEPARTMENT_CONTACT"));
-                policy.setMAIN_DEPARTMENT_PHONE(rs.getString("MAIN_DEPARTMENT_PHONE"));
-                policy.setOPERATING_INSTITUTION_NAME(rs.getString("OPERATING_INSTITUTION_NAME"));
-                policy.setOPERATING_INSTITUTION_CONTACT(rs.getString("OPERATING_INSTITUTION_CONTACT"));
-                policy.setOPERATING_INSTITUTION_PHONE(rs.getString("OPERATING_INSTITUTION_PHONE"));
-                policy.setSUBMISSION_DOCUMENTS(rs.getString("SUBMISSION_DOCUMENTS"));
-                policy.setEVALUATION_AND_ANNOUNCEMENT(rs.getString("EVALUATION_AND_ANNOUNCEMENT"));
-                policy.setAPPLICATION_SITE_URL(rs.getString("APPLICATION_SITE_URL"));
-                policy.setREFERENCE_SITE_URL1(rs.getString("REFERENCE_SITE_URL1"));
-                policy.setREFERENCE_SITE_URL2(rs.getString("REFERENCE_SITE_URL2"));
-                policy.setETC(rs.getString("ETC"));
-                policy.setPOLICY_FIELD_CODE(rs.getString("POLICY_FIELD_CODE"));
-                policies.add(policy);
+        String query = "SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? AND ROWNUM <= 5 ORDER BY UPDATED_AT DESC";
+        
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            
+            pstmt.setString(1, policyFieldCode);
+            pstmt.setString(2, orgCode);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    PolicyDTO policy = new PolicyDTO();
+                    policy.setPOLICY_ID(rs.getString("POLICY_ID"));
+                    policy.setORG_CODE(rs.getString("ORG_CODE"));
+                    policy.setPOLICY_NAME(rs.getString("POLICY_NAME"));
+                    policy.setPOLICY_DESC(rs.getString("POLICY_DESC"));
+                    policy.setSUPPORT_CONTENT(rs.getString("SUPPORT_CONTENT"));
+                    policy.setSUPPORT_SCALE(rs.getString("SUPPORT_SCALE"));
+                    policy.setOPERATION_PERIOD(rs.getString("OPERATION_PERIOD"));
+                    policy.setAPPLICATION_REPEAT_CODE(rs.getString("APPLICATION_REPEAT_CODE"));
+                    policy.setAPPLICATION_PERIOD(rs.getString("APPLICATION_PERIOD"));
+                    policy.setAGE_INFO(rs.getString("AGE_INFO"));
+                    policy.setRESIDENCE_INCOME_CONDITION(rs.getString("RESIDENCE_INCOME_CONDITION"));
+                    policy.setAPPLICATION_PROCESS(rs.getString("APPLICATION_PROCESS"));
+                    policy.setPARTICIPATION_LIMIT_TARGET(rs.getString("PARTICIPATION_LIMIT_TARGET"));
+                    policy.setAPPLICATION_PROCEDURE(rs.getString("APPLICATION_PROCEDURE"));
+                    policy.setMAIN_DEPARTMENT_NAME(rs.getString("MAIN_DEPARTMENT_NAME"));
+                    policy.setMAIN_DEPARTMENT_CONTACT(rs.getString("MAIN_DEPARTMENT_CONTACT"));
+                    policy.setMAIN_DEPARTMENT_PHONE(rs.getString("MAIN_DEPARTMENT_PHONE"));
+                    policy.setOPERATING_INSTITUTION_NAME(rs.getString("OPERATING_INSTITUTION_NAME"));
+                    policy.setOPERATING_INSTITUTION_CONTACT(rs.getString("OPERATING_INSTITUTION_CONTACT"));
+                    policy.setOPERATING_INSTITUTION_PHONE(rs.getString("OPERATING_INSTITUTION_PHONE"));
+                    policy.setSUBMISSION_DOCUMENTS(rs.getString("SUBMISSION_DOCUMENTS"));
+                    policy.setEVALUATION_AND_ANNOUNCEMENT(rs.getString("EVALUATION_AND_ANNOUNCEMENT"));
+                    policy.setAPPLICATION_SITE_URL(rs.getString("APPLICATION_SITE_URL"));
+                    policy.setREFERENCE_SITE_URL1(rs.getString("REFERENCE_SITE_URL1"));
+                    policy.setREFERENCE_SITE_URL2(rs.getString("REFERENCE_SITE_URL2"));
+                    policy.setETC(rs.getString("ETC"));
+                    policy.setPOLICY_FIELD_CODE(rs.getString("POLICY_FIELD_CODE"));
+                    policies.add(policy);
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            DBUtil.close(rs, pstmt, conn);
         }
-
+        
         return policies;
     }
     
