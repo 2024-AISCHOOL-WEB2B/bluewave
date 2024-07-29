@@ -7,6 +7,95 @@ import com.util.DBUtil;
 
 public class PolicyDAO {
 	
+	//키워드and검색용 메서드
+	public List<PolicyDTO> getAllPolicies(List<String> keywords, String code, int start, int end) {
+	    List<PolicyDTO> allPolicies = new ArrayList<>();
+	    StringBuilder queryBuilder = new StringBuilder(
+	        "SELECT * FROM (SELECT a.*, ROWNUM r__ FROM " +
+	        "(SELECT * FROM ALL_POLICY WHERE 1=1 "
+	    );
+
+	    for (int i = 0; i < keywords.size(); i++) {
+	        queryBuilder.append("AND POLICY_NAME LIKE ? ");
+	    }
+
+	    if (code != null && !code.isEmpty()) {
+	        queryBuilder.append("AND POLICY_FIELD_CODE = ? ");
+	    }
+
+	    queryBuilder.append("ORDER BY TO_NUMBER(SUBSTR(POLICY_ID, 2)) DESC) a " +
+	                        "WHERE ROWNUM <= ?) WHERE r__ >= ?");
+
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(queryBuilder.toString())) {
+
+	        int parameterIndex = 1;
+	        for (String keyword : keywords) {
+	            stmt.setString(parameterIndex++, "%" + keyword + "%");
+	        }
+	        
+	        if (code != null && !code.isEmpty()) {
+	            stmt.setString(parameterIndex++, code);
+	        }
+
+	        stmt.setInt(parameterIndex++, end);
+	        stmt.setInt(parameterIndex, start);
+
+	        System.out.println("Executing query: " + stmt.toString());
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            while (rs.next()) {
+	                PolicyDTO policy = createPolicyFromResultSet(rs);
+	                allPolicies.add(policy);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        System.out.println("SQLException occurred while retrieving policies: " + e.getMessage());
+	    }
+
+	    return allPolicies;
+	}
+
+	public int getTotalPolicyCount(List<String> keywords, String code) {
+	    StringBuilder queryBuilder = new StringBuilder("SELECT COUNT(*) FROM ALL_POLICY WHERE 1=1 ");
+
+	    for (int i = 0; i < keywords.size(); i++) {
+	        queryBuilder.append("AND POLICY_NAME LIKE ? ");
+	    }
+
+	    if (code != null && !code.isEmpty()) {
+	        queryBuilder.append("AND POLICY_FIELD_CODE = ? ");
+	    }
+
+	    int count = 0;
+	    
+	    try (Connection conn = DBUtil.getConnection();
+	         PreparedStatement stmt = conn.prepareStatement(queryBuilder.toString())) {
+	        
+	        int parameterIndex = 1;
+	        for (String keyword : keywords) {
+	            stmt.setString(parameterIndex++, "%" + keyword + "%");
+	        }
+	        
+	        if (code != null && !code.isEmpty()) {
+	            stmt.setString(parameterIndex, code);
+	        }
+	        
+	        try (ResultSet rs = stmt.executeQuery()) {
+	            if (rs.next()) {
+	                count = rs.getInt(1);
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return count;
+	}
+	
+	
+	
+	
     // 올폴리시 테이블의 전체 행 개수를 가져오는 메서드
 	// 전체 청년정책 데이터의 갯수를 표시하기 위함
     public int getTotalPolicyCount() {

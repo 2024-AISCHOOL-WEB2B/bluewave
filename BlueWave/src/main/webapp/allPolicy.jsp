@@ -6,6 +6,8 @@
 <%@page import="com.util.PolicyUtils"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Optional"%>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -103,24 +105,22 @@
 		<%
 		    UserDTO info = (UserDTO) session.getAttribute("user");
 		
-		    // 검색 파라미터 가져오기
-		    String title = request.getParameter("title") != null ? request.getParameter("title") : "";
+
+		    String[] keywordsArray = request.getParameterValues("keywords");
+		    List<String> keywords = keywordsArray != null ? Arrays.asList(keywordsArray) : new ArrayList<>();
 		    String code = request.getParameter("code") != null ? request.getParameter("code") : "";
 		
-		    // 페이지 번호 가져오기 기본값1
 		    int currentPage = Optional.ofNullable(request.getParameter("page")).map(Integer::parseInt).orElse(1);
 		    int pageSize = 23;
 		    int startIndex = (currentPage - 1) * pageSize + currentPage;
 		    int endIndex = startIndex + pageSize - 1;
-		
+		    //1,23+1
+		    //23+2,46+2
+		    //46+3,69+3
+		    //범위 이런식임
 		    PolicyDAO pDAO = new PolicyDAO();
-		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(title, code, startIndex, endIndex+1);
-            //1,23+1
-            //23+2,46+2
-            //46+3,69+3
-            //범위 이런식임
-            
-		    int totalPolicyCount = pDAO.getTotalPolicyCount(title, code);
+		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(keywords, code, startIndex, endIndex+1);
+		    int totalPolicyCount = pDAO.getTotalPolicyCount(keywords, code);
 		    int totalPages = (int) Math.ceil(totalPolicyCount / (double) pageSize);
 		%>
         <header>
@@ -144,10 +144,10 @@
             <h1>전체 청년정책 보기</h1>
 
 
-            <div class="allPolicyList">
 				<div class="serch">
-				    <form action="allPolicy.jsp" method="GET">
-				        정책 이름 <input type="text" name="title" value="<%= request.getParameter("title") != null ? request.getParameter("title") : "" %>">
+				    <form action="allPolicy.jsp" method="GET" id="searchForm">
+				        키워드 <input type="text" id="keywordInput" name="keyword">
+				        <button type="button" onclick="addKeyword()">추가</button>
 				        정책 분야
 				        <select id="category" name="code">
 				            <option value="">선택하세요</option>
@@ -159,6 +159,8 @@
 				        </select>
 				        <input type="submit" value="검색">
 				    </form>
+				    
+				    <div class="keywordBox" id="keywordBox"></div>
 				</div>
                 <div class="in-header">정책 조회결과 <%= totalPolicyCount %>건</div>
                 <hr width="100%" />
@@ -226,6 +228,40 @@
                 currentUrl.searchParams.set('page', page);
                 window.location.href = currentUrl.toString();
             }
+            
+            let keywords = [];
+
+            function addKeyword() {
+                const keyword = document.getElementById('keywordInput').value.trim();
+                if (keyword && !keywords.includes(keyword)) {
+                    keywords.push(keyword);
+                    updateKeywordBox();
+                    document.getElementById('keywordInput').value = '';
+                }
+            }
+
+            function removeKeyword(keyword) {
+                keywords = keywords.filter(k => k !== keyword);
+                updateKeywordBox();
+            }
+
+            function updateKeywordBox() {
+                const keywordBox = document.getElementById('keywordBox');
+                keywordBox.innerHTML = keywords.map(keyword => 
+                    `<span>${keyword} <button onclick="removeKeyword('${keyword}')">X</button></span>`
+                ).join(' ');
+            }
+
+            document.getElementById('searchForm').onsubmit = function() {
+                keywords.forEach((keyword, index) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'keywords';
+                    input.value = keyword;
+                    this.appendChild(input);
+                });
+                return true;
+            };
         </script>
     </body>
 </html>
