@@ -20,14 +20,13 @@
 	//post관련 객체 생성
 	PostDAO dao = new PostDAO();
 	PostDTO dto = new PostDTO();
-	int index_num = Integer.parseInt(request.getParameter("index_num"));
-	dto = dao.postSearch(index_num);
+	int post_idx = Integer.parseInt(request.getParameter("post_idx"));
+	dto = dao.postSearch(post_idx);
 	
 	//현재 유저의 정보 가져오기 - 세션
 	UserDTO user = (UserDTO) session.getAttribute("user");
 		
 
-	int post_idx = dto.getPostIdx(); //글 인덱스 번호
 	String user_id = dto.getUserId();//작성자ID
 	String post_title = dto.getPostTitle(); //타이틀
 	String post_content = dto.getPostContents(); //내용
@@ -54,7 +53,7 @@
 
 		<!-- 좋아요 버튼 추가 -->
 		<form action="PostLikeService.java" method="post">
-			<input type="hidden" name="index_num" value="<%=index_num%>">
+			<input type="hidden" name="post_idx" value="<%=post_idx%>">
 			<!-- index_num 추가 -->
 			<button type="submit">좋아요! (클릭)</button>
 			<!-- 좋아요 -->
@@ -81,7 +80,7 @@
 				<%= userid %>
 				<% } %>
 			</p>
-			<input type="hidden" value="<%=index_num%>" name="index_num">
+			<input type="hidden" value="<%=post_idx%>" name="post_idx">
 			
 			<textarea name="comment_content" placeholder="댓글 내용을 입력하세요" required></textarea>
 			<button type="submit">댓글 작성</button>

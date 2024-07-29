@@ -24,7 +24,7 @@ public class CommentServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		// ** post_idx 받아오기 **
-		int post_idx = Integer.parseInt(request.getParameter("index_num"));
+		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
 		System.out.println(post_idx);
 		// 1. 댓글작성자는 로그인한 유저의 아이디 가져와야해서 세션 가져오기
 		HttpSession session = request.getSession();
