@@ -73,7 +73,7 @@
                     if (info != null) {
                 %>
                     <p class="promptText">
-                        <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= age %>세 청년이세요. <br />
+                        <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= age %>세 <%=info.getUserJob() %>입니다. <br />
                         회원님의 학력과 재직상태등을 고려했을때, <br />
                         아래 정책들이 요건에 맞을것으로 예상됩니다. <br /><br />
                         저희가 생각하기엔
