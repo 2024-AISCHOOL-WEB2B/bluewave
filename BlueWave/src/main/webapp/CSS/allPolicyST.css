@@ -116,20 +116,22 @@ nav {
     border-radius: 10px;
 }
 
+/* 정책 리스트 스타일 */
 .Policy-row {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
     width: 1300px;
     box-sizing: border-box;
+    justify-content: flex-start; /* 기본적으로 좌측 정렬 */
 }
 
+/* recPolicyList 스타일 */
 .recPolicyList {
     background-color: #ececec;
     margin-top: 25px;
     padding: 20px;
-    width: calc(25% - 25px); /* 5개의 요소가 한 줄에 배치되도록 설정 */
+    width: calc(25% - 25px); /* 4개의 요소가 한 줄에 배치되도록 설정 */
     box-sizing: border-box;
     border-radius: 10px;
 }

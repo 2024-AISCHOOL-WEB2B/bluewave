@@ -16,7 +16,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Blue Wave</title>
-        <link rel="stylesheet" href="CSS/allPolicy.css" />
+        <link rel="stylesheet" href="CSS/allPolicyST.css" />
         <style>
             .date, .from, .title {
                 overflow: hidden;
@@ -86,6 +86,29 @@
 			    background-color: #0056b3;
 			}
 			
+			.addedKeyword {
+				background-color: #ffffff;
+				border-radius: 12px;
+				padding: 10px;
+				font-size: 12px;
+			}
+			
+			.keywordDelBtn{
+				border: none;
+				font-size: 10px;
+				padding: 7px;
+				border-radius: 20px;
+				margin-left: 5px;
+			}
+			
+			.addBtn {
+			    padding: 8px 12px;
+			    border: none;
+			    border-radius: 4px;
+			    font-size: 14px;
+			    background-color: #69d98d;
+			}
+			
 			@media (max-width: 768px) {
 			    .serch form {
 			        flex-direction: column;
@@ -105,21 +128,22 @@
 		<%
 		    UserDTO info = (UserDTO) session.getAttribute("user");
 		
-
 		    String[] keywordsArray = request.getParameterValues("keywords");
-		    List<String> keywords = keywordsArray != null ? Arrays.asList(keywordsArray) : new ArrayList<>();
+		    List<String> keywords = new ArrayList<>();
+		    if (keywordsArray != null) {
+		        for (String keyword : keywordsArray) {
+		            keywords.add(java.net.URLDecoder.decode(keyword, "UTF-8"));
+		        }
+		    }
 		    String code = request.getParameter("code") != null ? request.getParameter("code") : "";
 		
 		    int currentPage = Optional.ofNullable(request.getParameter("page")).map(Integer::parseInt).orElse(1);
 		    int pageSize = 23;
-		    int startIndex = (currentPage - 1) * pageSize + currentPage;
+		    int startIndex = (currentPage - 1) * pageSize + 1;
 		    int endIndex = startIndex + pageSize - 1;
-		    //1,23+1
-		    //23+2,46+2
-		    //46+3,69+3
-		    //범위 이런식임
+		
 		    PolicyDAO pDAO = new PolicyDAO();
-		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(keywords, code, startIndex, endIndex+1);
+		    List<PolicyDTO> allPolicies = pDAO.getAllPolicies(keywords, code, startIndex, endIndex);
 		    int totalPolicyCount = pDAO.getTotalPolicyCount(keywords, code);
 		    int totalPages = (int) Math.ceil(totalPolicyCount / (double) pageSize);
 		%>
@@ -147,7 +171,7 @@
 				<div class="serch">
 				    <form action="allPolicy.jsp" method="GET" id="searchForm">
 				        키워드 <input type="text" id="keywordInput" name="keyword">
-				        <button type="button" onclick="addKeyword()">추가</button>
+				        <button class="addBtn" type="button" onclick="addKeyword()">추가</button>
 				        정책 분야
 				        <select id="category" name="code">
 				            <option value="">선택하세요</option>
@@ -159,7 +183,7 @@
 				        </select>
 				        <input type="submit" value="검색">
 				    </form>
-				    
+				    <br>
 				    <div class="keywordBox" id="keywordBox"></div>
 				</div>
                 <div class="in-header">정책 조회결과 <%= totalPolicyCount %>건</div>
@@ -223,12 +247,6 @@
                 window.location.href = "policyView.jsp?policyId=" + policyId;
             }
 
-            function redirectToPage(page) {
-                var currentUrl = new URL(window.location.href);
-                currentUrl.searchParams.set('page', page);
-                window.location.href = currentUrl.toString();
-            }
-            
             let keywords = [];
 
             function addKeyword() {
@@ -240,16 +258,61 @@
                 }
             }
 
-            function removeKeyword(keyword) {
+            function removeKeyword(encodedKeyword) {
+                const keyword = decodeURIComponent(encodedKeyword);
                 keywords = keywords.filter(k => k !== keyword);
                 updateKeywordBox();
             }
 
             function updateKeywordBox() {
                 const keywordBox = document.getElementById('keywordBox');
-                keywordBox.innerHTML = keywords.map(keyword => 
-                    `<span>${keyword} <button onclick="removeKeyword('${keyword}')">X</button></span>`
-                ).join(' ');
+                let htmlContent = '';
+                for (let i = 0; i < keywords.length; i++) {
+                    const keyword = encodeURIComponent(keywords[i]);
+                    htmlContent += '<span class="addedKeyword">' + decodeURIComponent(keywords[i]) + 
+                                   ' <button class="keywordDelBtn" onclick="removeKeyword(\'' + keyword + '\')">X</button></span> ';
+                }
+                keywordBox.innerHTML = htmlContent;
+            }
+            
+            function redirectToPage(page) {
+                var form = document.createElement('form');
+                form.method = 'GET';
+                form.action = 'allPolicy.jsp';
+
+                var pageInput = document.createElement('input');
+                pageInput.type = 'hidden';
+                pageInput.name = 'page';
+                pageInput.value = page;
+                form.appendChild(pageInput);
+
+                // 현재 선택된 카테고리 추가
+                var category = document.getElementById('category').value;
+                var categoryInput = document.createElement('input');
+                categoryInput.type = 'hidden';
+                categoryInput.name = 'code';
+                categoryInput.value = category;
+                form.appendChild(categoryInput);
+
+                // 키워드 추가
+                keywords.forEach(function(keyword) {
+                    var keywordInput = document.createElement('input');
+                    keywordInput.type = 'hidden';
+                    keywordInput.name = 'keywords';
+                    keywordInput.value = encodeURIComponent(keyword);
+                    form.appendChild(keywordInput);
+                });
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            // 페이지 로드 시 URL 파라미터에서 키워드 복원
+            window.onload = function() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var keywordsFromUrl = urlParams.getAll('keywords');
+                keywords = keywordsFromUrl.map(keyword => decodeURIComponent(keyword));
+                updateKeywordBox();
             }
 
             document.getElementById('searchForm').onsubmit = function() {
@@ -257,7 +320,7 @@
                     const input = document.createElement('input');
                     input.type = 'hidden';
                     input.name = 'keywords';
-                    input.value = keyword;
+                    input.value = encodeURIComponent(keyword);
                     this.appendChild(input);
                 });
                 return true;
