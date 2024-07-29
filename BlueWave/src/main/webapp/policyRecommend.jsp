@@ -1,7 +1,5 @@
 <%@page import="com.util.CodeUtil"%>
-<%@page import="com.model.RecPolicyDAO"%>
 <%@page import="com.model.UserDTO"%>
-<%@page import="com.model.UserDAO"%>
 <%@page import="com.model.PolicyDAO"%>
 <%@page import="com.model.PolicyDTO"%>
 <%@page import="java.util.List"%>
@@ -21,24 +19,10 @@
         // 거주지역과 관심정책분야를 숫자 코드로 변환
         String regionCode = CodeUtil.getRegionCode(info.getUserRegion());
         String policyFieldCode = CodeUtil.getPolicyInterestCode(info.getUserPolicyInterest());
+        String jobKeyword = CodeUtil.getJobCode(info.getUserJob());
 
         PolicyDAO policyDAO = new PolicyDAO();
-        List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode);
-
-        int age = -1; // 기본값
-        if (info != null) {
-            String birthdate = info.getUserBirthdate();
-            if (birthdate != null && birthdate.length() == 8) {
-                try {
-                    java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd");
-                    java.time.LocalDate birthDate = java.time.LocalDate.parse(birthdate, formatter);
-                    java.time.LocalDate currentDate = java.time.LocalDate.now();
-                    age = java.time.Period.between(birthDate, currentDate).getYears();
-                } catch (java.time.format.DateTimeParseException e) {
-                    age = -1;
-                }
-            }
-        }
+        List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, jobKeyword);
     %>
     <header>
         <nav>
@@ -60,9 +44,9 @@
                 if (info != null) {
             %>
             <p class="promptText">
-                <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= age %>세 <%= info.getUserJob() %>이세요. <br />
-                회원님의 학력과 재직상태등을 고려했을때, <br />
-                아래 정책들이 요건에 맞을것으로 예상됩니다. <br /><br />
+                <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= info.getUserJob() %>입니다. <br />
+                회원님의 정보를 고려했을 때, <br />
+                아래 정책들이 요건에 맞을 것으로 예상됩니다. <br /><br />
                 <%
                     if (policies != null && !policies.isEmpty()) {
                 %>
@@ -111,11 +95,10 @@
                 }
             %>
         </section>
-
-        <div class="pagination">
-            <button class="prev">&lt;</button>
-            <button class="next">&gt;</button>
-        </div>
+        <%
+            } else {
+        %>
+        <p>추천할 정책이 없습니다.</p>
         <%
             }
         %>

@@ -328,15 +328,26 @@ public class PolicyDAO {
     
     
     // 정책필터링 클래스
-    public List<PolicyDTO> getFilteredPolicies(String policyFieldCode, String orgCode) {
+    public List<PolicyDTO> getFilteredPolicies(String policyFieldCode, String orgCode, String jobKeyword) {
         List<PolicyDTO> policies = new ArrayList<>();
-        String query = "SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? AND ROWNUM <= 5 ORDER BY UPDATED_AT DESC";
+        StringBuilder query = new StringBuilder("SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ?");
+        
+        // 직업 키워드가 있는 경우에만 조건 추가
+        if (jobKeyword != null && !jobKeyword.isEmpty()) {
+            query.append(" AND POLICY_DESC LIKE ?");
+        }
+        
+        query.append(" AND ROWNUM <= 10 ORDER BY UPDATED_AT DESC");
         
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
             
             pstmt.setString(1, policyFieldCode);
             pstmt.setString(2, orgCode);
+            
+            if (jobKeyword != null && !jobKeyword.isEmpty()) {
+                pstmt.setString(3, "%" + jobKeyword + "%");
+            }
             
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
