@@ -3,6 +3,9 @@
 <%@page import="com.model.PostDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="java.io.*, java.util.*, javax.servlet.*, javax.servlet.http.*, javax.servlet.jsp.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,27 +28,38 @@
 	String post_file = dto.getPostFile(); //첨부파일
 	Timestamp created_at = dto.getCreatedAt();
 	Timestamp updated_at = dto.getUpdatedAt();
-	int post_likes = dto.getPostLikes();
 	int post_views = dto.getPostViews();
 	%>
 
 	<header>
 		<h1>
-			환영합니다
-			<%=user_id%>님의 글 제목
-			<%=post_title%></h1>
+			환영합니다 <br>
+			<%=user_id%>님의 글 <br> 제목
+			<<%=post_title%>>
+		</h1>
 	</header>
 	<main>
-		<p>내용</p>
-		<p><%=post_content%></p>
-		<p><%=post_file%></p>
+		<p>
+			내용 :
+			<%=post_content%></p>
+		<p>
+			첨부 파일 :
+			<%=post_file%></p>
+
 		<!-- 좋아요 버튼 추가 -->
-		<form action="PostLikeService" method="post">
-			<input type="hidden" name="post_idx" value="<%=post_idx%>">
-			<button type="submit">
-				추천 수 : (<%=post_likes%>)
-			</button> <!-- 좋아요 -->
+		<form action="PostLikeService.java" method="post">
+			<input type="hidden" name="index_num" value="<%=index_num%>">
+			<!-- index_num 추가 -->
+			<button type="submit">좋아요! (클릭)</button>
+			<!-- 좋아요 -->
 		</form>
+
+		<%
+		int post_likes = dto.getPostLikes();
+		%>
+		<p>
+			추천(좋아요)수 :
+			<%=post_likes%></p>
 	</main>
 </body>
 </html>
