@@ -27,7 +27,6 @@
    
    //현재 유저의 정보 가져오기 - 세션
    UserDTO user = (UserDTO) session.getAttribute("user");
-      
 
    String user_id = dto.getUserId();//작성자ID
    String post_title = dto.getPostTitle(); //타이틀
@@ -42,7 +41,7 @@
       <h1>
          환영합니다 <br>
          <%=user_id%>님의 글 <br> 제목
-         <<%=post_title%>>
+         <%=post_title%>
       </h1>
    </header>
    <main>
@@ -54,9 +53,8 @@
          <%=post_file%></p>
 
       <!-- 좋아요 버튼 추가 -->
-      <form action="PostLikeService.java" method="post">
-         <input type="hidden" name="post_idx" value="<%=post_idx%>">
-         <!-- index_num 추가 -->
+      <form action="PostLikeService" method="post">
+         <input type="hidden"  value="<%=post_idx%>" name="post_idx">
          <button type="submit">좋아요! (클릭)</button>
          <!-- 좋아요 -->
       </form>
