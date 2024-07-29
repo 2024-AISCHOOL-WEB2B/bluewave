@@ -79,7 +79,7 @@
 		PostDAO dao = new PostDAO();
 		PostDTO dto = new PostDTO();
 	    List<PostDTO> postList = dao.getAllPosts();
-		int index_num = dto.getPostIdx(); //글 인덱스 번호
+		int post_idx = dto.getPostIdx(); //글 인덱스 번호
 		String user_id = dto.getUserId();//작성자ID
 		String post_title = dto.getPostTitle(); //타이틀
 		String post_content = dto.getPostContents(); //내용
@@ -89,8 +89,12 @@
 		int post_views = dto.getPostViews();
 		int post_likes = dto.getPostLikes();
 		response.setCharacterEncoding("EUC-KR");
+<<<<<<< HEAD
 		dto = dao.postSearch(index_num);
 		UserDTO info = (UserDTO) session.getAttribute("user");
+=======
+		dto = dao.postSearch(post_idx);
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/bluewave.git
 		%>
 		<table>
 			<thead>
@@ -105,7 +109,7 @@
 				<% for(PostDTO post : postList) { %>
 				<tr>
 					<td><%= post.getPostIdx() %></td>
-					<td><a href="viewPost.jsp?index_num=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
+					<td><a href="viewPost.jsp?post_idx=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
 					<td><%= post.getUserId() %></td>
 					<td><%= post.getCreatedAt() %></td>
 				</tr>
