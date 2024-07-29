@@ -1,3 +1,4 @@
+<%@page import="com.model.UserDTO"%>
 <%@page import="java.sql.Timestamp"%>
 <%@page import="com.model.PostDTO"%>
 <%@page import="com.model.PostDAO"%>
@@ -16,10 +17,15 @@
 </head>
 <body>
 	<%
+	//post관련 객체 생성
 	PostDAO dao = new PostDAO();
 	PostDTO dto = new PostDTO();
 	int index_num = Integer.parseInt(request.getParameter("index_num"));
 	dto = dao.postSearch(index_num);
+	
+	//현재 유저의 정보 가져오기 - 세션
+	UserDTO user = (UserDTO) session.getAttribute("user");
+		
 
 	int post_idx = dto.getPostIdx(); //글 인덱스 번호
 	String user_id = dto.getUserId();//작성자ID
@@ -60,6 +66,28 @@
 		<p>
 			추천(좋아요)수 :
 			<%=post_likes%></p>
+
+		<!-- 댓글 작성 폼 추가 -->
+		<h2>댓글</h2>
+		<form action="CommentServlet" method="post">
+			<p>
+				<% 
+            if (user == null || user.getUserId() == null) {
+                response.sendRedirect("retry.jsp");
+            } else {
+                String userid = user.getUserId();
+            %>
+				작성자 :
+				<%= userid %>
+				<% } %>
+			</p>
+			<input type="hidden" value="<%=index_num%>" name="index_num">
+			
+			<textarea name="comment_content" placeholder="댓글 내용을 입력하세요" required></textarea>
+			<button type="submit">댓글 작성</button>
+		</form>
+
+
 	</main>
 </body>
 </html>

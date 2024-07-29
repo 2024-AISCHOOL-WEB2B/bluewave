@@ -11,10 +11,9 @@
 <body>
 
 	<%
-		UserDTO info = (UserDTO)session.getAttribute("user");
-		String userId = info.getUserId();
+	UserDTO info = (UserDTO) session.getAttribute("user");
 	%>
-	
+
 	<header>
 		<h1>글쓰기</h1>
 	</header>
@@ -22,11 +21,18 @@
 		<form action="PostServlet" method="post" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="userId">작성자:</label>
-				<% if (userId != null) { %>
-					<%= userId %>
-				<% } else { %>
-				<p>로그인이 필요합니다.</p>
-				<% } %>
+				<%
+				if (info != null && info.getUserId() != null) {
+				%>
+				작성자 :<%=info.getUserId()%>
+				<%
+				} else {
+				%>
+				<script type="text/javascript">
+            alert("로그인이 필요합니다.");
+            window.location.href = "community.jsp";
+        </script>
+				<%}%>
 			</div>
 			<div class="form-group">
 				<label for="title">제목:</label> <input type="text" id="title"

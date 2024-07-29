@@ -9,7 +9,7 @@
     <div class="container">
         <h1>글이 성공적으로 저장되었습니다!</h1>
         <p>작성하신 글이 성공적으로 저장되었습니다. 감사합니다.</p>
-        <a href="main.jsp" class="button">홈으로 돌아가기</a>
+        <a href="community.jsp" class="button">커뮤니티 홈으로 돌아가기</a>
     </div>
 </body>
 </html>

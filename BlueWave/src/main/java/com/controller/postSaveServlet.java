@@ -29,12 +29,6 @@ public class postSaveServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
         UserDTO info = (UserDTO) session.getAttribute("user");
-
-        
-        if (info == null) {
-            response.getWriter().print("로그인이 필요합니다.");
-            return;
-        }
         
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -52,7 +46,8 @@ public class postSaveServlet extends HttpServlet {
 		if (result > 0) {
 			response.sendRedirect("postSaveSuccess.jsp");
 		} else {
-			response.getWriter().print("글 저장에 실패하였습니다.");
+			response.getWriter().print("댓글 저장에 실패하였습니다.");
+			
 		}
 	}
 

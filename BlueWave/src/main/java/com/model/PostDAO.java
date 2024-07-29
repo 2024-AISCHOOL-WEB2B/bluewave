@@ -28,6 +28,9 @@ public class PostDAO {
 				PreparedStatement psmt = connection.prepareStatement(INSERT_POST_SQL)) {
 
 			psmt.setString(1, post.getPostTitle());
+			psmt.setString(2, post.getPostContents());
+			psmt.setString(3, post.getPostFile() != null ? post.getPostFile() : null);
+			psmt.setString(4, post.getUserId());
 			result = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
