@@ -358,7 +358,7 @@ public class PolicyDAO {
     // 정책필터링 클래스
     public List<PolicyDTO> getFilteredPolicies(String policyFieldCode, String orgCode, String jobKeyword) {
         List<PolicyDTO> policies = new ArrayList<>();
-        String baseQuery = "SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? ";
+        String baseQuery = "SELECT * FROM ALL_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? ";
         String jobQuery = "AND POLICY_DESC LIKE ? ";
         String finalQuery = "ORDER BY UPDATED_AT DESC";
         String query = baseQuery + (jobKeyword != null && !jobKeyword.isEmpty() ? jobQuery : "") + finalQuery;
