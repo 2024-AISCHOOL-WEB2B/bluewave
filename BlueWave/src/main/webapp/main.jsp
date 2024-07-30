@@ -1,5 +1,10 @@
 <%@page import="com.model.UserDTO"%>
 <%@page import="com.model.UserDAO"%>
+<%@page import="com.model.PolicyDAO"%>
+<%@page import="com.model.PolicyDTO"%>
+<%@page import="com.util.PolicyUtils"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -16,6 +21,39 @@
 		position: relative;
 		left: 1000px;
 	}
+	
+	.recPolicyList {
+	    background-color: #ececec;
+	    margin-top: 25px;
+	    padding: 20px;
+	    width: calc(25% - 25px); /* 4개가 한 줄에 배치 */
+	    box-sizing: border-box;
+	    border-radius: 10px;
+	}
+
+	.recPolicyList h3, .recPolicyList .from, .recPolicyList .date {
+        white-space: nowrap; /* 텍스트가 한 줄로 표시되도록 설정 */
+        overflow: hidden;    /* 텍스트가 넘칠 경우 숨기도록 설정 */
+        text-overflow: ellipsis; /* 넘치는 텍스트를 '...'으로 표시 */
+        width: 100%; /* 부모 요소의 너비를 기준으로 오버플로우 처리 */
+    }
+
+	.recPolicyList h3{
+        width: 250px; /* 너비 설정 */
+	}
+	.from{
+        width: 250px; /* 너비 설정 */
+	}
+	.date{
+        width: 250px; /* 너비 설정 */
+
+	}
+	
+	.policyFeed h2 {
+		margin-bottom: 0px;
+		margin-top: 60px;
+	}
+	
 
 </style>
 </head>
@@ -24,6 +62,9 @@
 
 	<%
 	UserDTO info = (UserDTO) session.getAttribute("user");
+	%>
+	<%
+	PolicyDAO policyDAO = new PolicyDAO();
 	%>
 	
 	<header>
@@ -111,291 +152,38 @@
 			</div>
 
 
-                <h1>최신 정책 간단히 보기</h1>
-                <div class="policyFeed">
-                    <h2>일자리분야</h2>
-                    <div class="Policy-row">
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="policyFeed">
-                    <h2>주거분야</h2>
-                    <div class="Policy-row">
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="policyFeed">
-                    <h2>교육 분야</h2>
-                    <div class="Policy-row">
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="policyFeed">
-                    <h2>복지&문화 분야</h2>
-                    <div class="Policy-row">
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="policyFeed">
-                    <h2>참여&권리 분야</h2>
-                    <div class="Policy-row">
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="recPolicyList">
-                            <div class="policy-info">
-                                <h3>정책이름</h3>
-                                <p class="from">주관기관</p>
-                                <p class="date">진행날짜</p>
-                            </div>
-                            <div class="policy-actions">
-                                <button class="btn view blue" onclick="">
-                                    상세보기
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+			<h1>최신 정책 간단히 보기</h1>
+			<%
+			String[] fieldCodes = {"23010", "23020", "23030", "23040", "23050"};
+			
+			for (String fieldCode : fieldCodes) {
+			    List<PolicyDTO> policies = policyDAO.getLatestPoliciesByField(fieldCode, 4);
+			    
+			    if (!policies.isEmpty()) {
+			%>
+			    <div class="policyFeed">
+			        <h2><%= PolicyUtils.getCategory(fieldCode) %></h2>
+			        <div class="Policy-row">
+			            <% for (PolicyDTO policy : policies) { %>
+			                <div class="recPolicyList">
+			                    <div class="policy-info">
+			                        <h3 title="<%= policy.getPOLICY_NAME() %>"><%= policy.getPOLICY_NAME() %></h3>
+			                        <p class="from" title="<%= policy.getMAIN_DEPARTMENT_NAME() %>">주관: <%= policy.getMAIN_DEPARTMENT_NAME() %></p>
+			                        <p class="date" title="<%= policy.getAPPLICATION_PERIOD() %>">기간: <%= policy.getAPPLICATION_PERIOD() %></p>
+			                    </div>
+			                    <div class="policy-actions">
+			                        <button class="btn view blue" onclick="location.href='policyDetail.jsp?id=<%= policy.getPOLICY_ID() %>'">
+			                            상세보기
+			                        </button>
+			                    </div>
+			                </div>
+			            <% } %>
+			        </div>
+			    </div>
+			<% 
+			    }
+			} 
+			%>
                 <button class ="allpolicyViewButton"onclick="redirectToAllPolicy()">
                     <span class="APVbtn">모든 정책 조회하기</span>
                 </button>

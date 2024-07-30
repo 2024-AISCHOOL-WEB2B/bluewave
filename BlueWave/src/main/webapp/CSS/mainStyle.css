@@ -189,14 +189,7 @@
     box-sizing: border-box;
 }
 
-.recPolicyList {
-    background-color: #ececec;
-    margin-top: 25px;
-    padding: 20px;
-    width: calc(25% - 25px); /* 5개의 요소가 한 줄에 배치되도록 설정 */
-    box-sizing: border-box;
-    border-radius: 10px;
-}
+
 
 .policy-info h3 {
     margin: 0 0 5px 0;

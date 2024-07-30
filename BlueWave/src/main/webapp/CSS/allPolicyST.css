@@ -148,9 +148,9 @@ nav {
 
 .botton-info {
     display: flex;
-    justify-content: space-between; /* 두 요소 사이에 공간을 균등하게 배분 */
-    gap: 10px; /* 두 요소 사이의 간격 조정 (선택적) */
-    width: 100%; /* 필요에 따라 폭 조정 */
+    justify-content: space-between; /* 두 요소 사이에 공간을 균등하게 배분: space-between */
+    gap: 10px; /* 두 요소 사이의 간격 */
+    width: 100%; 
 }
 
 .policy-category {
@@ -212,7 +212,7 @@ nav {
 footer {
     background-color: #333;
     color: #fff;
-    padding: 40px 20px; /* 상하 패딩과 좌우 패딩 추가 */
+    padding: 40px 20px;
     width: 100%;
     box-sizing: border-box;
     position: relative;
@@ -230,13 +230,13 @@ footer {
     max-width: 100px;
     margin-bottom: 20px;
     position: absolute;
-    top: 0px; /* 상단에서의 거리 */
-    left: 20px; /* 왼쪽에서의 거리 */
+    top: 0px; 
+    left: 20px; 
 }
 
 .footer-nav {
     text-align: left;
-    padding-top: 40px; /* 네비게이션을 로고 아래로 이동 */
+    padding-top: 40px; /* 네비게이션을 로고 아래로 */
 }
 
 .footer-nav a {

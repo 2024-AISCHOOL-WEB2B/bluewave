@@ -22,14 +22,14 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                width: 250px; /* Adjust as needed */
+                width: 250px; 
                 display: inline-block;
             }
             .date {
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
-                width: 160px; /* Adjust as needed */
+                width: 160px; 
                 display: inline-block;
             }
             

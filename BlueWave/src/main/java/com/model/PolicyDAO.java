@@ -274,6 +274,34 @@ public class PolicyDAO {
         System.out.println("Total policies found: " + policies.size());
         return policies;
     }
+    
+    public List<PolicyDTO> getLatestPoliciesByField(String policyFieldCode, int limit) { //메인페이지 하단용 메서드
+        List<PolicyDTO> policies = new ArrayList<>();
+        String query = "SELECT * FROM (SELECT a.*, ROWNUM r__ FROM " +
+                       "(SELECT * FROM ALL_POLICY " +
+                       "WHERE POLICY_FIELD_CODE = ? " +
+                       "ORDER BY TO_NUMBER(SUBSTR(POLICY_ID, 2)) DESC) a " +
+                       "WHERE ROWNUM <= ?) WHERE r__ >= 1";
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, policyFieldCode);
+            stmt.setInt(2, limit);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    PolicyDTO policy = createPolicyFromResultSet(rs);
+                    policies.add(policy);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("SQLException occurred while retrieving latest policies by field: " + e.getMessage());
+        }
+
+        return policies;
+    }
 
     // ResultSet에서 PolicyDTO 객체 생성
     private PolicyDTO createPolicyFromResultSet(ResultSet rs) throws SQLException {
