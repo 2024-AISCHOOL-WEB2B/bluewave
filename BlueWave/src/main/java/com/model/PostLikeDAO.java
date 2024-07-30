@@ -15,7 +15,7 @@ public class PostLikeDAO {
 
 	private static final String SELECT_POSTLIKE_SQL = "SELECT LIKE_ID FROM TBL_POST_LIKE WHERE USER_ID = ? AND POST_IDX = ?";
 	private static final String UPDATE_POSTLIKE_SQL = "UPDATE TBL_POST SET POST_LIKES=? WHERE POST_IDX = ?";
-	private static final String INSERT_POSTLIKE_SQL = "INSERT INTO TBL_POST_LIKE VALUES(TBL_POST_SEQ.NEXTVAL,?,?,SYSDATE)";
+	private static final String INSERT_POSTLIKE_SQL = "INSERT INTO TBL_POST_LIKE VALUES(post_idx_seq.NEXTVAL,?,?,SYSDATE)";
 
 	static UserDTO user = new UserDTO();
 	static PostDTO post = new PostDTO();
