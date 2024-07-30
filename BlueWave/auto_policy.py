@@ -176,6 +176,9 @@ def update_database():
     if all_data:
         df_all = pd.DataFrame(all_data)  # 데이터를 DataFrame으로 변환
         df_all = df_all.applymap(remove_equal_sign)  # 각 셀에 '-' 제거 함수 적용
+        
+        # null 값을 결측치로 처리
+        df_all.fillna('', inplace=True)
 
         # 새로운 데이터에서 기존 정책 제거
         new_data = df_all[~df_all['policy_id'].isin(existing_policy_ids)]
