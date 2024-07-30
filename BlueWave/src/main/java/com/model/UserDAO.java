@@ -113,4 +113,29 @@ public class UserDAO {
 
         return user;
     }
+	
+    public boolean updateUser(UserDTO user) {
+        String sql = "UPDATE TBL_USER SET USER_NAME = ?, USER_GENDER = ?, USER_BIRTHDATE = ?, USER_REGION = ?, USER_EMAIL = ?, USER_JOB = ?, USER_POLICY_INTEREST = ?, USER_INCOME = ?, USER_FAMILY = ? WHERE USER_ID = ?";
+        try (Connection conn = DBUtil.getConnection(); // 연결 가져오기
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // SQL 쿼리 파라미터 설정
+            pstmt.setString(1, user.getUserName());
+            pstmt.setString(2, user.getUserGender());
+            pstmt.setString(3, user.getUserBirthdate());
+            pstmt.setString(4, user.getUserRegion());
+            pstmt.setString(5, user.getUserEmail());
+            pstmt.setString(6, user.getUserJob());
+            pstmt.setString(7, user.getUserPolicyInterest());
+            pstmt.setInt(8, user.getUserIncome());
+            pstmt.setInt(9, user.getUserFamily());
+            pstmt.setString(10, user.getUserId());
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
