@@ -18,52 +18,111 @@
         border-radius: 8px;
         margin-bottom: 120px;
     }
+    
+    .container h2 {
+        position: relative;
+        right: 200px;
+        margin: 10px;
+    }
+    
+    .title {
+        display: flex;
+    }
+    
     .myInfo {
         background-color: none;
         padding: 20px;
-        border-radius: 8px;
+        width: 90%;
     }
+    
     .profile {
         text-align: center;
         margin-bottom: 20px;
     }
+    
     .profile img {
         width: 100px;
         height: 100px;
         border-radius: 50%;
         background-color: #87CEEB;
     }
+    
     .profile p {
         margin-top: 10px;
         font-weight: bold;
     }
+    
     .info-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 10px;
     }
+    
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+    }
+    
     .info-label {
         font-weight: bold;
+        width: 150px; /* Adjust as needed */
     }
+    .infoContent {
+    	background-color: #ffffff;
+    	padding: 7px;
+    	border-radius: 10px;
+    	width: 40%;
+    	margin-right: 20px;
+    	text-align: center;
+    	font-size: 15px;
+    	
+    }
+    
+    .infoContentE {
+    	background-color: #ffffff;
+    	padding: 7px;
+    	border-radius: 10px;
+    	width: 120%;
+    	margin-right: 20px;
+    	text-align: center;
+    	font-size: 15px;
+    	
+    }
+    
     .button-group {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
+        margin-top: 50px;
     }
+    
     .button {
-        padding: 10px 20px;
+        
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
     }
+    
     .button-delete {
         background-color: #4CAF50;
+        position: relative;
+        right:140px;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 10px;
     }
+    
     .button-edit {
         background-color: #008CBA;
+        position: relative;
+        left:140px;
+        padding: 10px 30px;
+        border: none;
+        border-radius: 10px;
     }
 </style>
+
 </head>
 
 
@@ -76,7 +135,7 @@
 	<header>
 		<nav>
 		    <div class="logo">
-		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"  onclick="redirectToMain()"> </a>
 		    </div>
 		
 		    <div class="right-menu">
@@ -97,37 +156,67 @@
 	
 	
 	<div class="container">
-	    <h2 style="text-align: center; margin-bottom: 20px;">내정보관리</h2>
+	    <h2 class="title">내 정보 관리</h2>
 	    <div class="myInfo">
-	        <div class="profile">
-	            <img src="image/profile.png">
-	            <p><%=info != null ? info.getUserName() : ""%> 회원님<br>안녕하세요.</p>
-	        </div>
+			<div class="profile">
+			    <%
+			    String gender = info != null ? info.getUserGender() : "";
+			    String imagePath = "image/profile.png"; // 기본 이미지
+			    if ("M".equals(gender)) {
+			        imagePath = "image/male.jpg";
+			    } else if ("F".equals(gender)) {
+			        imagePath = "image/female.jpg";
+			    }
+			    %>
+			    <img src="<%=imagePath%>" alt="Profile Image">
+			    <p><%=info != null ? info.getUserName() : ""%> 회원님<br>안녕하세요.</p>
+			</div>
 	        <div class="info-grid">
-	            <div class="info-label">이름</div>
-	            <div><%=info != null ? info.getUserName() : ""%></div>
-	            <div class="info-label">성별</div>
-	            <div><%=info != null ? info.getUserGender() : ""%></div>
-	            <div class="info-label">생년월일</div>
-	            <div><%=info != null ? info.getUserBirthdate() : ""%></div>
-	            <div class="info-label">이메일</div>
-	            <div><%=info != null ? info.getUserEmail() : ""%></div>
-	            <div class="info-label">재직상태</div>
-	            <div><%=info != null ? info.getUserJob() : ""%></div>
-	            <div class="info-label">관심분야</div>
-	            <div><%=info != null ? info.getUserPolicyInterest() : ""%></div>
-	            <div class="info-label">거주지역</div>
-	            <div><%=info != null ? info.getUserRegion() : ""%></div>
-	            <div class="info-label">소득수준</div>
-	            <div><%=info != null ? info.getUserIncome() : ""%></div>
-	            <div class="info-label">가구원수</div>
-	            <div><%=info != null ? info.getUserFamily() : ""%></div>
+	        	<div class="info-row">
+		            <div class="info-label">이름</div>
+		            <div class="infoContent"><%=info != null ? info.getUserName() : ""%></div>
+		            <div class="info-label">성별</div>
+				    <div class="infoContent">
+				        <%
+				        String gendertext = info != null ? info.getUserGender() : "";
+				        String displayGender = "";
+				        if ("M".equals(gendertext)) {
+				            displayGender = "남성";
+				        } else if ("F".equals(gendertext)) {
+				            displayGender = "여성";
+				        }
+				        %>
+				        <%= displayGender %>
+				    </div>
+	        	</div>
+	        	<div class="info-row">
+		            <div class="info-label">생년월일</div>
+		            <div class="infoContent"><%=info != null ? info.getUserBirthdate() : ""%></div>
+		            <div class="info-label">거주지역</div>
+		            <div class="infoContent"><%=info != null ? info.getUserRegion() : ""%></div>
+	        	</div>
+	        	<div class="info-row">
+		            <div class="info-label">이메일</div>
+		            <div class="infoContentE"><%=info != null ? info.getUserEmail() : ""%></div>
+	        	</div>
+	        	<div class="info-row">
+		            <div class="info-label">재직상태</div>
+		            <div class="infoContent"><%=info != null ? info.getUserJob() : ""%></div>
+		            <div class="info-label">관심분야</div>
+		            <div class="infoContent"><%=info != null ? info.getUserPolicyInterest() : ""%></div>
+	        	</div>
+	        	<div class="info-row">
+		            <div class="info-label">소득수준</div>
+		            <div class="infoContent"><%=info != null ? info.getUserIncome() : ""%></div>
+		            <div class="info-label">가구원수</div>
+		            <div class="infoContent"><%=info != null ? info.getUserFamily() : ""%></div>
+	        	</div>
 	        </div>
 
 	    </div>
 		<div class="button-group">
-	        <button class="button button-delete">회원탈퇴</button>
-	        <button class="button button-edit">회원정보수정</button>
+	        <button class="button-delete">회원탈퇴</button>
+	        <button class="button-edit" onclick="redirectToEditInfo()">회원정보수정</button>
 	    </div>
 	</div>
 
@@ -145,5 +234,14 @@
             </nav>
         </div>
     </footer>
+    
+    <script>
+	    function redirectToEditInfo() {
+	        window.location.href = "editInfo.jsp";
+	    }
+		function redirectToMain() {
+		    window.location.href = "main.jsp";
+		} 
+    </script>
 </body>
 </html>

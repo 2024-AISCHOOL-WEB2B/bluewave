@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="CSS/mainStyle.css">
 
 <style>
+	.logoutNavBtn {
+		position: relative;
+		left: 1000px;
+	}
 
 </style>
 </head>
@@ -32,7 +36,7 @@
 		        <%
 		        if (info != null) {
 		        %>	<a class="" href="userInfo.jsp">내 정보 관리</a>
-		            <a class="logNavBtn" href="LogoutServlet">로그아웃</a>
+		            <a class="logoutNavBtn" href="LogoutServlet">로그아웃</a>
 		        <%
 		        } else {
 		        %>
@@ -88,11 +92,6 @@
 				</div>
 			</div>
 
-			<!-- 두번째 게시글 섹션 추가
-            <div class="second-post">
-                <h2 class="post-title">두번째 게시글 제목</h2>
-                <p class="post-description">여기에 두번째 게시글 내용을 추가합니다...</p>
-            </div> -->
 			<!--커뮤니티 글 좋아요/싫어요 커뮤니티 이동-->
 			<div class="post-actions">
 
