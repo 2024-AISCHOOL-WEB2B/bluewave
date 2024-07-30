@@ -128,17 +128,17 @@
 %>
 <%
 	String category = "-";
-	if(policy.getPOLICY_FIELD_CODE().equals("23010")) {
-		category = "일자리 분야";
-	}else if(policy.getPOLICY_FIELD_CODE().equals("23020")) {
-		category = "주거 분야";
-	}else if(policy.getPOLICY_FIELD_CODE().equals("23030")) {
-		category = "교육 분야";
-	}else if(policy.getPOLICY_FIELD_CODE().equals("23040")) {
-		category = "복지.문화 분야";
-	}else if(policy.getPOLICY_FIELD_CODE().equals("23050")) {
-		category = "참여.권리 분야";
-	}
+if (policy.getPOLICY_FIELD_CODE().equals("23010") || policy.getPOLICY_FIELD_CODE().equals("023010")) {
+    category = "일자리 분야";
+} else if (policy.getPOLICY_FIELD_CODE().equals("23020") || policy.getPOLICY_FIELD_CODE().equals("023020")) {
+    category = "주거 분야";
+} else if (policy.getPOLICY_FIELD_CODE().equals("23030") || policy.getPOLICY_FIELD_CODE().equals("023030")) {
+    category = "교육 분야";
+} else if (policy.getPOLICY_FIELD_CODE().equals("23040") || policy.getPOLICY_FIELD_CODE().equals("023040")) {
+    category = "복지.문화 분야";
+} else if (policy.getPOLICY_FIELD_CODE().equals("23050") || policy.getPOLICY_FIELD_CODE().equals("023050")) {
+    category = "참여.권리 분야";
+}
 
 %>
 <div class="container">
