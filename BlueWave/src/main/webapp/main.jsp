@@ -66,8 +66,11 @@
 				}
 				%>
 			<div class="btn-wrap">
+<<<<<<< HEAD
 			
             
+=======
+>>>>>>> branch 'main' of https://github.com/2024-AISCHOOL-WEB2B/bluewave.git
         </div>
 			</div>
 
