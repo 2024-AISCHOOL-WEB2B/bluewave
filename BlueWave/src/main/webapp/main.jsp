@@ -53,7 +53,27 @@
 		margin-bottom: 0px;
 		margin-top: 60px;
 	}
+	.rainbow-button {
+	    display: inline-block;
+	    padding: 15px 40px;
+	    font-size: 24px;
+	    font-weight: bold;
+	    text-decoration: none;
+	    color: white;
+	    background: linear-gradient(
+	        90deg,
+	        #65b2ff,
+	        #ff66b2
+	    );
+	    border-radius: 25px;
+	    transition: transform 0.3s ease;
+	    line-height: 1.3;
+	    width: auto;
+	}
 	
+	.rainbow-button:hover {
+	    transform: scale(1.05);
+	}
 
 </style>
 </head>

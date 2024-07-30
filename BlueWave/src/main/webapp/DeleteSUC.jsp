@@ -63,8 +63,8 @@
 		</h2>
 		<h3>더 좋은 서비스로 발전하겠습니다.</h3><br><br>
 		<!-- 메인페이지 이동 버튼 -->
-		<button class="login-button" onclick="redirectToMain()">
-			메인페이지로 이동
+		<button class="login-button" id="mainPageButton">
+		    메인페이지로 이동
 		</button>
 
 		<!-- 리다이렉트 알림 문구 -->
@@ -83,27 +83,31 @@
 </footer>
 
 <script>
+function redirectToMain() {
+    // 메인 페이지로 이동
+    window.location.href = "main.jsp";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     let countdown = 4;
     const redirectMessage = document.getElementById("redirectMessage");
+    const mainPageButton = document.getElementById("mainPageButton");
+
+    // 버튼에 이벤트 리스너 추가
+    mainPageButton.addEventListener("click", redirectToMain);
 
     function updateCountdown() {
         if (countdown > 0) {
-            redirectMessage.textContent = countdown + "초 후 리다이렉트됩니다.";
+            redirectMessage.innerHTML = countdown + "초 후 리다이렉트됩니다.";
             countdown--;
         } else {
-            redirectMessage.textContent = "리다이렉트 중...";
+            redirectMessage.innerHTML = "리다이렉트 중...";
             clearInterval(countdownInterval);
             setTimeout(redirectToMain, 1000);
         }
     }
 
     const countdownInterval = setInterval(updateCountdown, 1000);
-
-    function redirectToMain() {
-        // 메인 페이지로 이동
-        window.location.href = "main.jsp";
-    }
 });
 </script>
 

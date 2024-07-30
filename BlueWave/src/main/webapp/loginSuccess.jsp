@@ -34,9 +34,9 @@ String name = user.getUserName();
         </h2>
 
         <!-- 메인페이지 이동 버튼 -->
-        <button class="login-button" onclick="redirectToMain()">
-            메인페이지로 이동
-        </button>
+		<button class="login-button" id="mainPageButton">
+		    메인페이지로 이동
+		</button>
 
         <!-- 리다이렉트 알림 문구 -->
         <p id="redirectMessage" class="redirect-message">5초 후 리다이렉트됩니다.</p>
@@ -55,9 +55,18 @@ String name = user.getUserName();
 </footer>
 
 <script>
+function redirectToMain() {
+    // 메인 페이지로 이동
+    window.location.href = "main.jsp";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     let countdown = 4;
     const redirectMessage = document.getElementById("redirectMessage");
+    const mainPageButton = document.getElementById("mainPageButton");
+
+    // 버튼에 이벤트 리스너 추가
+    mainPageButton.addEventListener("click", redirectToMain);
 
     function updateCountdown() {
         if (countdown > 0) {
@@ -65,17 +74,12 @@ document.addEventListener("DOMContentLoaded", function() {
             countdown--;
         } else {
             redirectMessage.innerHTML = "리다이렉트 중...";
-            clearInterval(countdownInterval); // 카운트다운 종료 후 리다이렉트 중지
+            clearInterval(countdownInterval);
             setTimeout(redirectToMain, 1000);
         }
     }
 
-    const countdownInterval = setInterval(updateCountdown, 1000); // 1초마다 함수 호출
-
-    function redirectToMain() {
-        // 메인 페이지로 이동
-        window.location.href = "main.jsp";
-    }
+    const countdownInterval = setInterval(updateCountdown, 1000);
 });
 </script>
 </body>
