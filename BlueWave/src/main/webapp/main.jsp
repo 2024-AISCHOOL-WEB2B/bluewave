@@ -92,11 +92,6 @@
 				</div>
 			</div>
 
-			<!-- 두번째 게시글 섹션 추가
-            <div class="second-post">
-                <h2 class="post-title">두번째 게시글 제목</h2>
-                <p class="post-description">여기에 두번째 게시글 내용을 추가합니다...</p>
-            </div> -->
 			<!--커뮤니티 글 좋아요/싫어요 커뮤니티 이동-->
 			<div class="post-actions">
 
