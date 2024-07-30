@@ -1,51 +1,75 @@
+@charset "EUC-KR";
+/* communityStyles.css */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 0;
-    text-align: center;
-    position: relative;
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
 }
 
 .write-button {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    background-color: #008CBA;
-    color: white;
-    border: none;
     padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .write-button:hover {
-    background-color: #005f73;
+    background-color: #0056b3;
 }
 
 main {
-    width: 80%;
-    margin: 20px auto;
-    background-color: white;
+    padding: 20px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #e0f7fa; /* 연한 파랑 배경색 */
+    margin-top: 20px;
+    background-color: #ffffff;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+thead {
+    background-color: #f1f1f1;
 }
 
 th, td {
-    padding: 10px;
-    text-align: center !important; /* 가운데 정렬 */
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

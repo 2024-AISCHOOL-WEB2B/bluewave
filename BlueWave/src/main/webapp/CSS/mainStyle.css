@@ -29,12 +29,7 @@
     color: white;
     background: linear-gradient(
         90deg,
-        #ff4248,
-        #ff941a,
-        #feffbe,
-        #80ff6f,
-        #65b2ff,
-        #8b00c2
+        #65b2ff
     );
     border-radius: 25px;
     transition: transform 0.3s ease;
