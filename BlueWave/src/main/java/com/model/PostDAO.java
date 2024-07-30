@@ -42,17 +42,17 @@ public class PostDAO {
 	}
 
 	// 게시물을 DB에서 조회(꺼내오는) 메서드
-	public PostDTO postSearch(int search) {
+	public PostDTO postSearch(int post_idx) {
 		ResultSet result = null;
 		PostDTO dto = null;
 
 		try (Connection connection = DBUtil.getConnection();
 				PreparedStatement psmt = connection.prepareStatement(SELECT_POST_SQL)) {
 
-			psmt.setInt(1, search);
+			psmt.setInt(1, post_idx);
 			result = psmt.executeQuery();
 
-			while (result.next()) {
+			while(result.next()) {
 				String user_id = result.getString("user_id");
 				String post_title = result.getString("post_title");
 				String post_content = result.getString("post_content");
@@ -62,7 +62,7 @@ public class PostDAO {
 				java.sql.Timestamp created_at = result.getTimestamp("created_at");
 				java.sql.Timestamp updated_at = result.getTimestamp("updated_at");
 
-				dto = new PostDTO(search, post_title, post_content, post_file, post_views, post_likes, created_at,
+				dto = new PostDTO(post_idx, post_title, post_content, post_file, post_views, post_likes, created_at,
 						updated_at, user_id);
 			}
 

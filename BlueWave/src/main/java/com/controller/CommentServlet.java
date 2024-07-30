@@ -42,7 +42,7 @@ public class CommentServlet extends HttpServlet {
 
 		// 댓글쓰는 메서드에 매개변수로 넣기
 		int result = dao.writeComment(post_idx, userid, comment_content);
-		System.out.println("result값: "+result);
+		System.out.println("result값: "+result +" 댓글쓰기 성공!!");
 		
 		// 4. 결과
 		if (result > 0) {
