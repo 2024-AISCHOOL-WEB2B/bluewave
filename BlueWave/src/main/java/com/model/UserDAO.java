@@ -138,4 +138,20 @@ public class UserDAO {
             return false;
         }
     }
+    
+    public boolean deleteUser(String userId) {
+        String sql = "DELETE FROM TBL_USER WHERE USER_ID = ?";
+        
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, userId);
+            int rowsAffected = pstmt.executeUpdate();
+            
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

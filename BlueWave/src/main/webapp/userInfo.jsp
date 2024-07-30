@@ -215,7 +215,7 @@
 
 	    </div>
 		<div class="button-group">
-	        <button class="button-delete">È¸¿øÅ»Åð</button>
+	        <button class="button-delete" onclick="redirectToCancelUser()">È¸¿øÅ»Åð</button>
 	        <button class="button-edit" onclick="redirectToEditInfo()">È¸¿øÁ¤º¸¼öÁ¤</button>
 	    </div>
 	</div>
@@ -241,7 +241,10 @@
 	    }
 		function redirectToMain() {
 		    window.location.href = "main.jsp";
-		} 
+		}
+		function redirectToCancelUser() {
+		    window.location.href = "CancelUser.jsp";
+		}
     </script>
 </body>
 </html>

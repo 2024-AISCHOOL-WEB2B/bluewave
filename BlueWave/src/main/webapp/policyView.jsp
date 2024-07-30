@@ -106,13 +106,6 @@
                 <img src="image/Blue Wave.png" alt="Blue Wave Logo" onclick="redirectToMain()" />
             </a>
         </div>
-        <div class="right-menu">
-            <% if(info != null){ %>
-                <a href="LogoutServlet">로그아웃<a>
-            <% }else{ %>
-                <a href="login.jsp">로그인</a>
-            <% } %>
-        </div>
     </nav>
 </header>
 <%    
