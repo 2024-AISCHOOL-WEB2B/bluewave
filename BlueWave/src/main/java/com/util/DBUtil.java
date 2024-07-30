@@ -15,17 +15,17 @@ public class DBUtil {
     static {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            System.out.println("Oracle JDBC Driver Loaded Successfully.");
+            System.out.println("Oracle JDBC 드라이버가 성공적으로 로드");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Failed to load Oracle JDBC Driver.");
+            System.out.println("Oracle JDBC 드라이버 로드에 실패");
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        System.out.println("Attempting to connect to the database...");
+        System.out.println("데이터베이스에 연결을 시도 중...");
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-        System.out.println("Connection established successfully.");
+        System.out.println("데이터베이스에 성공적으로 연결");
         return conn;
     }
 
@@ -34,10 +34,10 @@ public class DBUtil {
             if (rs != null) rs.close();
             if (stmt != null) stmt.close();
             if (conn != null) conn.close();
-            System.out.println("Resources closed successfully.");
+            System.out.println("성공");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Failed to close resources.");
+            System.out.println("실패");
         }
     }
 
@@ -45,13 +45,13 @@ public class DBUtil {
         // Test the database connection
         try (Connection conn = DBUtil.getConnection()) {
             if (conn != null) {
-                System.out.println("Database connection test successful.");
+                System.out.println("데이터베이스 연결 테스트가 성공");
             } else {
-                System.out.println("Database connection test failed.");
+                System.out.println("데이터베이스 연결 테스트가 실패");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("SQLException occurred during database connection test.");
+            System.out.println("데이터베이스 연결 테스트 중 SQLException이 발생");
         }
     }
 }
