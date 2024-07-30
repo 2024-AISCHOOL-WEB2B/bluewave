@@ -13,12 +13,12 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티 글 목록</title>
-<link rel="stylesheet" href="CSS/communityStyles.css">
+<link rel="stylesheet" href="CSS/communityStyles.css?=v1.0">
 
 </head>
 <body>
    <div class="title">
-      <h1>커뮤니티 글 목록</h1>
+      <h1>커뮤니티</h1>
       <button class="write-button" onclick="location.href='write.jsp'">글쓰기</button>
    </div>
    <main>
