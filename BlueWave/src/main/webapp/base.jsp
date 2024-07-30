@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Wave</title>
-<link rel="stylesheet" href="CSS/mainST.css">
+<link rel="stylesheet" href="CSS/baseStyle.css">
 </head>
 
 <body>
@@ -19,22 +19,23 @@
 	
 	<header>
 		<nav>
-			<div class="logo">
-				<a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo">
-				</a>
-			</div>
-
-			<div class="right-menu">
-				<%
-				if (info != null) {
-				%>
-				<a href="LogoutServlet">로그아웃<a> <%
-				 } else {
-				 %> <a
-				 href="login.jsp">로그인</a> <%
-				 }
-				 %>
-			</div>
+		    <div class="logo">
+		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+		    </div>
+		
+		    <div class="right-menu">
+		        <%
+		        if (info != null) {
+		        %>
+		            <a class="logNavBtn" href="LogoutServlet">로그아웃</a>
+		        <%
+		        } else {
+		        %>
+		            <a class="logNavBtn" href="login.jsp">로그인</a>
+		        <%
+		        }
+		        %>
+		    </div>
 		</nav>
 	</header>
 

@@ -8,7 +8,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Wave</title>
-<link rel="stylesheet" href="CSS/mainST.css">
+<link rel="stylesheet" href="CSS/baseStyle.css">
+<link rel="stylesheet" href="CSS/mainStyle.css">
+
+<style>
+
+</style>
 </head>
 
 <body>
@@ -19,22 +24,23 @@
 	
 	<header>
 		<nav>
-			<div class="logo">
-				<a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo">
-				</a>
-			</div>
-
-			<div class="right-menu">
-				<%
-				if (info != null) {
-				%>
-				<a href="LogoutServlet">로그아웃<a> <%
-				 } else {
-				 %> <a
-										href="login.jsp">로그인</a> <%
-				 }
-				 %>
-			</div>
+		    <div class="logo">
+		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+		    </div>
+		
+		    <div class="right-menu">
+		        <%
+		        if (info != null) {
+		        %>	<a class="" href="userInfo.jsp">내 정보 관리</a>
+		            <a class="logNavBtn" href="LogoutServlet">로그아웃</a>
+		        <%
+		        } else {
+		        %>
+		            <a class="logNavBtn" href="login.jsp">로그인</a>
+		        <%
+		        }
+		        %>
+		    </div>
 		</nav>
 	</header>
 
@@ -61,7 +67,6 @@
 				%>
 			<div class="btn-wrap">
 			
-            <a href="policyRecommend.jsp" class="btn btn-primary">정책 추천 받기</a> <!-- policyRecommend버튼(삭제할예정) -->
             
         </div>
 			</div>
