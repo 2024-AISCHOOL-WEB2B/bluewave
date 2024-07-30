@@ -330,25 +330,20 @@ public class PolicyDAO {
     // 정책필터링 클래스
     public List<PolicyDTO> getFilteredPolicies(String policyFieldCode, String orgCode, String jobKeyword) {
         List<PolicyDTO> policies = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ?");
-        
-        // 직업 키워드가 있는 경우에만 조건 추가
-        if (jobKeyword != null && !jobKeyword.isEmpty()) {
-            query.append(" AND POLICY_DESC LIKE ?");
-        }
-        
-        query.append(" AND ROWNUM <= 10 ORDER BY UPDATED_AT DESC");
-        
+        String baseQuery = "SELECT * FROM EX_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? ";
+        String jobQuery = "AND POLICY_DESC LIKE ? ";
+        String finalQuery = "ORDER BY UPDATED_AT DESC";
+        String query = baseQuery + (jobKeyword != null && !jobKeyword.isEmpty() ? jobQuery : "") + finalQuery;
+
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
-            
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setString(1, policyFieldCode);
             pstmt.setString(2, orgCode);
-            
             if (jobKeyword != null && !jobKeyword.isEmpty()) {
                 pstmt.setString(3, "%" + jobKeyword + "%");
             }
-            
+
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
                     PolicyDTO policy = new PolicyDTO();
@@ -382,10 +377,54 @@ public class PolicyDAO {
                     policies.add(policy);
                 }
             }
+
+            // 재직상태넣어서 조회했을때 안나오는경우
+            if (policies.isEmpty() && (jobKeyword != null && !jobKeyword.isEmpty())) {
+                query = baseQuery + finalQuery;
+                try (PreparedStatement pstmt2 = conn.prepareStatement(query)) {
+                    pstmt2.setString(1, policyFieldCode);
+                    pstmt2.setString(2, orgCode);
+
+                    try (ResultSet rs = pstmt2.executeQuery()) {
+                        while (rs.next()) {
+                            PolicyDTO policy = new PolicyDTO();
+                            policy.setPOLICY_ID(rs.getString("POLICY_ID"));
+                            policy.setORG_CODE(rs.getString("ORG_CODE"));
+                            policy.setPOLICY_NAME(rs.getString("POLICY_NAME"));
+                            policy.setPOLICY_DESC(rs.getString("POLICY_DESC"));
+                            policy.setSUPPORT_CONTENT(rs.getString("SUPPORT_CONTENT"));
+                            policy.setSUPPORT_SCALE(rs.getString("SUPPORT_SCALE"));
+                            policy.setOPERATION_PERIOD(rs.getString("OPERATION_PERIOD"));
+                            policy.setAPPLICATION_REPEAT_CODE(rs.getString("APPLICATION_REPEAT_CODE"));
+                            policy.setAPPLICATION_PERIOD(rs.getString("APPLICATION_PERIOD"));
+                            policy.setAGE_INFO(rs.getString("AGE_INFO"));
+                            policy.setRESIDENCE_INCOME_CONDITION(rs.getString("RESIDENCE_INCOME_CONDITION"));
+                            policy.setAPPLICATION_PROCESS(rs.getString("APPLICATION_PROCESS"));
+                            policy.setPARTICIPATION_LIMIT_TARGET(rs.getString("PARTICIPATION_LIMIT_TARGET"));
+                            policy.setAPPLICATION_PROCEDURE(rs.getString("APPLICATION_PROCEDURE"));
+                            policy.setMAIN_DEPARTMENT_NAME(rs.getString("MAIN_DEPARTMENT_NAME"));
+                            policy.setMAIN_DEPARTMENT_CONTACT(rs.getString("MAIN_DEPARTMENT_CONTACT"));
+                            policy.setMAIN_DEPARTMENT_PHONE(rs.getString("MAIN_DEPARTMENT_PHONE"));
+                            policy.setOPERATING_INSTITUTION_NAME(rs.getString("OPERATING_INSTITUTION_NAME"));
+                            policy.setOPERATING_INSTITUTION_CONTACT(rs.getString("OPERATING_INSTITUTION_CONTACT"));
+                            policy.setOPERATING_INSTITUTION_PHONE(rs.getString("OPERATING_INSTITUTION_PHONE"));
+                            policy.setSUBMISSION_DOCUMENTS(rs.getString("SUBMISSION_DOCUMENTS"));
+                            policy.setEVALUATION_AND_ANNOUNCEMENT(rs.getString("EVALUATION_AND_ANNOUNCEMENT"));
+                            policy.setAPPLICATION_SITE_URL(rs.getString("APPLICATION_SITE_URL"));
+                            policy.setREFERENCE_SITE_URL1(rs.getString("REFERENCE_SITE_URL1"));
+                            policy.setREFERENCE_SITE_URL2(rs.getString("REFERENCE_SITE_URL2"));
+                            policy.setETC(rs.getString("ETC"));
+                            policy.setPOLICY_FIELD_CODE(rs.getString("POLICY_FIELD_CODE"));
+                            policies.add(policy);
+                        }
+                    }
+                }
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return policies;
     }
     

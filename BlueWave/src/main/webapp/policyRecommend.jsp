@@ -23,6 +23,11 @@
 
         PolicyDAO policyDAO = new PolicyDAO();
         List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, jobKeyword);
+
+        // If no policies found with jobKeyword, search without it
+        if (policies.isEmpty()) {
+            policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, null);
+        }
     %>
     <header>
         <nav>
