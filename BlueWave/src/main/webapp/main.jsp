@@ -70,7 +70,7 @@
 				}
 				%>
 			<div class="btn-wrap">
-<!-- 충돌확인용 -->
+
         </div>
 			</div>
 
