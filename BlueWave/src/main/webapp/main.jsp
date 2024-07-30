@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="CSS/mainStyle.css">
 
 <style>
+	.logoutNavBtn {
+		position: relative;
+		left: 1000px;
+	}
 
 </style>
 </head>
@@ -32,7 +36,7 @@
 		        <%
 		        if (info != null) {
 		        %>	<a class="" href="userInfo.jsp">내 정보 관리</a>
-		            <a class="logNavBtn" href="LogoutServlet">로그아웃</a>
+		            <a class="logoutNavBtn" href="LogoutServlet">로그아웃</a>
 		        <%
 		        } else {
 		        %>

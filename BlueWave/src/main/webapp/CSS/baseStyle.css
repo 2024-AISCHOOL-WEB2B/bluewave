@@ -8,9 +8,6 @@
 	    
 	    min-height: 100vh;
 	}
-	.right-menu {
-		align-items: left;
-	}
 
 
 	header,
@@ -87,6 +84,10 @@
 	.logNavBtn {
 		position: relative;
 		left: 1100px;
+	}
+	.logoutNavBtn {
+		position: relative;
+		left: 1000px;
 	}
 
 /* 
