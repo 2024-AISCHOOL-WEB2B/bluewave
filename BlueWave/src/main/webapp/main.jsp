@@ -172,7 +172,7 @@
 			                        <p class="date" title="<%= policy.getAPPLICATION_PERIOD() %>">기간: <%= policy.getAPPLICATION_PERIOD() %></p>
 			                    </div>
 			                    <div class="policy-actions">
-			                        <button class="btn view blue" onclick="location.href='policyDetail.jsp?id=<%= policy.getPOLICY_ID() %>'">
+			                        <button class="btn view blue" onclick="redirectToPolicyView('<%= policy.getPOLICY_ID() %>')">
 			                            상세보기
 			                        </button>
 			                    </div>
@@ -206,6 +206,11 @@
         function redirectToAllPolicy() {
             // 올폴리씨로move
             window.location.href = "allPolicy.jsp";
+        }
+        
+        function redirectToPolicyView(policyId) {
+            console.log("Redirecting to policy view with ID: " + policyId);
+            window.location.href = "policyView.jsp?policyId=" + policyId;
         }
     </script>
 </body>
