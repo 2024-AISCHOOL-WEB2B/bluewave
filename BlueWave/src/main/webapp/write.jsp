@@ -18,7 +18,7 @@
 		<h1>글쓰기</h1>
 	</header>
 	<main>
-		<form action="PostServlet" method="post" enctype="multipart/form-data">
+		<form action="postSaveServlet" method="post" enctype="multipart/form-data"> <%//action에 postsaveservlet임!!!! %>
 			<div class="form-group">
 				<label for="userId">작성자:</label>
 				<%
@@ -30,7 +30,7 @@
 				%>
 				<script type="text/javascript">
             alert("로그인이 필요합니다.");
-            window.location.href = "community.jsp";
+            window.location.href = "login.jsp";
         </script>
 				<%}%>
 			</div>

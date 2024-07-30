@@ -33,12 +33,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			System.out.println("user가 null입니다.");
-			response.sendRedirect("login.jsp?error=1");
-			System.out.println("아이디 : "+userId);
-			System.out.println("내가 입력한 값 : " + password);
-			System.out.println("함수에 넣은 해시 값 : " + PasswordUtil.hashPassword(password));
-			String dto = user.getUserPw();
-			System.out.println("DTO에 저장된 해시값" + dto);
+			response.sendRedirect("userisnull.jsp");
 		}
 	}
 }

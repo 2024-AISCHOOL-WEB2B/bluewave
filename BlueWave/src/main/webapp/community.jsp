@@ -34,7 +34,6 @@
       Timestamp created_at = dto.getCreatedAt();
       Timestamp updated_at = dto.getUpdatedAt();
       int post_views = dto.getPostViews();
-      int post_likes = dto.getPostLikes();
       response.setCharacterEncoding("EUC-KR");
       %>
       <table>

@@ -16,7 +16,7 @@ import com.model.PostDTO;
 import com.model.UserDTO;
 import com.oreilly.servlet.multipart.Part;
 
-@WebServlet("/PostServlet")
+@WebServlet("/postSaveServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
 		maxFileSize = 1024 * 1024 * 10, // 10 MB
 		maxRequestSize = 1024 * 1024 * 15 // 15 MB
@@ -24,23 +24,27 @@ import com.oreilly.servlet.multipart.Part;
 public class postSaveServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//인코딩
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
+		//작성자userid 가져오기
 		HttpSession session = request.getSession();
         UserDTO info = (UserDTO) session.getAttribute("user");
-        
+		String userId = info.getUserId();
+		
+		//글 제목과 내용 받아오기
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String userId = info.getUserId();
 
+		//post객체생성
 		PostDTO post = new PostDTO();
 		post.setPostTitle(title);
 		post.setPostContents(content);
 		post.setUserId(userId);
 
 		PostDAO dao = new PostDAO();
-
+		
+		//생성한 post를 postdbsave 메서드로 보냄
 		int result = dao.postDbSave(post);
 
 		if (result > 0) {

@@ -38,16 +38,6 @@ public class PostLikeDAO {
 			if (!rs.next()) {
 				// 좋아요 올리고
 				System.out.println("좋아요 누른 기록 없음");
-				preparedStatement = connection.prepareStatement(UPDATE_POSTLIKE_SQL);
-				preparedStatement.setInt(1, (post.getPostLikes()) + 1);
-				preparedStatement.setInt(2, postIdx);
-				int cnt = preparedStatement.executeUpdate();
-
-				if (cnt > 0) {
-					System.out.println("좋아요 업데이트 성공");
-				} else {
-					System.out.println("좋아요 업데이트 실패");
-				}
 
 				// postlike 테이블에 추가
 				preparedStatement = connection.prepareStatement(INSERT_POSTLIKE_SQL);

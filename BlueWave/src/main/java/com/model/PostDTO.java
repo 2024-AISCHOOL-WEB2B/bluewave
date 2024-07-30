@@ -19,13 +19,12 @@ public class PostDTO {
 		//기본생성자
 	}
 	public PostDTO(int postIdx, String postTitle, String postContents, String postFile, int postViews,
-			int postLikes, Timestamp createdAt, Timestamp updatedAt, String userId) {
+		 Timestamp createdAt, Timestamp updatedAt, String userId) {
 		this.postIdx = postIdx;
 		this.postTitle = postTitle;
 		this.postContents = postContents;
 		this.postFile = postFile;
 		this.postViews = postViews;
-		this.postLikes = postLikes;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.userId = userId;

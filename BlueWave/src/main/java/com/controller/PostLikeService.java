@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.http.HttpClient.Redirect;
 import java.security.Timestamp;
 import java.sql.SQLException;
@@ -21,19 +22,18 @@ import com.model.UserDTO;
 public class PostLikeService extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
+
 		PostDTO dto = new PostDTO();
 		PostDAO dao = new PostDAO();
-		
+
 		// 1. 게시물 번호 가져오기
 		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
-		
+
 		System.out.println("post_idx 가져오기 성공");
 		dto = dao.postSearch(post_idx);
 
 		post_idx = dto.getPostIdx(); // 글 인덱스 번호
-		String user_id = dto.getUserId();// 글의 작성자ID 
+		String user_id = dto.getUserId();// 글의 작성자ID
 		String post_title = dto.getPostTitle(); // 타이틀
 		String post_content = dto.getPostContents(); // 내용
 		String post_file = dto.getPostFile(); // 첨부파일
@@ -45,12 +45,12 @@ public class PostLikeService extends HttpServlet {
 		// * postlikedao 객체 생성
 		PostLikeDAO postlikedao = new PostLikeDAO();
 		System.out.println("postlikedao 객체생성 완료");
-		
+
 		HttpSession session = request.getSession();
 		UserDTO info = (UserDTO) session.getAttribute("user");
 		String likeuser_id = info.getUserId();
-		System.out.println("likeuser_id. 현재 로그인한 사람 아이디 가져오기 성공"+ likeuser_id);
-		
+		System.out.println("likeuser_id. 현재 로그인한 사람 아이디 가져오기 성공" + likeuser_id);
+
 		// 3. db postlike 테이블에 있는지 확인
 		// postlke dao에 좋아요확인 메서드 만들어서
 		// 좋아요 안눌렀으면 (조회되면) 1 반환, 좋아요 눌렀으면 (조회X) 0반환
@@ -58,14 +58,17 @@ public class PostLikeService extends HttpServlet {
 
 		int result = postlikedao.like(likeuser_id, post_idx);
 		System.out.println(result);
-		
-		if (result == 1) {
-			System.out.println("좋아요를 눌렀습니다. - postlikeservice메세지");
-			response.sendRedirect("viewPost.jsp?post_idx=" + post_idx); // 리디렉션에 post_idx 추가
-			} else {
-				System.out.println("이미 좋아요 누른 게시물입니다 - postlikeservice메세지");
-				response.sendRedirect("viewPost.jsp?post_idx=" + post_idx); // 리디렉션에 post_idx 추가
-		}
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
 
-		
-	}}
+		if (result == 1) {
+
+			writer.println(
+					"<script>alert('좋아요 누르기 성공!'); location.href='viewPost.jsp?post_idx=" + post_idx + "';</script>");
+		} else {
+			writer.println("<script>alert('이미 좋아요를 누르셨습니다.'); location.href='viewPost.jsp?post_idx=" + post_idx
+					+ "';</script>");
+		}
+		writer.close();
+	}
+}
