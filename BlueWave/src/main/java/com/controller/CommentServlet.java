@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import com.model.CommentDAO;
 import com.model.CommentDTO;
 import com.model.UserDTO;
-import com.util.ServletUtil;
 
 @WebServlet("/CommentServlet")
 public class CommentServlet extends HttpServlet {
@@ -23,8 +22,8 @@ public class CommentServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// 인코딩
-		ServletUtil.setCharacterEncoding(request);
-		ServletUtil.setContentTypeAndEncoding(response, "text/html", "UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		// ** post_idx 받아오기 **
 		int post_idx = Integer.parseInt(request.getParameter("post_idx"));
