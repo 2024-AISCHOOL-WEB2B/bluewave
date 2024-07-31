@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.model.UserDTO;
+import com.util.ServletUtil;
 import com.model.UserDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +17,8 @@ public class UpdateUserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("EUC-KR");
-        response.setContentType("text/html; charset=EUC-KR");
+    	ServletUtil.setCharacterEncoding(request);
+    	ServletUtil.setContentTypeAndEncoding(response, "text/html", "UTF-8");
         // 요청 응답 인코딩
 
         // 요청 파라미터 읽기

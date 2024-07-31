@@ -15,6 +15,7 @@ import com.model.PostDAO;
 import com.model.PostDTO;
 import com.model.UserDTO;
 import com.oreilly.servlet.multipart.Part;
+import com.util.ServletUtil;
 
 @WebServlet("/postSaveServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, // 1 MB
@@ -25,8 +26,8 @@ public class postSaveServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//인코딩
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		ServletUtil.setCharacterEncoding(request);
+		ServletUtil.setContentTypeAndEncoding(response, "text/html", "UTF-8");
 		
 		//작성자userid 가져오기
 		HttpSession session = request.getSession();

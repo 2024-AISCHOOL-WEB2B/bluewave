@@ -2,6 +2,7 @@ package com.controller;
 
 import com.model.UserDTO;
 import com.util.PasswordUtil;
+import com.util.ServletUtil;
 import com.model.UserDAO;
 
 import javax.servlet.ServletException;
@@ -19,8 +20,8 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// 인코딩
-		request.setCharacterEncoding("EUC-KR");
-		response.setCharacterEncoding("EUC-KR");
+		ServletUtil.setCharacterEncoding(request);
+		ServletUtil.setContentTypeAndEncoding(response, "text/html", "UTF-8");
 
 		try {
 			String userId = request.getParameter("username");
