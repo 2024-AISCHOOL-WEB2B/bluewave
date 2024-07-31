@@ -102,9 +102,7 @@
 <header>
     <nav>
         <div class="logo">
-            <a href="#">
-                <img src="image/Blue Wave.png" alt="Blue Wave Logo" onclick="redirectToMain()" />
-            </a>
+            <a href="main.jsp"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
         </div>
     </nav>
 </header>
@@ -332,10 +330,5 @@
         </nav>
     </div>
 </footer>
-<script>
-    function redirectToMain() {
-        window.location.href = "main.jsp";
-    }  
-</script>
 </body>
 </html>

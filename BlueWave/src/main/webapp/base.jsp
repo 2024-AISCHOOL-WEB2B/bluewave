@@ -20,7 +20,7 @@
 	<header>
 		<nav>
 		    <div class="logo">
-		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+		        <a href="main.jsp"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
 		    </div>
 		
 		    <div class="right-menu">

@@ -13,10 +13,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Wave</title>
-<link rel="stylesheet" href="CSS/baseStyle.css">
+<link rel="stylesheet" href="CSS/base.css">
 <link rel="stylesheet" href="CSS/mainStyle.css">
 
 <style>
+
+	header,
+	main,
+	footer {
+	    width: 100%;
+	}
+	
+	.container {
+	    display: flex;
+	    flex-direction: column;
+	    align-items: center;
+	    width: 100%;
+	    box-sizing: border-box;
+	    margin-bottom: 100px;
+	}
+	
 	.logoutNavBtn {
 		position: relative;
 		left: 1000px;
@@ -90,7 +106,7 @@
 	<header>
 		<nav>
 		    <div class="logo">
-		        <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+		        <a href="main.jsp"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
 		    </div>
 		
 		    <div class="right-menu">
@@ -118,8 +134,7 @@
 				<%
 				if (info != null) {
 				%>
-				<a href="policySuggest.jsp" class="rainbow-button"> 지금 바로 혜택
-					받을수있는<br>정책 추천받기
+				<a href="policySuggest.jsp" class="rainbow-button"> 지금 바로 참여 가능한<br>정책 추천받기
 				</a>
 				<%
 				} else {

@@ -18,6 +18,23 @@
  <style>
  	/* communityStyles.css */
 
+
+
+.communityName {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* bestPost 클래스 스타일 */
+.bestPost {
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #75ffaa, #75ffb1, #75ffcc, #75ffe8, #75f1ff, #75c8ff, #75afff);
+    -webkit-background-clip: text; /* 텍스트에 배경을 적용 */
+    -webkit-text-fill-color: transparent; /* 텍스트 색상을 투명으로 설정 */
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
@@ -28,9 +45,10 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    margin-bottom: 170px;
+    padding: 40px;
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 영역 구분용 그림자 (지우기)*/
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 영역 구분용 그림자 (나중에 지우기)*/
 }
 
 .title {
@@ -66,7 +84,8 @@ body {
 }
 
 .communityNav h1 {
-    font-size: 20px;
+    font-size: 25px;
+    font-style: bold;
     color: #333;
     margin-bottom: 0px;
 }
@@ -84,7 +103,7 @@ body {
 }
 
 .write-button:hover {
-    background-color: #0056b3;
+    background-color: #7b96ff;
 }
 
 table {
@@ -93,20 +112,20 @@ table {
     background-color: #ffffff;
 }
 
-thead {
-    background-color: #f1f1f1;
-}
 
-th, td {
-    padding: 12px 15px;
+td {
+    padding: 7px 15px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    
 }
 
-th {
-    font-weight: bold;
-    color: #333;
+.postRow {
+	border-bottom: 1px solid #ddd;
 }
+
+
+
+
 
 .createAt {
 	text-align: right;
@@ -179,7 +198,7 @@ footer {
 	<header>
 		<nav>
 			<div class="logo">
-			    <a href="#"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
+			    <a href="main.jsp"> <img src="image/Blue Wave.png" alt="Blue Wave Logo"> </a>
 			</div>
 			
 			<div class="right-menu">
@@ -200,9 +219,9 @@ footer {
     <div class="container">
 	    <main>
 	    	<div class="title">
-	    		<span>VOICE of YOUTH</span>
+	    		<h1 class="communityName">VOICE of YOUTH</h1>
 	    		<hr>
-	    		<span>최다 추천 글</span>
+	    		<h2><span class="bestPost">최다 추천 글</span></h2>
 	    	</div>
 	    	<div class="bestPostSection">
 	    	post
@@ -213,17 +232,16 @@ footer {
 	  	    </div>
 	  	    <hr>
 	        <table>
-
-	            <tbody>
-	            <% for(PostDTO post : postList) { %>
-	            <tr>
-	                <!--<td><%= post.getPostIdx() %></td> 보통 커뮤니티 게시글에 id는 표시하지않아서 제외  -->
-	                <td><a href="viewPost.jsp?post_idx=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
-	                <td><%= post.getUserId() %></td>
-	                <td class="createAt"><%= post.getCreatedAt() %></td>
-	            </tr>
-	            <% } %>
-	            </tbody>
+		        <tbody>
+			        <% for(PostDTO post : postList) { %>
+			        <tr class="postRow">
+			            <!--<td><%= post.getPostIdx() %></td> 보통 커뮤니티 게시글에 id는 표시하지않아서 제외  -->
+			            <td><a href="viewPost.jsp?post_idx=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
+			            <td><%= post.getUserId() %></td>
+			            <td class="createAt"><%= post.getCreatedAt() %></td>
+			        </tr>
+			        <% } %>
+		        </tbody>
 	        </table>
 	    </main>
     </div>
