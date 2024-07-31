@@ -8,7 +8,7 @@ import schedule
 import time
 
 # 저장할 디렉터리 설정
-save_dir = './data/정책'
+save_dir = '저장할공간'
 os.makedirs(save_dir, exist_ok=True) # 디렉토리 없으면 생성
 
 # API 기본 설정
@@ -223,9 +223,17 @@ def update_database():
     cursor.close()  # 커서 닫기
     conn.close()  # 연결 종료
 
-# 스케줄러 설정 - 매일 특정 시간에 실행
-schedule.every().day.at("08:00").do(update_database)
+# 매일 아침 9시에 실행되도록 스케줄 설정
+def job():
+    current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"Updating database at {current_time}")
+    update_database()
+    print("Database update completed.")
 
-while True:
-    schedule.run_pending()  # 예약된 작업 실행
-    time.sleep(1)
+# 스케줄러 설정
+schedule.every().day.at("09:00").do(job)
+
+if __name__ == "__main__":
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
