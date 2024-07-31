@@ -24,10 +24,11 @@
 1. 리포지토리를 클론합니다.
    ```sh
    git clone https://github.com/2024-AISCHOOL-WEB2B/bluewave.git
+   '''
    라이브러리설치
    ```sh
    pip install requests pandas schedule cx_Oracle scikit-learn
-
+   '''
 
 ## 일일보고서
 주요내용 : 청년 정책 추천 모델 최적화<br>
