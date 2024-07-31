@@ -48,7 +48,6 @@ body {
     margin-bottom: 170px;
     padding: 40px;
     background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 영역 구분용 그림자 (나중에 지우기)*/
 }
 
 .title {
@@ -172,6 +171,9 @@ footer {
 .footer-nav a:hover {
     text-decoration: underline;
 }
+h1:hover {
+    cursor: pointer; /* 손가락 모양 커서로 변경 */
+}
  </style>
 
 </head>
@@ -219,7 +221,7 @@ footer {
     <div class="container">
 	    <main>
 	    	<div class="title">
-	    		<h1 class="communityName">VOICE of YOUTH</h1>
+	    		<h1 class="communityName" onclick="redirectToCommunity()">VOICE of YOUTH</h1>
 	    		<hr>
 	    		<h2><span class="bestPost">최다 추천 글</span></h2>
 	    	</div>
@@ -259,5 +261,10 @@ footer {
             </nav>
         </div>
     </footer>
+    <script>
+	function redirectToCommunity() {
+	    window.location.href = "community.jsp";
+	} 
+    </script>
 </body>
 </html>
