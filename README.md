@@ -25,6 +25,7 @@
    ```sh
    git clone https://github.com/2024-AISCHOOL-WEB2B/bluewave.git
 2. 라이브러리 설치
+   '''sh
    pip install requests pandas schedule cx_Oracle scikit-learn
 
 ## 일일보고서
