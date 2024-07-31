@@ -30,7 +30,7 @@ public class PolicyDTO {
 	private String ETC;
 	private String POLICY_FIELD_CODE;
 	private String CREATED_AT;
-	private String UPDATED_AT;
+	private String FETCHED_AT;
 	
 	private long numericPolicyId; //숫자로 변환된 policy_id 를 저장할 변수
 	
@@ -204,10 +204,10 @@ public class PolicyDTO {
 		CREATED_AT = cREATED_AT;
 	}
 	public String getUPDATED_AT() {
-		return UPDATED_AT;
+		return FETCHED_AT;
 	}
-	public void setUPDATED_AT(String uPDATED_AT) {
-		UPDATED_AT = uPDATED_AT;
+	public void setFETCHED_AT(String fETCHED_AT) {
+		FETCHED_AT = fETCHED_AT;
 	}
 	
     public long getNumericPolicyId() {

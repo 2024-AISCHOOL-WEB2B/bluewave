@@ -31,30 +31,4 @@ public class RecPolicyDAO {
 
         return policyIds;
     }
-
-    // 지울코드(정책필터링5개가져오기)
-    public List<String> getRecPolicyIds2(String userId) {
-        List<String> policyIds = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = DBUtil.getConnection();
-            String sql = "SELECT POLICY_ID FROM EX_POLICY WHERE USER_ID = ? FETCH FIRST 5 ROWS ONLY";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, userId);
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                policyIds.add(rs.getString("POLICY_ID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(rs, pstmt, conn);
-        }
-
-        return policyIds;
-    }
 }

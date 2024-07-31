@@ -347,7 +347,7 @@ public class PolicyDAO {
         policy.setETC(rs.getString("ETC"));
         policy.setPOLICY_FIELD_CODE(rs.getString("POLICY_FIELD_CODE"));
         policy.setCREATED_AT(rs.getTimestamp("created_at").toString());
-        policy.setUPDATED_AT(rs.getTimestamp("updated_at").toString());
+        policy.setFETCHED_AT(rs.getTimestamp("fetched_at").toString());
 
         return policy;
     }
@@ -360,7 +360,7 @@ public class PolicyDAO {
         List<PolicyDTO> policies = new ArrayList<>();
         String baseQuery = "SELECT * FROM ALL_POLICY WHERE POLICY_FIELD_CODE = ? AND ORG_CODE = ? ";
         String jobQuery = "AND POLICY_DESC LIKE ? ";
-        String finalQuery = "ORDER BY UPDATED_AT DESC";
+        String finalQuery = "ORDER BY FETCHED_AT DESC";
         String query = baseQuery + (jobKeyword != null && !jobKeyword.isEmpty() ? jobQuery : "") + finalQuery;
 
         try (Connection conn = DBUtil.getConnection();
