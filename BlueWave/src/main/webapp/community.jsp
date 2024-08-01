@@ -47,7 +47,7 @@ body {
     margin: 0 auto;
     margin-bottom: 170px;
     padding: 40px;
-    background-color: #ffffff;
+    background-color: #fafafa;
 }
 
 .title {
@@ -225,9 +225,20 @@ h1:hover {
 	    		<hr>
 	    		<h2><span class="bestPost">최다 추천 글</span></h2>
 	    	</div>
-	    	<div class="bestPostSection">
-	    	post
-	    	</div>
+			<div class="bestPostSection">
+			    <% 
+			    PostDTO mostLikedPost = dao.getMostLikedPost();
+			    if (mostLikedPost != null) {
+			    %>
+			        <%= mostLikedPost.getPostTitle() %>
+			    <% 
+			    } else {
+			    %>
+			        <p>현재 추천 글이 없습니다.</p>
+			    <% 
+			    } 
+			    %>
+			</div>
 	        <div class="communityNav">
 		        <h1>글 목록</h1>
 		        <button class="write-button" onclick="location.href='write.jsp'">글 작성하기</button>
@@ -236,7 +247,7 @@ h1:hover {
 	        <table>
 		        <tbody>
 			        <% for(PostDTO post : postList) { %>
-			        <tr class="postRow">
+			        <tr class="postRow" onclick="redirectToViewPost()">
 			            <!--<td><%= post.getPostIdx() %></td> 보통 커뮤니티 게시글에 id는 표시하지않아서 제외  -->
 			            <td><a href="viewPost.jsp?post_idx=<%= post.getPostIdx() %>"><%= post.getPostTitle() %></a></td>
 			            <td><%= post.getUserId() %></td>
@@ -264,7 +275,10 @@ h1:hover {
     <script>
 	function redirectToCommunity() {
 	    window.location.href = "community.jsp";
-	} 
+	}
+	function redirectToViewPost() {
+	    window.location.href = "viewPost.jsp";
+	}
     </script>
 </body>
 </html>

@@ -93,4 +93,38 @@ public class PostDAO {
         }
         return postList;
     }
+    
+    
+    // 가장 like가 높은 게시글 dto 가져오는 메서드
+    public PostDTO getMostLikedPost() {
+        PostDTO mostLikedPost = null;
+        String SELECT_MOST_LIKED_POST_SQL = 
+            "SELECT p.*, NVL(l.like_count, 0) as like_count " +
+            "FROM TBL_POST p " +
+            "LEFT JOIN (SELECT post_idx, COUNT(*) as like_count FROM tbl_post_like GROUP BY post_idx) l " +
+            "ON p.post_idx = l.post_idx " +
+            "WHERE ROWNUM = 1 " +
+            "ORDER BY NVL(l.like_count, 0) DESC";
+
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement psmt = connection.prepareStatement(SELECT_MOST_LIKED_POST_SQL);
+             ResultSet rs = psmt.executeQuery()) {
+
+            if (rs.next()) {
+                mostLikedPost = new PostDTO();
+                mostLikedPost.setPostIdx(rs.getInt("post_idx"));
+                mostLikedPost.setUserId(rs.getString("user_id"));
+                mostLikedPost.setPostTitle(rs.getString("post_title"));
+                mostLikedPost.setPostContents(rs.getString("post_content"));
+                mostLikedPost.setPostFile(rs.getString("post_file"));
+                mostLikedPost.setCreatedAt(rs.getTimestamp("created_at"));
+                mostLikedPost.setUpdatedAt(rs.getTimestamp("updated_at"));
+                mostLikedPost.setPostViews(rs.getInt("post_views"));
+                mostLikedPost.setPostLikes(rs.getInt("like_count"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return mostLikedPost;
+    }
 }

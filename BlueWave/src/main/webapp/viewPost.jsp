@@ -29,10 +29,12 @@
             width: 800px;
             margin: 100px auto; /* 중앙 정렬 및 위아래 여백 */
             padding: 20px; /* 내부 여백 설정 */
+            padding-bottom: 10px;
             border: none;
-            background-color: #fff;
+            background-color: #fafafa;
             position: relative; /* 위치 설정을 위해 relative로 설정 */
             margin-top: 10px;
+            height: 1200%
         }
         
 		.communityName {
