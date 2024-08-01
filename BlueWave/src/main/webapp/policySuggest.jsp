@@ -41,7 +41,7 @@
 
 .highlight {
     font-weight: bold;
-    color: #4a90e2;
+    color: #4a9968;
     font-size: 20px;
 }
 
@@ -125,6 +125,13 @@
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+.username {
+	font-size: 22px;
+	color: #639eff;
+	font-weight: bold;
+	
 }
     </style>
 </head>
