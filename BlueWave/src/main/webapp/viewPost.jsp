@@ -260,7 +260,7 @@
             <!-- 좋아요 버튼 폼 -->
             <form action="PostLikeService" method="post" class="like-button-form">
                 <input type="hidden" value="<%= post_idx %>" name="post_idx">
-                <button type="submit">좋아요<br><%= post_likes %></button>
+                <button type="submit"><img src="image/likehand.png" alt="like" style="width: 50%; height: auto;"><br><span style="position: relative; top: 5px;"><%= post_likes %></span></button> 
             </form>
             
             <!-- 댓글 작성 폼 추가 -->
