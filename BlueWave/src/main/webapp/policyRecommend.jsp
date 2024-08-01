@@ -16,18 +16,13 @@
     <%
         UserDTO info = (UserDTO) session.getAttribute("user");
 
-        // 거주지역과 관심정책분야를 숫자 코드로 변환
-        String regionCode = CodeUtil.getRegionCode(info.getUserRegion());
-        String policyFieldCode = CodeUtil.getPolicyInterestCode(info.getUserPolicyInterest());
-        String jobKeyword = CodeUtil.getJobCode(info.getUserJob());
+        if (info != null) {
+            String regionCode = CodeUtil.getRegionCode(info.getUserRegion());
+            String policyFieldCode = CodeUtil.getPolicyInterestCode(info.getUserPolicyInterest());
+            String jobKeyword = info.getUserJob();
 
-        PolicyDAO policyDAO = new PolicyDAO();
-        List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, jobKeyword);
-
-        // If no policies found with jobKeyword, search without it
-        if (policies.isEmpty()) {
-            policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, null);
-        }
+            PolicyDAO policyDAO = new PolicyDAO();
+            List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, jobKeyword);
     %>
     <header>
         <nav>
@@ -45,17 +40,15 @@
     <div class="container">
         <section class="policy-recommendation">
             <h2 class="title">맞춤 정책 추천</h2>
-            <%
-                if (info != null) {
-            %>
             <p class="promptText">
                 <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= info.getUserJob() %>입니다. <br />
                 회원님의 정보를 고려했을 때, <br />
                 아래 정책들이 요건에 맞을 것으로 예상됩니다. <br /><br />
                 <%
                     if (policies != null && !policies.isEmpty()) {
+                        PolicyDTO topPolicy = policies.get(0);
                 %>
-                저희가 생각하기엔 <span class="highlight"> <%= policies.get(0).getPOLICY_NAME() %></span> 정책이 가장 도움이 될 것 같습니다.
+                저희가 생각하기엔 <span class="highlight"><%= topPolicy.getPOLICY_NAME() %></span> 정책이 가장 도움이 될 것 같습니다.
             </p>
             <%
                     } else {
@@ -64,13 +57,6 @@
                 <%
                     }
                 %>
-            <%
-                } else {
-            %>
-            <p class="promptText">로그인을 다시 해주세요.</p>
-            <%
-                }
-            %>
         </section>
 
         <hr width="71%" />
@@ -80,14 +66,13 @@
         %>
         <section class="policy-list">
             <%
-                for (int i = 0; i < policies.size() && i < 5; i++) {
-                    PolicyDTO policy = policies.get(i);
+                for (PolicyDTO policy : policies) {
             %>
             <div class="Policy-row">
                 <div class="recPolicyList">
                     <div class="policy-info">
                         <h3><%= policy.getPOLICY_NAME() %></h3>
-                        <p class="from"><%= policy.getMAIN_DEPARTMENT_NAME() %></p>
+                                                <p class="from"><%= policy.getMAIN_DEPARTMENT_NAME() %></p>
                         <p class="date"><%= policy.getAPPLICATION_PERIOD() %></p>
                     </div>
                     <div class="policy-actions">
@@ -122,7 +107,6 @@
     </footer>
     <script>
         function redirectToPolicyView(policyId) {
-            console.log("Redirecting to policy view with ID: " + policyId);
             window.location.href = "policyView.jsp?policyId=" + policyId;
         }
 
@@ -130,5 +114,12 @@
             window.location.href = "main.jsp";
         }
     </script>
+    <%
+        } else {
+    %>
+    <p class="promptText">로그인을 다시 해주세요.</p>
+    <%
+        }
+    %>
 </body>
 </html>
