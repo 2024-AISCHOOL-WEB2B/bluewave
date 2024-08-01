@@ -190,10 +190,16 @@
 
 			<!--커뮤니티 글 좋아요/싫어요 커뮤니티 이동-->
 			<div class="post-actions">
-
-				<button class="like-btn">
-					<img src="image/likehand.png" alt=""><br> 좋은 아이디어입니다!
-				</button>
+	
+				<% if(info != null) {%>
+				<% int post_idx = mostLikedPost.getPostIdx(); %>
+	            <form action="PostLikeService" method="post" class="like-button-form">
+	                <input type="hidden" value="<%= post_idx %>" name="post_idx">
+	                <button class="like-btn" type="submit"><img src="image/likehand.png" alt="like"><br> 좋은 아이디어입니다!</button>
+	            </form>
+	            <%} else {%>
+	            <button class="like-btn"><img src="image/likehand.png" alt="like" onclick="redirectToLogin()"><br> 좋은 아이디어입니다!</button>
+	            <%} %>
 
 
 				<button class="community-btn"
@@ -263,6 +269,9 @@
         function redirectToPolicyView(policyId) {
             console.log("Redirecting to policy view with ID: " + policyId);
             window.location.href = "policyView.jsp?policyId=" + policyId;
+        }
+        function redirectToLogin() {
+            window.location.href = "login.jsp";
         }
     </script>
 </body>
