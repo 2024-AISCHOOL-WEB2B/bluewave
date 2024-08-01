@@ -26,8 +26,8 @@ public class postSaveServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//인코딩
-		ServletUtil.setCharacterEncoding(request);
-		ServletUtil.setContentTypeAndEncoding(response, "text/html", "UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		//작성자userid 가져오기
 		HttpSession session = request.getSession();
