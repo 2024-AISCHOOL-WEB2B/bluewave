@@ -209,9 +209,8 @@
         <section class="policy-list">
 
             <%
-                for (int i = 0; i < policies.size() && i < 6; i+=2) {
+                for (int i = 0; i < policies.size(); i += 2) {
                     PolicyDTO policy = policies.get(i);
-                    PolicyDTO policy2 = policies.get(i+1);
             %>
             <div class="Policy-row">
                 <div class="recPolicyList">
@@ -224,6 +223,10 @@
                         <button class="btn view blue" onclick="redirectToPolicyView('<%= policy.getPOLICY_ID() %>')">상세보기</button>
                     </div>
                 </div>
+                <%
+                    if (i + 1 < policies.size()) {
+                        PolicyDTO policy2 = policies.get(i + 1);
+                %>
                 <div class="recPolicyList">
                     <div class="policy-info">
                         <h3><%= policy2.getPOLICY_NAME() %></h3>
@@ -234,6 +237,9 @@
                         <button class="btn view blue" onclick="redirectToPolicyView('<%= policy2.getPOLICY_ID() %>')">상세보기</button>
                     </div>
                 </div>
+                <%
+                    }
+                %>
             </div>
             <hr width="100%" />
             <%
