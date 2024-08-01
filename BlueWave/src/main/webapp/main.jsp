@@ -1,3 +1,5 @@
+<%@page import="com.model.PostDTO"%>
+<%@page import="com.model.PostDAO"%>
 <%@page import="com.model.UserDTO"%>
 <%@page import="com.model.UserDAO"%>
 <%@page import="com.model.PolicyDAO"%>
@@ -90,6 +92,23 @@
 	.rainbow-button:hover {
 	    transform: scale(1.05);
 	}
+	
+	<style>
+    /* 버튼 공통 스타일 */
+    .btn, .rainbow-button, .like-btn, .dislike-btn, .community-btn, .view, .allpolicyViewButton {
+        display: inline-block;
+        text-decoration: none;
+        
+        cursor: pointer;
+    }
+
+    /* 호버 시 애니메이션 효과 */
+    .btn:hover, .rainbow-button:hover, .like-btn:hover, .dislike-btn:hover, .community-btn:hover, .view:hover, .allpolicyViewButton:hover {
+        transform: scale(1.05); /* 버튼을 부드럽게 확대 */
+        transition: transform 0.3s ease; /* 부드러운 애니메이션 추가 */
+    }
+</style>
+	
 
 </style>
 </head>
@@ -151,16 +170,17 @@
 			</div>
 
 			<br> <br> <br> <br> <br> <br>
-
+            <% 
+            PostDAO dao = new PostDAO();
+            PostDTO dto = new PostDTO();
+            PostDTO mostLikedPost = dao.getMostLikedPost();
+            %>
 			<!--커뮤니티 글 표시-->
 			<div class="popular-post">
 				<div class="post-content">
-					<h2 class="post-title">아이패드병에 걸린 청년들을 지원하는 정책</h2>
-					<p class="post-description">금속한 사회 디지털화로 인해 청년층의 디지털 역량 강화가
-						시급해졌습니다. 이에 정부 아이패드 지원 정책은 취업난 해소를 위한 디지털 스킬 향상에 기여하며, 경제적 여건에
-						관계없이 균등한 학습 기회를 제공해 교육의 격차를 줄일 수 있습니다. 또한 4차 산업혁명 시대를 대비하고 창업 생태계를
-						활성화하는 디지털 도구를 지원함으로써, 국가 전체의 디지털 경쟁력을 강화하고 청년층의 디지털 소외 현상을 방지하는 데
-						크게 기여할 것입니다.</p>
+					<h2 class="post-title"><%= mostLikedPost.getPostTitle() %></h2>
+					<hr>
+					<p class="post-description"><%= mostLikedPost.getPostContents()%></p>
 				</div>
 
 				<div class="post-image">
@@ -172,12 +192,9 @@
 			<div class="post-actions">
 
 				<button class="like-btn">
-					<img src="image/like_hand.png" alt=""><br> 좋은 아이디어입니다!
+					<img src="image/likehand.png" alt=""><br> 좋은 아이디어입니다!
 				</button>
 
-				<button class="dislike-btn">
-					<img src="image/like_hand.png" alt=""><br> 별로인것 같아요..
-				</button>
 
 				<button class="community-btn"
 					onclick="location.href='community.jsp'">
