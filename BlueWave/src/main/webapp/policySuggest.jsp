@@ -10,7 +10,123 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blue Wave</title>
-    <link rel="stylesheet" href="CSS/policySuggestST.css" />
+    <link rel="stylesheet" href="CSS/baseStyle.css" />
+    <style>
+    /* 맞춤 정책 추천 섹션 스타일 */
+
+.policy-recommendation {
+    width: 70%;
+    margin-top: 25px;
+}
+
+.title {
+    position: relative;
+}
+
+.promptText {
+    background-color: #ececec;
+    border-radius: 10px;
+    width: 97%;
+    margin: 0;
+    padding: 40px; /* 모든 방향으로 패딩 추가 */
+    margin-bottom: 20px;
+    position: relative;
+    right: 20px;
+}
+
+.recommendation-text {
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.highlight {
+    font-weight: bold;
+    color: #4a90e2;
+    font-size: 20px;
+}
+
+/* 정책 리스트 스타일 */
+
+.policy-list {
+    width: 70%;
+}
+.bestPolicy {
+    background-color: #e8f5e9;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.Policy-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.recPolicyList {
+    background-color: #e3f2fd;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    width: calc(50% - 10px); /* 두 요소가 한 줄에 배치되도록 설정 */
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.policy-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+}
+
+.date {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.btn.view {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn.view.blue {
+    background-color: #2196f3;
+}
+
+.btn.compare {
+    background-color: white;
+    border: 1px solid #ddd;
+    margin-left: 5px;
+}
+
+/* 페이지네이션 스타일 */
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+    </style>
 </head>
 <body>
     <%
@@ -44,7 +160,7 @@
                 if (info != null) {
             %>
             <p class="promptText">
-                <%= info.getUserName() %>님은 <%= info.getUserRegion() %>에 거주하시는 <%= info.getUserJob() %>입니다. <br />
+                <span class="username"><%= info.getUserName() %></span> 님은 <%= info.getUserRegion() %>에 거주하시는 <%= info.getUserJob() %>입니다. <br />
                 회원님의 정보를 고려했을 때, <br />
                 아래 정책들이 요건에 맞을 것으로 예상됩니다. <br /><br />
                 <%
@@ -72,11 +188,24 @@
 
         <%
             if (policies != null && !policies.isEmpty()) {
+            	PolicyDTO Bestpolicy = policies.get(0);
         %>
         <section class="policy-list">
+                <div class="bestPolicy">
+                    <div class="policy-info">
+                        <h3><%= Bestpolicy.getPOLICY_NAME() %></h3>
+                        <p class="from"><%= Bestpolicy.getMAIN_DEPARTMENT_NAME() %></p>
+                        <p class="date"><%= Bestpolicy.getAPPLICATION_PERIOD() %></p>
+                    </div>
+                    <div class="policy-actions">
+                        <button class="btn view" onclick="redirectToPolicyView('<%= Bestpolicy.getPOLICY_ID() %>')">상세보기</button>
+                    </div>
+                </div>
+                <hr>
             <%
-                for (int i = 0; i < policies.size() && i < 5; i++) {
+                for (int i = 1; i < policies.size() && i < 5; i+=2) {
                     PolicyDTO policy = policies.get(i);
+                    PolicyDTO policy2 = policies.get(i+1);
             %>
             <div class="Policy-row">
                 <div class="recPolicyList">
@@ -87,6 +216,16 @@
                     </div>
                     <div class="policy-actions">
                         <button class="btn view blue" onclick="redirectToPolicyView('<%= policy.getPOLICY_ID() %>')">상세보기</button>
+                    </div>
+                </div>
+                <div class="recPolicyList">
+                    <div class="policy-info">
+                        <h3><%= policy2.getPOLICY_NAME() %></h3>
+                        <p class="from"><%= policy2.getMAIN_DEPARTMENT_NAME() %></p>
+                        <p class="date"><%= policy2.getAPPLICATION_PERIOD() %></p>
+                    </div>
+                    <div class="policy-actions">
+                        <button class="btn view blue" onclick="redirectToPolicyView('<%= policy2.getPOLICY_ID() %>')">상세보기</button>
                     </div>
                 </div>
             </div>
