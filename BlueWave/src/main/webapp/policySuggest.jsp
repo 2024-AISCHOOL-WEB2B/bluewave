@@ -3,6 +3,7 @@
 <%@page import="com.model.PolicyDAO"%>
 <%@page import="com.model.PolicyDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="com.util.AgeUtil"%>
 <%@page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,7 @@
     width: 97%;
     margin: 0;
     padding: 40px; /* 모든 방향으로 패딩 추가 */
+    padding-bottom: 25px;
     margin-bottom: 20px;
     position: relative;
     right: 20px;
@@ -147,6 +149,10 @@
         PolicyDAO policyDAO = new PolicyDAO();
         List<PolicyDTO> policies = policyDAO.getFilteredPolicies(policyFieldCode, regionCode, jobKeyword);
     %>
+    <%
+    String birthDate = info.getUserBirthdate();
+    int age = AgeUtil.calculateAge(birthDate);
+%>
     <header>
         <nav>
             <div class="logo">
@@ -167,13 +173,16 @@
                 if (info != null) {
             %>
             <p class="promptText">
-                <span class="username"><%= info.getUserName() %></span> 님은 <%= info.getUserRegion() %>에 거주하시는 <%= info.getUserJob() %>입니다. <br />
+                <span class="username"><%= info.getUserName() %></span>
+                 님은 <span style=" font-size: 20px; font-weight: bold; color: #4d88e9;"><%= info.getUserRegion() %></span>
+                에 거주하시는 <span style=" font-size: 20px; font-weight: bold; color: #386dc5;"> <%= age %></span>
+                세 <span style="font-size: 20px; font-weight: bold; color: #2151a1;"><%= info.getUserJob() %></span>
+                입니다. <br />
                 회원님의 정보를 고려했을 때, <br />
                 아래 정책들이 요건에 맞을 것으로 예상됩니다. <br /><br />
                 <%
                     if (policies != null && !policies.isEmpty()) {
                 %>
-                저희가 생각하기엔 <span class="highlight"> <%= policies.get(0).getPOLICY_NAME() %></span> 정책이 가장 도움이 될 것 같습니다.
             </p>
             <%
                     } else {
@@ -198,19 +207,9 @@
             	PolicyDTO Bestpolicy = policies.get(0);
         %>
         <section class="policy-list">
-                <div class="bestPolicy">
-                    <div class="policy-info">
-                        <h3><%= Bestpolicy.getPOLICY_NAME() %></h3>
-                        <p class="from"><%= Bestpolicy.getMAIN_DEPARTMENT_NAME() %></p>
-                        <p class="date"><%= Bestpolicy.getAPPLICATION_PERIOD() %></p>
-                    </div>
-                    <div class="policy-actions">
-                        <button class="btn view" onclick="redirectToPolicyView('<%= Bestpolicy.getPOLICY_ID() %>')">상세보기</button>
-                    </div>
-                </div>
-                <hr>
+
             <%
-                for (int i = 1; i < policies.size() && i < 5; i+=2) {
+                for (int i = 0; i < policies.size() && i < 6; i+=2) {
                     PolicyDTO policy = policies.get(i);
                     PolicyDTO policy2 = policies.get(i+1);
             %>
