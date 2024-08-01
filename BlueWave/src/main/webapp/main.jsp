@@ -107,6 +107,20 @@
         transform: scale(1.05); /* 버튼을 부드럽게 확대 */
         transition: transform 0.3s ease; /* 부드러운 애니메이션 추가 */
     }
+    .popular-post {
+    display: flex;
+    background-color: #f0f8ff;
+    border-radius: 0px;
+    padding: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+    box-sizing: border-box;
+    max-width: 3000px;
+	}
 </style>
 	
 
