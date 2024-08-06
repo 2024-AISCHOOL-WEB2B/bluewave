@@ -167,7 +167,7 @@
 				<%
 				if (info != null) {
 				%>
-				<a href="policySuggest.jsp" class="rainbow-button"> 지금 바로 참여 가능한<br>정책 추천받기
+				<a href="policyRecom.jsp" class="rainbow-button"> 지금 바로 참여 가능한<br>정책 추천받기
 				</a>
 				<%
 				} else {
@@ -244,7 +244,7 @@
 			                        <p class="date" title="<%= policy.getAPPLICATION_PERIOD() %>">기간: <%= policy.getAPPLICATION_PERIOD() %></p>
 			                    </div>
 			                    <div class="policy-actions">
-			                        <button class="btn view blue" onclick="redirectToPolicyView('<%= policy.getPOLICY_ID() %>')">
+			                        			                        <button class="btn view blue" onclick="redirectToPolicyView('<%= policy.getPOLICY_ID() %>')">
 			                            상세보기
 			                        </button>
 			                    </div>
@@ -256,7 +256,7 @@
 			    }
 			} 
 			%>
-                <button class ="allpolicyViewButton"onclick="redirectToAllPolicy()">
+                <button class="allpolicyViewButton" onclick="redirectToAllPolicy()">
                     <span class="APVbtn">모든 정책 조회하기</span>
                 </button>
             </div>
@@ -276,7 +276,7 @@
     </footer>
     <script>
         function redirectToAllPolicy() {
-            // 올폴리씨로move
+            // 올폴리씨로 이동
             window.location.href = "allPolicy.jsp";
         }
         
@@ -290,3 +290,4 @@
     </script>
 </body>
 </html>
+
